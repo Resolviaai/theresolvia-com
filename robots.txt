@@ -1,12 +1,17 @@
 # robots.txt for https://theresolvia.com
 User-agent: *
 Allow: /
+Allow: /services/
+Allow: /for/
+Allow: /work/
+Allow: /blog/
 Allow: /blog.html
 Allow: /careers.html
 Allow: /security.html
 Allow: /terms.html
 Allow: /privacy.html
 Allow: /llms.txt
+Allow: /llms-full.txt
 
 # Disallow internal test pages, staging previews and scratch files
 Disallow: /scratch/
@@ -21,18 +26,27 @@ Disallow: /super-search.html
 User-agent: GPTBot
 Allow: /
 Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: ClaudeBot
 Allow: /
 Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: PerplexityBot
 Allow: /
 Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: Google-Extended
 Allow: /
 Allow: /llms.txt
+Allow: /llms-full.txt
 
 User-agent: CCBot
 Allow: /

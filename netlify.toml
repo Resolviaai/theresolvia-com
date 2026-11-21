@@ -46,6 +46,67 @@
   to = "/security.html"
   status = 200
 
+# Clean URL redirects for Services & Audiences
+[[redirects]]
+  from = "/work"
+  to = "/work/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/youtube-video-editing"
+  to = "/services/youtube-video-editing/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/short-form-video-editing"
+  to = "/services/short-form-video-editing/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/podcast-video-editing"
+  to = "/services/podcast-video-editing/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/video-ad-editing"
+  to = "/services/video-ad-editing/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/for/creators"
+  to = "/for/creators/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/for/businesses"
+  to = "/for/businesses/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/for/agencies"
+  to = "/for/agencies/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/video-editing-cost-pricing-guide"
+  to = "/blog/video-editing-cost-pricing-guide/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/agency-vs-freelance-video-editor"
+  to = "/blog/agency-vs-freelance-video-editor/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/how-to-improve-youtube-retention"
+  to = "/blog/how-to-improve-youtube-retention/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/what-makes-a-good-short-form-video-editor"
+  to = "/blog/what-makes-a-good-short-form-video-editor/index.html"
+  status = 200
+
 # Global Security & Performance Headers
 [[headers]]
   for = "/*"
