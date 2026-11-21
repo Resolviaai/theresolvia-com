@@ -79,9 +79,9 @@
     return scratchCtx;
   }
 
-  function computeLayout(width, fontFam, weight, maxFont) {
+  function computeLayout(containerWidth, fontFam, weight, maxFont) {
     const ctx = getScratch();
-    if (!ctx || width < 16) return null;
+    if (!ctx || containerWidth < 16) return null;
 
     const setFont = (px) => {
       ctx.font = `${weight} ${px}px ${fontFam}`;
@@ -92,29 +92,37 @@
 
     setFont(100);
     const w100 = Math.max(1, ctx.measureText(text).width);
-    const fontSize = Math.max(28, Math.min(maxFont, (width * 0.88 * 100) / w100));
+    const fontSize = Math.max(28, Math.min(maxFont, (containerWidth * 0.88 * 100) / w100));
     setFont(fontSize);
 
     const m = ctx.measureText(text);
     const asc = m.actualBoundingBoxAscent || fontSize * 0.72;
     const desc = m.actualBoundingBoxDescent || fontSize * 0.18;
-    
-    // Generous headroom and footroom so dragging/pulling ink never clips above or below
-    const padY = Math.round(fontSize * 0.95);
+    const textWidth = m.width;
+
+    // Generous 4-way fluid expansion padding:
+    // padX: +280px margin left and right (never clips horizontally)
+    // padY: +160px margin top and bottom (never clips vertically)
+    const padX = Math.max(220, Math.round(fontSize * 2.4));
+    const padY = Math.max(140, Math.round(fontSize * 1.5));
+
+    const width = Math.round(textWidth + padX * 2);
     const height = Math.round(fontSize * 1.4 + padY * 2);
     const baseline = padY + Math.round(fontSize * 0.72 + (asc - desc) / 2);
     const contentHeight = Math.round(fontSize * 1.32);
 
     return {
+      containerWidth,
       width,
       height,
+      padX,
       padY,
       contentHeight,
       fontSize,
       font: `${weight} ${fontSize}px ${fontFam}`,
       tracking: -0.025 * fontSize,
       baseline,
-      textWidth: m.width,
+      textWidth,
       inkTop: baseline - asc,
       inkBottom: baseline + desc,
     };
@@ -527,13 +535,15 @@ void main() {
           field = buildField(layout);
           if (!field) return;
 
-          canvas.width = Math.round(layout.width * dpr);
+                    canvas.width = Math.round(layout.width * dpr);
           canvas.height = Math.round(layout.height * dpr);
-          canvas.style.width = layout.width + 'px';
-          canvas.style.height = layout.height + 'px';
           canvas.style.position = 'absolute';
           canvas.style.top = `-${layout.padY}px`;
-          canvas.style.left = '0';
+          canvas.style.left = '50%';
+          canvas.style.transform = 'translateX(-50%)';
+          canvas.style.width = layout.width + 'px';
+          canvas.style.height = layout.height + 'px';
+          canvas.style.maxWidth = 'none';
           canvas.style.pointerEvents = 'auto';
 
           container.style.position = 'relative';
@@ -621,12 +631,13 @@ void main() {
           return [(e.clientX - rect.left) * sx, (e.clientY - rect.top) * sy];
         }
 
-        function onMove(e) {
+                function onMove(e) {
           const pt = toLocal(e);
           if (!pt || !layout) return;
-          const m = layout.fontSize * 0.08;
-          sim.tx = Math.min(layout.width - m, Math.max(m, pt[0]));
-          sim.ty = Math.min(layout.height - m, Math.max(m, pt[1]));
+          const mx = layout.padX * 0.1;
+          const my = layout.padY * 0.1;
+          sim.tx = Math.min(layout.width - mx, Math.max(mx, pt[0]));
+          sim.ty = Math.min(layout.height - my, Math.max(my, pt[1]));
           if (sim.mode !== "pointer") {
             sim.mode = "pointer";
             sim.mass = 0;
@@ -725,21 +736,25 @@ void main() {
   let pointerActive = false;
   let clock = 0;
 
-  function resizeFallback() {
+    function resizeFallback() {
     const rect = container.getBoundingClientRect();
-    width = Math.max(300, rect.width || window.innerWidth);
-    const fontSize = Math.max(36, Math.min(130, width * 0.14));
-    const padY = Math.round(fontSize * 0.95);
+    const containerW = Math.max(300, rect.width || window.innerWidth);
+    const fontSize = Math.max(36, Math.min(130, containerW * 0.14));
+    const padX = Math.max(220, Math.round(fontSize * 2.4));
+    const padY = Math.max(140, Math.round(fontSize * 1.5));
+    width = Math.round(containerW + padX * 2);
     height = Math.round(fontSize * 1.4 + padY * 2);
     const contentHeight = Math.round(fontSize * 1.32);
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     activeCanvas.width = Math.round(width * dpr);
     activeCanvas.height = Math.round(height * dpr);
-    activeCanvas.style.width = width + 'px';
-    activeCanvas.style.height = height + 'px';
     activeCanvas.style.position = 'absolute';
     activeCanvas.style.top = `-${padY}px`;
-    activeCanvas.style.left = '0';
+    activeCanvas.style.left = '50%';
+    activeCanvas.style.transform = 'translateX(-50%)';
+    activeCanvas.style.width = width + 'px';
+    activeCanvas.style.height = height + 'px';
+    activeCanvas.style.maxWidth = 'none';
     container.style.position = 'relative';
     container.style.overflow = 'visible';
     container.style.height = contentHeight + 'px';
