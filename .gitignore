@@ -42,3 +42,6 @@ row2.png
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Local Netlify folder
+.netlify

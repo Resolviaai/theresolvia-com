@@ -1,0 +1,10 @@
+/* Custom Resolvia 3D Glossy Cursor System */
+html, body {
+  cursor: url('/assets/cursor-default.png') 2 0, auto !important;
+}
+
+a, button, [role="button"], input[type="submit"], input[type="button"], select, 
+.cursor-pointer, .filter-pill, .bwf-l, .hero-btn-secondary, .btn-bevel, 
+.resolvia-nav-link, .resolvia-nav-brand, .card-link, [data-sphere-anchor] {
+  cursor: url('/assets/cursor-pointer.png') 9 0, pointer !important;
+}
