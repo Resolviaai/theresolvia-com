@@ -10,11 +10,87 @@
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/cursor.css"/>
   <style id="resolvia-cursor-inline">
-    html, body { cursor: url('/assets/cursor-default.png') 2 0, auto !important; }
-    a, button, [role="button"], input[type="submit"], input[type="button"], select, .cursor-pointer, .filter-pill, .bwf-l, .btn-bevel, .hero-btn-secondary, .resolvia-nav-link, .resolvia-nav-brand, .card-link {
-      cursor: url('/assets/cursor-pointer.png') 9 0, pointer !important;
-    }
-  </style>
+/* ==========================================================================
+   Resolvia 3D Glossy Custom Cursor System
+   ========================================================================== */
+
+/* 1. Default Arrow */
+html, body {
+  cursor: url('/assets/cursor-default.png') 2 0, auto !important;
+}
+
+/* 2. Interactive Pointer (Links, Buttons, Clickable Elements) */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+.cursor-pointer,
+.filter-pill,
+.bwf-l,
+.btn-bevel,
+.hero-btn-secondary,
+.resolvia-nav-link,
+.resolvia-nav-brand,
+.card-link {
+  cursor: url('/assets/cursor-pointer.png') 9 0, pointer !important;
+}
+
+/* 3. Grab (Interactive Canvas, 3D Globe, Liquid Text Container) */
+.cursor-grab,
+#liquid-text-container,
+[data-sphere-anchor],
+#hero-sphere-container {
+  cursor: url('/assets/cursor-grab.png') 14 14, grab !important;
+}
+
+/* 4. Grabbing (Active Dragging State) */
+.cursor-grabbing,
+.cursor-grab:active,
+#liquid-text-container:active,
+[data-sphere-anchor]:active,
+#hero-sphere-container:active,
+*:active.cursor-grabbing {
+  cursor: url('/assets/cursor-grabbing.png') 14 14, grabbing !important;
+}
+
+/* 5. Text Selection (Inputs, Textareas, Contenteditable) */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+textarea,
+[contenteditable="true"],
+.cursor-text {
+  cursor: url('/assets/cursor-text.png') 6 17, text !important;
+}
+
+/* 6. Disabled / Not Allowed */
+[disabled],
+:disabled,
+.disabled,
+.cursor-not-allowed,
+[aria-disabled="true"] {
+  cursor: url('/assets/cursor-not-allowed.png') 16 16, not-allowed !important;
+}
+
+/* 7. Help */
+.cursor-help,
+abbr,
+dfn {
+  cursor: url('/assets/cursor-help.png') 2 0, help !important;
+}
+
+/* 8. Move / Pan */
+.cursor-move,
+[data-draggable="true"] {
+  cursor: url('/assets/cursor-move.png') 16 17, move !important;
+}
+</style>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="theme-color" content="#0B0F17"/>

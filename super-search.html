@@ -9,11 +9,87 @@
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/cursor.css"/>
   <style id="resolvia-cursor-inline">
-    html, body { cursor: url('/assets/cursor-default.png') 2 0, auto !important; }
-    a, button, [role="button"], input[type="submit"], input[type="button"], select, .cursor-pointer, .filter-pill, .bwf-l, .btn-bevel, .hero-btn-secondary, .resolvia-nav-link, .resolvia-nav-brand, .card-link {
-      cursor: url('/assets/cursor-pointer.png') 9 0, pointer !important;
-    }
-  </style><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link as="image" href="/brand/claude.svg" rel="preload"/><link data-precedence="next" href="/_next/static/chunks/1pmsn_rpclwta.css?dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" rel="stylesheet"/><link data-precedence="next" href="/_next/static/chunks/2rtpwwx2j42fi.css?dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" rel="stylesheet"/><meta content="" name="next-size-adjust"/><meta content="#0B0F17" name="theme-color"/><title>RESOLVIA · High-Retention Video Editing Agency & Creative Studio</title><meta content="Resolvia is an elite video editing agency helping top creators and brands scale with retention-engineered short-form and high-production content." name="description"/><link href="https://theresolvia.com" rel="canonical"/><link href="https://theresolvia.com" hreflang="en" rel="alternate"/><link href="https://theresolvia.com/?lang=fr" hreflang="fr" rel="alternate"/><link href="https://theresolvia.com/?lang=pt" hreflang="pt-BR" rel="alternate"/><link href="https://theresolvia.com" hreflang="x-default" rel="alternate"/><meta content="RESOLVIA · High-Retention Video Editing Agency & Creative Studio" property="og:title"/><meta content="Resolvia is an elite video editing agency helping top creators and brands scale with retention-engineered short-form and high-production content." property="og:description"/><meta content="Resolvia" property="og:site_name"/><meta content="https://theresolvia.com/og-image.png" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="Resolvia" property="og:image:alt"/><meta content="website" property="og:type"/><meta content="summary_large_image" name="twitter:card"/><meta content="RESOLVIA · High-Retention Video Editing Agency & Creative Studio" name="twitter:title"/><meta content="Resolvia is an elite video editing agency helping top creators and brands scale with retention-engineered short-form and high-production content." name="twitter:description"/><meta content="https://theresolvia.com/og-image.png" name="twitter:image"/><script>(function(){var s=function(a,b,c){var d=a.replace(/\/$/,"");if("/auto-editing"!==d&&"/script-studio"!==d)return null;var e=new URLSearchParams(b),f=e.get("handoff");if(null===f)return null;e.delete("handoff");var g=e.toString();return{code:f,url:a+(g?"?"+g:"")+(e.get("p")?c||"":"#etape/1")}};var r=s(location.pathname,location.search,location.hash);if(r){window.__resolviaHandoff=r.code;history.replaceState(history.state,"",r.url)}})()</script><script>(()=>{if(!matchMedia("(prefers-reduced-motion: no-preference)").matches)return;var r=document.documentElement;r.setAttribute("data-rv-on","");setTimeout(function(){if(!window.__rv)r.removeAttribute("data-rv-on")},2500)})()</script><style id="resolvia-visibility-guarantee">
+/* ==========================================================================
+   Resolvia 3D Glossy Custom Cursor System
+   ========================================================================== */
+
+/* 1. Default Arrow */
+html, body {
+  cursor: url('/assets/cursor-default.png') 2 0, auto !important;
+}
+
+/* 2. Interactive Pointer (Links, Buttons, Clickable Elements) */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+.cursor-pointer,
+.filter-pill,
+.bwf-l,
+.btn-bevel,
+.hero-btn-secondary,
+.resolvia-nav-link,
+.resolvia-nav-brand,
+.card-link {
+  cursor: url('/assets/cursor-pointer.png') 9 0, pointer !important;
+}
+
+/* 3. Grab (Interactive Canvas, 3D Globe, Liquid Text Container) */
+.cursor-grab,
+#liquid-text-container,
+[data-sphere-anchor],
+#hero-sphere-container {
+  cursor: url('/assets/cursor-grab.png') 14 14, grab !important;
+}
+
+/* 4. Grabbing (Active Dragging State) */
+.cursor-grabbing,
+.cursor-grab:active,
+#liquid-text-container:active,
+[data-sphere-anchor]:active,
+#hero-sphere-container:active,
+*:active.cursor-grabbing {
+  cursor: url('/assets/cursor-grabbing.png') 14 14, grabbing !important;
+}
+
+/* 5. Text Selection (Inputs, Textareas, Contenteditable) */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+textarea,
+[contenteditable="true"],
+.cursor-text {
+  cursor: url('/assets/cursor-text.png') 6 17, text !important;
+}
+
+/* 6. Disabled / Not Allowed */
+[disabled],
+:disabled,
+.disabled,
+.cursor-not-allowed,
+[aria-disabled="true"] {
+  cursor: url('/assets/cursor-not-allowed.png') 16 16, not-allowed !important;
+}
+
+/* 7. Help */
+.cursor-help,
+abbr,
+dfn {
+  cursor: url('/assets/cursor-help.png') 2 0, help !important;
+}
+
+/* 8. Move / Pan */
+.cursor-move,
+[data-draggable="true"] {
+  cursor: url('/assets/cursor-move.png') 16 17, move !important;
+}
+</style><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link as="image" href="/brand/claude.svg" rel="preload"/><link data-precedence="next" href="/_next/static/chunks/1pmsn_rpclwta.css?dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" rel="stylesheet"/><link data-precedence="next" href="/_next/static/chunks/2rtpwwx2j42fi.css?dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" rel="stylesheet"/><meta content="" name="next-size-adjust"/><meta content="#0B0F17" name="theme-color"/><title>RESOLVIA · High-Retention Video Editing Agency & Creative Studio</title><meta content="Resolvia is an elite video editing agency helping top creators and brands scale with retention-engineered short-form and high-production content." name="description"/><link href="https://theresolvia.com" rel="canonical"/><link href="https://theresolvia.com" hreflang="en" rel="alternate"/><link href="https://theresolvia.com/?lang=fr" hreflang="fr" rel="alternate"/><link href="https://theresolvia.com/?lang=pt" hreflang="pt-BR" rel="alternate"/><link href="https://theresolvia.com" hreflang="x-default" rel="alternate"/><meta content="RESOLVIA · High-Retention Video Editing Agency & Creative Studio" property="og:title"/><meta content="Resolvia is an elite video editing agency helping top creators and brands scale with retention-engineered short-form and high-production content." property="og:description"/><meta content="Resolvia" property="og:site_name"/><meta content="https://theresolvia.com/og-image.png" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="Resolvia" property="og:image:alt"/><meta content="website" property="og:type"/><meta content="summary_large_image" name="twitter:card"/><meta content="RESOLVIA · High-Retention Video Editing Agency & Creative Studio" name="twitter:title"/><meta content="Resolvia is an elite video editing agency helping top creators and brands scale with retention-engineered short-form and high-production content." name="twitter:description"/><meta content="https://theresolvia.com/og-image.png" name="twitter:image"/><script>(function(){var s=function(a,b,c){var d=a.replace(/\/$/,"");if("/auto-editing"!==d&&"/script-studio"!==d)return null;var e=new URLSearchParams(b),f=e.get("handoff");if(null===f)return null;e.delete("handoff");var g=e.toString();return{code:f,url:a+(g?"?"+g:"")+(e.get("p")?c||"":"#etape/1")}};var r=s(location.pathname,location.search,location.hash);if(r){window.__resolviaHandoff=r.code;history.replaceState(history.state,"",r.url)}})()</script><script>(()=>{if(!matchMedia("(prefers-reduced-motion: no-preference)").matches)return;var r=document.documentElement;r.setAttribute("data-rv-on","");setTimeout(function(){if(!window.__rv)r.removeAttribute("data-rv-on")},2500)})()</script><style id="resolvia-visibility-guarantee">
 [data-reveal], [data-reveal-children] > * {
   opacity: 1 !important;
   visibility: visible !important;
