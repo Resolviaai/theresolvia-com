@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing and Scratch
+scratch/
+*.log
+*.tmp
+temp_*
+*.pyc
+__pycache__/
+
+# Staging & QA test artifacts
+audit_*.png
+final_*.png
+mobile_*.png
+desktop_*.png
+tablet_*.png
+hero_*.png
+nav_*.png
+preview_test.*
+deep_verify_render.*
+cta_banner_dump.*
+temp_icon_test.*
+temp_mobile_test.*
+contact_scroll_proof.png
+faq_scroll_proof.png
+portfolio_blocked_proof.png
+workflow_scroll_proof.png
+supaste_gallery.png
+card_*.png
+img_shot_*.png
+davinci_png_rendered.png
+davinci_svg_rendered.png
+deep_verify_output.png
+row2.png
+
+# Local development scripts
+*.py
+
+# OS metadata
+.DS_Store
+Thumbs.db

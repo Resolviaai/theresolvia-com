@@ -1,0 +1,28 @@
+# Resolvia
+> Retention-Engineered Video Editing Agency & Post-Production Studio for High-Growth Creators, Media Brands, and Venture-Backed Founders.
+
+Resolvia (https://theresolvia.com) is an elite video post-production agency specializing in high-retention editing, pacing architecture, sonic foley design, and high-velocity workflow pipelines for YouTube, Shorts, and Reels creators.
+
+## Primary Canonical Pages
+- [Home & Portfolio](https://theresolvia.com/): Official studio showcase, featured client edits (50M+ combined views), 48-hour sprint workflow, and core post-production capabilities.
+- [Editorial & Retention Science](https://theresolvia.com/blog.html): Reverse-engineered YouTube retention case studies, hook psychology, pacing curves, and audio foley architecture.
+- [Join the Editor Roster](https://theresolvia.com/careers.html): Global career opportunities for top-tier NLE editors, motion designers, and sound engineers.
+- [Pre-Release Security Vault](https://theresolvia.com/security.html): Enterprise-grade bilateral NDAs, zero-leak raw footage vault, and encrypted post-production pipelines.
+- [Terms of Production](https://theresolvia.com/terms.html): Production agreements, media usage rights, turnaround SLAs, and retainer conditions.
+- [Privacy Policy](https://theresolvia.com/privacy.html): Pre-release media confidentiality, data handling, and client asset governance.
+
+## Direct Consultation & Onboarding
+- [Book an Onboarding Consultation](https://calendly.com/resolviaai/meet): Schedule a direct 30-minute creative strategy and channel retention audit with our lead post-production team.
+
+## Core Capabilities & Specializations
+- YouTube Long-Form Architecture: Structural narrative pacing, retention valley elimination, multi-camera rhythm, and retention hold optimization.
+- Short-Form & Reels Velocity: High-energy vertical post-production with kinetic typography, custom sound design, and sub-3-second visual interrupts.
+- Immersive Sonic Engineering: Multi-stem audio grading, dialogue clarity enhancement, custom foley accents, and frequency-sculpted music ducking.
+- Motion Graphics & 3D Packaging: Custom title sequences, kinetic infographics, 3D title cards, and high-CTR thumbnail packaging.
+- 48-Hour Sprint Delivery: Dedicated producer, Frame.io cloud collaboration, and multi-time zone post-production coverage (New York, London, Tokyo).
+
+## Production Software & Infrastructure
+- DaVinci Resolve Studio (Fusion VFX & Fairlight Audio Mastering)
+- Adobe Premiere Pro & Adobe After Effects
+- Frame.io Cloud Collaboration & Camera-to-Cloud (C2C) Pipelines
+- Encrypted Local-Vault Media Storage

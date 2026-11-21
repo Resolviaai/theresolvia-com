@@ -1,0 +1,40 @@
+# robots.txt for https://theresolvia.com
+User-agent: *
+Allow: /
+Allow: /blog.html
+Allow: /careers.html
+Allow: /security.html
+Allow: /terms.html
+Allow: /privacy.html
+Allow: /llms.txt
+
+# Disallow internal test pages, staging previews and scratch files
+Disallow: /scratch/
+Disallow: /*_test.html
+Disallow: /preview_test.html
+Disallow: /deep_verify_render.html
+Disallow: /cta_banner_dump.html
+Disallow: /temp_*
+Disallow: /super-search.html
+
+# Allow Major AI Search and Retrieval Bots for GEO / Citations
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://theresolvia.com/sitemap.xml
