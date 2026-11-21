@@ -107,6 +107,21 @@
   to = "/blog/what-makes-a-good-short-form-video-editor/index.html"
   status = 200
 
+[[redirects]]
+  from = "/blog/white-label-video-editing-agency-guide"
+  to = "/blog/white-label-video-editing-agency-guide/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/2026-thumbnail-psychology-playbook"
+  to = "/blog/2026-thumbnail-psychology-playbook/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/b2b-saas-video-production-acquisition-guide"
+  to = "/blog/b2b-saas-video-production-acquisition-guide/index.html"
+  status = 200
+
 # Global Security & Performance Headers
 [[headers]]
   for = "/*"

@@ -38,6 +38,7 @@ row2.png
 
 # Local development scripts
 *.py
+!scripts/*.py
 
 # OS metadata
 .DS_Store
