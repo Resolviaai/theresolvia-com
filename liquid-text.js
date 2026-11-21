@@ -98,12 +98,18 @@
     const m = ctx.measureText(text);
     const asc = m.actualBoundingBoxAscent || fontSize * 0.72;
     const desc = m.actualBoundingBoxDescent || fontSize * 0.18;
-    const height = Math.round(fontSize * 1.5);
-    const baseline = height * 0.52 + (asc - desc) / 2;
+    
+    // Generous headroom and footroom so dragging/pulling ink never clips above or below
+    const padY = Math.round(fontSize * 0.95);
+    const height = Math.round(fontSize * 1.4 + padY * 2);
+    const baseline = padY + Math.round(fontSize * 0.72 + (asc - desc) / 2);
+    const contentHeight = Math.round(fontSize * 1.32);
 
     return {
       width,
       height,
+      padY,
+      contentHeight,
       fontSize,
       font: `${weight} ${fontSize}px ${fontFam}`,
       tracking: -0.025 * fontSize,
@@ -525,7 +531,15 @@ void main() {
           canvas.height = Math.round(layout.height * dpr);
           canvas.style.width = layout.width + 'px';
           canvas.style.height = layout.height + 'px';
-          container.style.height = layout.height + 'px';
+          canvas.style.position = 'absolute';
+          canvas.style.top = `-${layout.padY}px`;
+          canvas.style.left = '0';
+          canvas.style.pointerEvents = 'auto';
+
+          container.style.position = 'relative';
+          container.style.overflow = 'visible';
+          container.style.height = layout.contentHeight + 'px';
+          container.style.minHeight = layout.contentHeight + 'px';
 
           gl.bindTexture(gl.TEXTURE_2D, tex);
           gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
@@ -646,8 +660,7 @@ void main() {
               container.releasePointerCapture(e.pointerId);
             }
           } catch (_) {}
-          const rect = container.getBoundingClientRect();
-          const outside = e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom;
+          const rect = canvas.getBoundingClientRect(); const outside = e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom;
           if (e.pointerType !== "mouse" || outside) onLeave();
         }
 
@@ -716,13 +729,20 @@ void main() {
     const rect = container.getBoundingClientRect();
     width = Math.max(300, rect.width || window.innerWidth);
     const fontSize = Math.max(36, Math.min(130, width * 0.14));
-    height = Math.round(fontSize * 1.5);
+    const padY = Math.round(fontSize * 0.95);
+    height = Math.round(fontSize * 1.4 + padY * 2);
+    const contentHeight = Math.round(fontSize * 1.32);
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     activeCanvas.width = Math.round(width * dpr);
     activeCanvas.height = Math.round(height * dpr);
     activeCanvas.style.width = width + 'px';
     activeCanvas.style.height = height + 'px';
-    container.style.height = height + 'px';
+    activeCanvas.style.position = 'absolute';
+    activeCanvas.style.top = `-${padY}px`;
+    activeCanvas.style.left = '0';
+    container.style.position = 'relative';
+    container.style.overflow = 'visible';
+    container.style.height = contentHeight + 'px';
 
     const cx = width / 2;
     const cy = height / 2;

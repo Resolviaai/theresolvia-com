@@ -25,7 +25,7 @@
       canvas.style.width = "100%";
       canvas.style.height = "100%";
       canvas.style.pointerEvents = "auto";
-      canvas.style.cursor = "grab";
+      canvas.classList.add("cursor-grab"); canvas.style.cursor = window.RESOLVIA_CURSORS ? window.RESOLVIA_CURSORS.grab : "url('/assets/cursor-grab.png') 14 14, grab";
       canvas.style.filter = "contrast(1.08) brightness(1.02) saturate(1.08)";
       container.insertBefore(canvas, container.firstChild);
     } else {
@@ -192,7 +192,7 @@
 
       if (!isDragging) {
         if (isCursorOverGlobe) {
-          canvas.style.cursor = "grab";
+          canvas.classList.add("cursor-grab"); canvas.style.cursor = window.RESOLVIA_CURSORS ? window.RESOLVIA_CURSORS.grab : "url('/assets/cursor-grab.png') 14 14, grab";
         } else {
           canvas.style.cursor = "default";
         }
@@ -222,13 +222,20 @@
       startY = e.clientY;
       lastTime = performance.now();
       velY = velX = 0;
-      canvas.style.cursor = "grabbing";
+      canvas.classList.add("is-grabbing", "cursor-grabbing"); canvas.classList.remove("cursor-grab"); canvas.style.cursor = window.RESOLVIA_CURSORS ? window.RESOLVIA_CURSORS.grabbing : "url('/assets/cursor-grabbing.png') 14 14, grabbing";
     });
 
     window.addEventListener("pointerup", () => {
       if (isDragging) {
         isDragging = false;
-        canvas.style.cursor = isCursorOverGlobe ? "grab" : "default";
+        canvas.classList.remove("is-grabbing", "cursor-grabbing");
+        if (isCursorOverGlobe) {
+          canvas.classList.add("cursor-grab");
+          canvas.style.cursor = window.RESOLVIA_CURSORS ? window.RESOLVIA_CURSORS.grab : "url('/assets/cursor-grab.png') 14 14, grab";
+        } else {
+          canvas.classList.remove("cursor-grab");
+          canvas.style.cursor = window.RESOLVIA_CURSORS ? window.RESOLVIA_CURSORS.default : "url('/assets/cursor-default.png') 2 0, auto";
+        }
       }
     });
 
