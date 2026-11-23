@@ -579,14 +579,26 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     text-align: center !important;
   }
   #lead-form-container {
-    background: #0E131F !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-    padding: 32px !important;
+    background: radial-gradient(70% 120% at 50% 0%, #24262a 0%, #18191c 55%, #131416 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    padding: 36px 32px !important;
     max-width: 680px !important;
     margin: 32px auto 0 !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    overflow: hidden !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  }
+  #lead-form-container * {
+    font-family: inherit !important;
+  }
+  #lead-form-container .form-footer-note {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 13px !important;
+    text-align: center !important;
+    margin-top: 14px !important;
   }
   #lead-form-container h3 {
     color: #ffffff !important;
@@ -601,12 +613,41 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     text-align: center !important;
     margin-bottom: 24px !important;
   }
+  #lead-form-container .form-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 4px 12px !important;
+    border-radius: 9999px !important;
+    background: rgba(47, 134, 247, 0.12) !important;
+    border: 1px solid rgba(47, 134, 247, 0.32) !important;
+    color: #38BAFE !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+  }
+  #lead-form-container .form-badge-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 9999px !important;
+    background: #38BAFE !important;
+    box-shadow: 0 0 8px #38BAFE !important;
+  }
   #lead-form-container label {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 12.5px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 13px !important;
     font-weight: 500 !important;
     margin-bottom: 6px !important;
     display: block !important;
+  }
+  #lead-form-container .form-footer-link {
+    color: #38BAFE !important;
+    text-decoration: underline !important;
+    transition: color 0.15s !important;
+  }
+  #lead-form-container .form-footer-link:hover {
+    color: #ffffff !important;
   }
   #lead-form-container input,
   #lead-form-container select,
@@ -636,7 +677,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
   }
   #lead-submit-btn {
     background: linear-gradient(180deg, #0077ED 0%, #0062CC 100%) !important;
-    box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.95), 0 8px 24px rgba(0, 119, 237, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
     border-radius: 14px !important;
     height: 48px !important;
     width: 100% !important;
@@ -649,10 +690,12 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    transition: transform 0.2s, filter 0.2s !important;
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), filter 0.18s, box-shadow 0.18s !important;
   }
   #lead-submit-btn:hover {
-    filter: brightness(1.1) !important;
+    filter: brightness(1.05) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
   }
   #lead-submit-btn:active {
     transform: scale(0.98) !important;
@@ -674,10 +717,10 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     right: 16px !important;
     max-width: 380px !important;
     margin: 0 auto !important;
-    background: #0E131F !important;
+    background: rgba(20, 23, 29, 0.96) !important;
     border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 20px !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 20px rgba(47, 134, 247, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
     padding: 14px !important;
     z-index: 1000 !important;
     backdrop-filter: blur(24px) !important;
@@ -921,7 +964,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
       </p>
 </div>
 <div class="relative z-20 mt-[24px] flex items-center gap-3">
-<a class="btn-bevel cta flex h-[48px] items-center justify-center rounded-[14px] bg-brand px-[28px] text-[15px] font-bold text-white shadow-[0_20px_42px_-6px_rgba(0,0,0,0.95),0_8px_24px_rgba(0,119,237,0.55),inset_0_1px_0_rgba(255,255,255,0.45)] transition-all hover:brightness-110 active:scale-98" href="#contact">
+<a class="btn-bevel cta flex h-[48px] items-center justify-center rounded-[14px] bg-brand px-[28px] text-[15px] font-bold text-white shadow-[0_4px_14px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.25)] transition-all active:scale-98" href="#contact">
         Get Your First Edit
       </a>
 <a class="hero-btn-secondary flex h-[48px] items-center justify-center rounded-[14px] border border-white/[0.18] px-[24px] text-[15px] font-semibold text-white/90 transition-all hover:bg-white/[0.12] hover:text-white" href="#portfolio">
@@ -1136,12 +1179,13 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     </p>
   </div>
 
-  <!-- Lead Capture Form Card (Steve Jobs / Jensen Huang Dark Glass Grid) -->
-  <div id="lead-form-container" class="mt-[40px] w-full max-w-[680px] mx-auto rounded-[20px] border border-white/[0.12] bg-[#0E131F]/90 p-6 sm:p-8 shadow-[0_24px_64px_-12px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl text-left relative z-20">
+  <!-- Lead Capture Form Card (Exact match with #mcp Showcase Banner) -->
+  <div id="lead-form-container" class="mt-[40px] w-full max-w-[680px] mx-auto rounded-[22px] max-sm:rounded-[16px] border border-white/[0.08] bg-[radial-gradient(70%_120%_at_50%_0%,#24262a_0%,#18191c_55%,#131416_100%)] p-6 sm:p-8 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.1)] text-left relative z-20 overflow-hidden">
+    <div class="dot-grid pointer-events-none absolute inset-x-0 bottom-0 h-[45%] [mask-image:linear-gradient(0deg,#000_0%,transparent_100%)]"></div>
     <div class="mb-6 text-center">
-      <div class="inline-flex items-center gap-2 rounded-full border border-[rgba(47,134,247,0.35)] bg-[rgba(47,134,247,0.10)] px-3 py-1 text-[12px] font-semibold tracking-wider text-[#70E5FD] uppercase">
-        <span class="inline-block size-1.5 rounded-full bg-[#38BAFE] animate-pulse"></span>
-        Free Sample Cut & Retention Audit
+      <div class="form-badge">
+        <span class="form-badge-dot"></span>
+        <span>Free Sample Cut & Retention Audit</span>
       </div>
       <h3 class="mt-3 text-[22px] sm:text-[26px] font-bold tracking-tight text-white">Request Your Custom Edit</h3>
       <p class="form-desc">Drop your channel or raw rushes below. We'll edit your first video cut in 48 hours.</p>
@@ -1190,7 +1234,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
         <textarea id="lead-notes" name="notes" rows="2" placeholder="e.g. Want higher 30s retention, dynamic sound design, and faster turnaround..." class="w-full rounded-[11px] border border-white/10 bg-black/40 p-3 text-[14px] text-white placeholder-white/30 outline-none transition-all focus:border-[#2F86F7] focus:bg-black/60 focus:ring-1 focus:ring-[#2F86F7] resize-none"></textarea>
       </div>
 
-      <button type="submit" id="lead-submit-btn" class="btn-bevel cta group relative flex h-[50px] w-full items-center justify-center rounded-[14px] bg-brand text-[15.5px] font-bold text-white shadow-[0_20px_42px_-6px_rgba(0,0,0,0.95),0_8px_24px_rgba(0,119,237,0.55),inset_0_1px_0_rgba(255,255,255,0.45)] transition-all hover:brightness-110 active:scale-98 cursor-pointer mt-1">
+      <button type="submit" id="lead-submit-btn" class="group relative flex h-[50px] w-full items-center justify-center rounded-[14px] bg-brand text-[15.5px] font-bold text-white shadow-[0_4px_14px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.25)] transition-all active:scale-98 cursor-pointer mt-1">
         <span class="flex items-center gap-2">
           <span>Claim Free Sample Cut & Audit</span>
           <svg width="16" height="16" class="size-4 transition-transform group-hover:translate-x-1" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -1199,15 +1243,15 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 
       <div id="lead-form-status" class="hidden text-center text-[14px] font-medium py-2 rounded-[9px] transition-all"></div>
 
-      <div class="mt-2 text-center text-[12.5px] text-white/45">
-        Prefer an instant strategy session? <a href="https://calendly.com/resolviaai/meet" target="_blank" rel="noopener noreferrer" class="text-[#70E5FD] underline hover:text-white transition-colors">Book 15-min discovery call on Calendly →</a>
+      <div class="form-footer-note">
+        Prefer an instant strategy session? <a href="https://calendly.com/resolviaai/meet" target="_blank" rel="noopener noreferrer" class="form-footer-link">Book 15-min discovery call on Calendly →</a>
       </div>
     </form>
   </div>
 
 
 </section>
-<section class="mx-auto max-w-[1432px] px-4 pt-[48px] pb-0 lg:pt-[64px] scroll-mt-24" data-home-section="crewBanner" id="contact"><div class="dot-grid resolvia-cta-card relative overflow-hidden rounded-t-[22px] rounded-b-none max-sm:rounded-t-[16px] border-t border-x border-b-0 border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]" data-reveal="scale"><div aria-hidden="true" class="pointer-events-none absolute bottom-[-30px] left-1/2 -translate-x-1/2 w-[700px] max-w-full h-[180px] rounded-full bg-[radial-gradient(closest-side,rgba(47,134,247,0.16),transparent)] blur-2xl"></div><div aria-hidden="true" class="pointer-events-none absolute top-0 left-0 size-[1040px] rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent-1-rgb)/0.11),rgb(var(--accent-2-rgb)/0.04)_45%,transparent_70%)] opacity-0 transition-opacity duration-500 will-change-transform"></div><div class="pointer-events-none absolute top-[40px] left-1/2 h-[200px] w-[620px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent-1-rgb)/0.14),transparent)]"></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] lg:block" style="left:110px;top:30px;animation-delay:0s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:-7deg"><img alt="Resolvia Post-Production Graphic #38" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>950M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">Viral Shorts</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -left-[26px]" style="animation-delay:0.3s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] xl:block" style="left:262px;top:118px;animation-delay:0.9s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:6deg"><img alt="Resolvia Post-Production Graphic #39" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>569M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">Reel Cuts</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -right-[26px] -scale-x-100" style="animation-delay:1.2s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] xl:block" style="right:262px;top:118px;animation-delay:1.3s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:-6deg"><img alt="Resolvia Post-Production Graphic #40" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>152M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">Motion FX Cut</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -left-[26px]" style="animation-delay:1.6s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] lg:block" style="right:110px;top:30px;animation-delay:0.5s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:7deg"><img alt="Resolvia Post-Production Graphic #41" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>195M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">YouTube Cuts</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -right-[26px] -scale-x-100" style="animation-delay:0.8s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div class="relative flex h-full flex-col items-center px-[20px] py-[48px] text-center lg:py-0 lg:pt-[64px]" data-reveal-children="true"><h2 class="text-[30px] leading-[1.12] font-extrabold tracking-[-0.03em] text-white sm:text-[40px] lg:text-[47px]">Stop editing.<br/>Post what converts.</h2><p class="mt-[14px] text-[15px] leading-[1.45] text-[#828282]">Viral hooks, dynamic pacing, and custom sound design,<br class="max-sm:hidden"/>delivered in 48 hours for your channel.</p><a class="bg-brand cta mt-[18px] flex h-[40px] min-w-[182px] items-center justify-center rounded-[14px] px-[22px] text-[16px] transition-[filter,transform] hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-1)] active:scale-[0.98]" data-track="web_home.getStartedClicked" data-track-manual="" href="https://calendly.com/resolviaai/meet" rel="noopener noreferrer" target="_blank">Book a Call</a></div>
+<section class="mx-auto max-w-[1432px] px-4 pt-[48px] pb-0 lg:pt-[64px] scroll-mt-24" data-home-section="crewBanner" id="cta-bottom"><div class="dot-grid resolvia-cta-card relative overflow-hidden rounded-t-[22px] rounded-b-none max-sm:rounded-t-[16px] border-t border-x border-b-0 border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]" data-reveal="scale"><div aria-hidden="true" class="pointer-events-none absolute bottom-[-30px] left-1/2 -translate-x-1/2 w-[700px] max-w-full h-[180px] rounded-full bg-[radial-gradient(closest-side,rgba(47,134,247,0.16),transparent)] blur-2xl"></div><div aria-hidden="true" class="pointer-events-none absolute top-0 left-0 size-[1040px] rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent-1-rgb)/0.11),rgb(var(--accent-2-rgb)/0.04)_45%,transparent_70%)] opacity-0 transition-opacity duration-500 will-change-transform"></div><div class="pointer-events-none absolute top-[40px] left-1/2 h-[200px] w-[620px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent-1-rgb)/0.14),transparent)]"></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] lg:block" style="left:110px;top:30px;animation-delay:0s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:-7deg"><img alt="Resolvia Post-Production Graphic #38" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fthumbs%2Flib-01.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>950M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">Viral Shorts</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -left-[26px]" style="animation-delay:0.3s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] xl:block" style="left:262px;top:118px;animation-delay:0.9s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:6deg"><img alt="Resolvia Post-Production Graphic #39" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fthumbs%2Flib-02.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>569M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">Reel Cuts</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -right-[26px] -scale-x-100" style="animation-delay:1.2s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] xl:block" style="right:262px;top:118px;animation-delay:1.3s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:-6deg"><img alt="Resolvia Post-Production Graphic #40" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fthumbs%2Flib-09.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>152M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">Motion FX Cut</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -left-[26px]" style="animation-delay:1.6s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div aria-hidden="true" class="gump-float absolute hidden w-[96px] lg:block" style="right:110px;top:30px;animation-delay:0.5s"><div class="relative h-[150px] w-[96px] overflow-hidden rounded-[14px] border border-white/35 shadow-[0_18px_40px_rgba(0,0,0,0.65)]" style="rotate:7deg"><img alt="Resolvia Post-Production Graphic #41" class="object-cover" data-nimg="fill" decoding="async" loading="lazy" sizes="110px" src="/_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa" srcset="/_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=32&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 32w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=48&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 48w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=64&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 64w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=96&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 96w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=128&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 128w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=256&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 256w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=384&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 384w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=640&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 640w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=750&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 750w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=828&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 828w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=1080&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1080w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=1200&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1200w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=1920&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 1920w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=2048&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 2048w, /_next/image?url=%2Flp%2Fcard-trend.jpg&amp;w=3840&amp;q=75&amp;dpl=dpl_9ksTggmEoPPmjtsBRKUjiQsZfDTa 3840w" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"/><span class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent"></span><span class="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold"><svg class="size-[8px] fill-white" viewbox="0 0 10 10"><path d="M2 1l7 4-7 4z"></path></svg>195M</span></div><span class="absolute top-[140px] left-1/2 -translate-x-1/2 rounded-full border border-white/[0.12] bg-[#121b1b]/90 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.45)] backdrop-blur-sm">YouTube Cuts</span><svg class="gump-cursor absolute top-[150px] size-[18px] text-white/90 -right-[26px] -scale-x-100" style="animation-delay:0.8s" viewbox="0 0 24 24"><path d="M4 3l16 7-7 2.2L10.5 20z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"></path></svg></div><div class="relative flex h-full flex-col items-center px-[20px] py-[48px] text-center lg:py-0 lg:pt-[64px]" data-reveal-children="true"><h2 class="text-[30px] leading-[1.12] font-extrabold tracking-[-0.03em] text-white sm:text-[40px] lg:text-[47px]">Stop editing.<br/>Post what converts.</h2><p class="mt-[14px] text-[15px] leading-[1.45] text-[#828282]">Viral hooks, dynamic pacing, and custom sound design,<br class="max-sm:hidden"/>delivered in 48 hours for your channel.</p><a class="bg-brand cta mt-[18px] flex h-[40px] min-w-[182px] items-center justify-center rounded-[14px] px-[22px] text-[16px] transition-[filter,transform] hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-1)] active:scale-[0.98]" data-track="web_home.getStartedClicked" data-track-manual="" href="https://calendly.com/resolviaai/meet" rel="noopener noreferrer" target="_blank">Book a Call</a></div>
       
 </div></section>
 </main>
@@ -1870,12 +1914,12 @@ document.addEventListener("DOMContentLoaded", function() {
   <script defer src="/assets/analytics.js"></script>
 
   <!-- YouTube-Style Bottom Scroll Progress Scrubber with Electric Border Shine -->
-  <div id="resolvia-scrubber-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Page scroll progress" style="position: fixed; bottom: 0; left: 0; width: 100%; height: 4px; z-index: 99999; background: rgba(255, 255, 255, 0.08); cursor: pointer; transition: height 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.1);">
-    <div id="resolvia-scrubber-fill" style="height: 100%; width: 0%; position: relative; background: linear-gradient(90deg, #103A82 0%, #0077ED 40%, #2F86F7 75%, #70E5FD 100%); box-shadow: 0 -2px 10px rgba(0, 119, 237, 0.8), 0 0 18px rgba(112, 229, 253, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.85); transition: width 0.06s linear;">
+  <div id="resolvia-scrubber-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Page scroll progress" style="position: fixed; bottom: 0; left: 0; width: 100%; height: 2px; z-index: 99999; background: rgba(255, 255, 255, 0.04); cursor: pointer;">
+    <div id="resolvia-scrubber-fill" style="height: 100%; width: 0%; position: relative; background: linear-gradient(90deg, #103A82 0%, #0077ED 40%, #2F86F7 75%, #70E5FD 100%); box-shadow: 0 0 6px rgba(47, 134, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5); transition: width 0.06s linear;">
       <!-- Travelling Shimmer Light Beam -->
       <div style="position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%); animation: resolviaShimmer 2.4s infinite linear; pointer-events: none;"></div>
       <!-- Scrubber Head Dot (YouTube video playhead style with cyan/electric glow) -->
-      <div id="resolvia-scrubber-dot" style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%) scale(0); width: 12px; height: 12px; border-radius: 50%; background: #ffffff; box-shadow: 0 0 10px #70E5FD, 0 0 20px #0077ED, 0 2px 4px rgba(0,0,0,0.6); transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1.1);"></div>
+      
     </div>
   </div>
 
@@ -1884,12 +1928,8 @@ document.addEventListener("DOMContentLoaded", function() {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(200%); }
     }
-    #resolvia-scrubber-track:hover {
-      height: 7px !important;
-    }
-    #resolvia-scrubber-track:hover #resolvia-scrubber-dot {
-      transform: translateY(-50%) scale(1.15) !important;
-    }
+    
+    
   </style>
 
   <script>
@@ -1897,7 +1937,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // 1. YouTube Scroll Scrubber Engine
       var track = document.getElementById('resolvia-scrubber-track');
       var fill = document.getElementById('resolvia-scrubber-fill');
-      var dot = document.getElementById('resolvia-scrubber-dot');
+      // dot removed
       if (track && fill) {
         var ticking = false;
         function updateScroll() {
@@ -1907,11 +1947,7 @@ document.addEventListener("DOMContentLoaded", function() {
           var clamped = Math.min(100, Math.max(0, scrolled));
           fill.style.width = clamped + '%';
           track.setAttribute('aria-valuenow', Math.round(clamped));
-          if (clamped > 1) {
-            dot.style.transform = 'translateY(-50%) scale(1)';
-          } else {
-            dot.style.transform = 'translateY(-50%) scale(0)';
-          }
+          
           ticking = false;
         }
 
