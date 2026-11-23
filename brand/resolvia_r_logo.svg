@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134 131" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Facet 1: Top-Left Darker Under-Bevel -->
+    <linearGradient id="bevel-facet" x1="21" y1="20" x2="85" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#143A82"/>
+      <stop offset="50%" stop-color="#1C4F9E"/>
+      <stop offset="100%" stop-color="#2464C8"/>
+    </linearGradient>
+
+    <!-- Facet 2: Top Luminous Surface (Cyan to Electric Blue) -->
+    <linearGradient id="top-luminous" x1="21" y1="18" x2="114" y2="45" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2F86F7"/>
+      <stop offset="40%" stop-color="#38BAFE"/>
+      <stop offset="70%" stop-color="#70E5FD"/>
+      <stop offset="90%" stop-color="#3CBDFE"/>
+      <stop offset="100%" stop-color="#2873DC"/>
+    </linearGradient>
+
+    <!-- Facet 3: Lower Loop & Inner Waist -->
+    <linearGradient id="inner-waist" x1="70" y1="40" x2="114" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2464C8"/>
+      <stop offset="50%" stop-color="#35A8FC"/>
+      <stop offset="100%" stop-color="#2464C8"/>
+    </linearGradient>
+
+    <!-- Facet 4: Diagonal Leg with Bevel -->
+    <linearGradient id="leg-surface" x1="50" y1="60" x2="122" y2="109" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#276CD4"/>
+      <stop offset="45%" stop-color="#2F86F7"/>
+      <stop offset="80%" stop-color="#36A7FA"/>
+      <stop offset="100%" stop-color="#2568D0"/>
+    </linearGradient>
+
+    <linearGradient id="leg-bevel" x1="60" y1="70" x2="122" y2="109" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#163F8B"/>
+      <stop offset="60%" stop-color="#1D4E9F"/>
+      <stop offset="100%" stop-color="#174393"/>
+    </linearGradient>
+
+    <!-- Overall Master Silhouette Gradient -->
+    <linearGradient id="master-base" x1="21" y1="18" x2="122" y2="109" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1F5DBB"/>
+      <stop offset="25%" stop-color="#2F86F7"/>
+      <stop offset="50%" stop-color="#46C8FD"/>
+      <stop offset="75%" stop-color="#2A7EEA"/>
+      <stop offset="100%" stop-color="#225FBF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Group for entire logo -->
+  <g id="resolvia-r-logo">
+    <!-- Base Silhouette -->
+    <path id="base-silhouette" d="M 21 18
+             L 87 18
+             C 98 18, 108 24, 112 34
+             C 114 40, 114 48, 111 55
+             C 107 63, 97 69, 83 72
+             L 114 100
+             L 122 109
+             L 112 107
+             C 103 105, 96 103, 90 98
+             L 61 71
+             C 54 65, 51 61, 50 60
+             L 71 59
+             C 83 58, 93 54, 95 46
+             C 96 42, 94 40.5, 90 40
+             L 41 40
+             L 21 20
+             Z"
+          fill="url(#master-base)"/>
+
+    <!-- 3D Bevel Facet: Under-wing of top bar -->
+    <path id="top-left-bevel" d="M 21 18
+             L 86 33
+             C 91 35, 94 38, 93 41
+             L 41 40
+             L 21 20
+             Z"
+          fill="url(#bevel-facet)"
+          opacity="0.95"/>
+
+    <!-- 3D Luminous Top Crest Highlight -->
+    <path id="top-crest" d="M 21 18
+             L 87 18
+             C 98 18, 108 24, 112 34
+             C 114 40, 114 48, 111 55
+             C 107 61, 99 67, 88 70
+             C 97 65, 104 57, 105 48
+             C 106 39, 101 28, 90 23
+             C 86 21, 80 19.5, 75 19.5
+             L 21 18
+             Z"
+          fill="url(#top-luminous)"
+          opacity="0.85"/>
+
+    <!-- 3D Bevel Facet: Lower edge of diagonal leg -->
+    <path id="leg-bevel-shade" d="M 61 71
+             L 90 98
+             C 96 103, 103 105, 112 107
+             L 122 109
+             L 112 104
+             C 101 98, 93 92, 83 83
+             L 65 67
+             Z"
+          fill="url(#leg-bevel)"
+          opacity="0.75"/>
+  </g>
+</svg>
