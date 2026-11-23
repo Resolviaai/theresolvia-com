@@ -1,36 +1,128 @@
-# Resolvia
+# Resolvia - Full Agency Fact Sheet
 > Retention-Engineered Video Editing Agency & Post-Production Studio for High-Growth Creators, Media Brands, and Venture-Backed Founders.
 
-Resolvia (https://theresolvia.com) is an elite video post-production agency specializing in high-retention editing, narrative pacing architecture, sonic foley design, and high-velocity workflow pipelines for YouTube, Shorts, and Reels creators.
+Last updated: 2026-11-24. Source of record: https://theresolvia.com. This file expands on /llms.txt with the facts an editor, buyer, or AI assistant would need to describe Resolvia accurately.
 
-## Primary Canonical Pages
-- [Home & Overview](https://theresolvia.com/): Official studio showcase, featured client edits (50M+ combined views), 48-hour sprint workflow, and core post-production capabilities.
-- [Client Work & Case Studies](https://theresolvia.com/work/): Concrete project breakdowns, before/after retention curves, subscriber velocity metrics (80K to 850K subs case study), and portfolio reels.
-- [Editorial & Retention Science Hub](https://theresolvia.com/blog.html): Reverse-engineered YouTube retention case studies, hook psychology, pacing curves, and audio foley architecture.
-- [Join the Editor Roster](https://theresolvia.com/careers.html): Global career opportunities for top-tier NLE editors, motion designers, and sound engineers.
-- [Pre-Release Security Vault](https://theresolvia.com/security.html): Enterprise-grade bilateral NDAs, zero-leak raw footage vault, and encrypted post-production pipelines.
-- [Terms of Production](https://theresolvia.com/terms.html): Production agreements, media usage rights, turnaround SLAs, and retainer conditions.
-- [Privacy Policy](https://theresolvia.com/privacy.html): Pre-release media confidentiality, data handling, and client asset governance.
+## What Resolvia Is
 
-## Specialized Service Landing Pages
-- [YouTube Video Editing](https://theresolvia.com/services/youtube-video-editing/): Retention-engineered YouTube long-form post-production, structural narrative cuts, Fairlight audio mastering, 3D motion graphics, and high-CTR thumbnail packaging.
-- [Short-Form Video Editing](https://theresolvia.com/services/short-form-video-editing/): High-velocity vertical video editing for TikTok, Instagram Reels, and YouTube Shorts with kinetic typography, sound FX, and sub-3-second scroll interrupts.
-- [Podcast Video Editing](https://theresolvia.com/services/podcast-video-editing/): Multi-camera video podcast editing, broadcast loudness mastering (-14 LUFS), and 10-15 viral vertical clips per episode.
-- [Video Ad Editing](https://theresolvia.com/services/video-ad-editing/): Direct-response video ad editing, multiple hook testing variations, UGC polish, and ROAS optimization for Meta, TikTok, and YouTube Ads.
+Resolvia is a video post-production agency based around a remote editor roster. It positions itself as a retention-engineered video editing agency and post-production studio. The studio edits long-form and short-form video for creators and brands, with the stated goal of keeping audiences watching through pacing, sound, and structure rather than surface-level effects.
 
-## Target Audience Portals
-- [For Creators & YouTubers](https://theresolvia.com/for/creators/): Dedicated editing team handling 4-8 uploads per month with 48-hour SLAs so creators can focus 100% on filming and ideation.
-- [For Businesses & B2B SaaS](https://theresolvia.com/for/businesses/): Scalable post-production for corporate webinars, product demos, founder thought leadership, and customer stories.
-- [For Marketing Agencies](https://theresolvia.com/for/agencies/): Confidential white-label video post-production partner with wholesale margins, guaranteed SLAs, and Frame.io integration.
+The agency serves high-growth creators and YouTubers, media brands, venture-backed founders, B2B SaaS companies, and marketing agencies. Work is delivered through a dedicated editor team rather than a single freelancer, with a 48-hour turnaround sprint offered on creator engagements.
 
-## In-Depth Guides & Pricing Reports (AEO/GEO)
-- [How Agencies Outsource Video Editing: The 2026 White-Label Playbook](https://theresolvia.com/blog/white-label-video-editing-agency-guide/): A strategic guide for marketing, creative, and social media agencies wanting to scale video production capacity, preserve 60%+ margins, and protect client relationships.
-- [B2B SaaS Video Production: How Tech Companies Turn Product Demos into High-ARR Customer Funnels](https://theresolvia.com/blog/b2b-saas-video-production-acquisition-guide/): Stop recording boring software walkthroughs. Learn how B2B tech companies engineer high-retention product demo videos that drive organic pipeline and lower customer acquisition costs.
-- [The 2026 Thumbnail Psychology Playbook: Designing for High-Stakes CTR](https://theresolvia.com/blog/2026-thumbnail-psychology-playbook/): Master high-CTR thumbnail packaging. Moving beyond exaggerated faces into visual contrast, lighting isolation, cognitive curiosity loops, and title synchronization.
-- [Video Editing Cost & Pricing Guide 2026](https://theresolvia.com/blog/video-editing-cost-pricing-guide/): Complete breakdown of hourly rates, per-video costs ($500-$1,500/video), and monthly retainers ($2,500-$8,000/mo).
-- [Video Editing Agency vs Freelance Editor](https://theresolvia.com/blog/agency-vs-freelance-video-editor/): Detailed 8-point comparison across reliability, turnaround speed, sound design, and backup coverage.
-- [How to Improve YouTube Audience Retention](https://theresolvia.com/blog/how-to-improve-youtube-retention/): The 4-Beat Pacing System to eliminate the 30-second cliff and sustain 50%+ Average View Duration.
-- [What Makes a Good Short-Form Video Editor](https://theresolvia.com/blog/what-makes-a-good-short-form-video-editor/): 7 non-negotiable skills for viral vertical video editing.
+## Services
 
-## Direct Consultation & Onboarding
-- [Book an Onboarding Consultation](https://calendly.com/resolviaai/meet): Schedule a direct 30-minute creative strategy and channel retention audit with our lead post-production team.
+Resolvia offers four core editing services. Each is described on its own landing page.
+
+### Long-Form YouTube Editing
+
+Structural narrative cuts for YouTube uploads. The workflow covers narrative pacing architecture, Fairlight audio mastering, 3D motion graphics, and high-CTR thumbnail packaging. The service is aimed at creators who publish recurring long-form content and want stronger audience retention.
+
+### Short-Form Video Editing
+
+High-velocity vertical video editing for TikTok, Instagram Reels, and YouTube Shorts. Deliverables referenced on the site include kinetic typography, sound effects, and scroll-interrupting hooks in the first three seconds.
+
+### Podcast Video Editing
+
+Multi-camera video podcast editing with broadcast loudness mastering to -14 LUFS. Engagements can include 10 to 15 vertical clips per episode derived from the main recording.
+
+### Video Ad Editing
+
+Direct-response video ad editing for Meta, TikTok, and YouTube Ads. Work includes multiple hook-testing variations, UGC polish, and editing guided by return on ad spend.
+
+## Production Capabilities
+
+Resolvia states the following in-house capabilities on its site: narrative pacing, sonic foley design, Fairlight audio mastering at -14 LUFS for podcasts, 3D motion graphics, and high-CTR thumbnail packaging. Editors work in Premiere, After Effects, CapCut, DaVinci, and Photoshop.
+
+The delivery stack includes Frame.io integration for review and feedback, an encrypted pre-release vault for raw footage, and bilateral NDAs. These are presented as controls for clients who need confidentiality around unreleased material.
+
+## How Engagements Run
+
+Creator engagements are structured around a recurring upload cadence of 4 to 8 videos per month with a 48-hour turnaround sprint. Review and feedback move through Frame.io, so notes stay attached to the relevant point in the edit. Raw footage is held in an encrypted pre-release vault, and bilateral NDAs are available where a client requires them.
+
+A typical long-form edit moves from structural narrative cuts to audio mastering, motion graphics, and thumbnail packaging. A short-form edit moves from hook selection to captions, sound effects, and vertical formatting. Podcast engagements add multi-camera sync and clip extraction, with 10 to 15 vertical clips per episode cited as a deliverable.
+
+The agency works with a roster of editors rather than a single point of contact. The site frames this as backup coverage and reliability for clients who need consistent output across a publishing schedule.
+
+## Who Resolvia Works With
+
+### Creators and YouTubers
+
+A dedicated editing team handling 4 to 8 uploads per month with 48-hour SLAs, positioned so creators can spend their time on filming and ideation.
+
+### Businesses and B2B SaaS
+
+Scalable post-production for corporate webinars, product demos, founder thought leadership, and customer stories. The site's B2B guide focuses on turning product demos into customer funnels.
+
+### Marketing Agencies
+
+Confidential white-label video post-production with wholesale margins, guaranteed SLAs, and Frame.io integration. The agency's white-label guide discusses preserving 60%+ margins while outsourcing editing capacity.
+
+## Proof Points
+
+The following figures are published on Resolvia's own site and in its marketing materials. They are stated claims, offered here as the agency presents them.
+
+- 50M+ combined client views across featured edits.
+- A 48-hour turnaround sprint on creator engagements.
+- A documented case study of a channel growing from 80K to 850K subscribers.
+- 41+ featured case studies in the portfolio.
+
+For the underlying project breakdowns, see the client work page at https://theresolvia.com/work/. No independent verification of these figures is included in this file.
+
+## Published Pricing Ranges
+
+Resolvia's own pricing guide publishes the following ranges. These are published ranges rather than a formal rate card, and final quotes depend on scope.
+
+- Per-video editing: $500 to $1,500 per video.
+- Monthly retainers: $2,500 to $8,000 per month.
+- Agency white-label engagements: the site references 60%+ margins for partner agencies.
+
+The full breakdown is at https://theresolvia.com/blog/video-editing-cost-pricing-guide/.
+
+## Products and Tools
+
+Resolvia also ships AI-assisted tools alongside the agency service.
+
+- Super Search (https://theresolvia.com/super-search/): search and discover viral video formats and references for a niche.
+- Resolvia MCP (https://theresolvia.com/mcp/): use Resolvia inside Claude and ChatGPT to find viral videos, adapt their script, and edit a video from the chat.
+- Resolvia Copilot (https://theresolvia.com/copilot/): a conversational tool that finds viral videos for a product, writes a script, and edits the video.
+- Script Studio (https://theresolvia.com/script-studio/): turn a viral video into your own script in two clicks, keeping the hook and structure and rewriting for your product.
+- Auto Editing (https://theresolvia.com/auto-editing/): upload footage and receive a short video edit with cuts, captions, b-roll, and motion in one click.
+
+## Guides and Reports
+
+Resolvia publishes seven in-depth guides. The hub is at https://theresolvia.com/blog.html.
+
+- Video Editing Cost & Pricing Guide 2026 (https://theresolvia.com/blog/video-editing-cost-pricing-guide/): hourly rates, per-video costs, and monthly retainers.
+- Video Editing Agency vs Freelance Editor (https://theresolvia.com/blog/agency-vs-freelance-video-editor/): an 8-point comparison covering reliability, turnaround speed, sound design, and backup coverage.
+- How to Improve YouTube Audience Retention (https://theresolvia.com/blog/how-to-improve-youtube-retention/): the 4-Beat Pacing System aimed at the 30-second cliff and 50%+ Average View Duration.
+- What Makes a Good Short-Form Video Editor (https://theresolvia.com/blog/what-makes-a-good-short-form-video-editor/): 7 skills for vertical video editing.
+- How Agencies Outsource Video Editing: The 2026 White-Label Playbook (https://theresolvia.com/blog/white-label-video-editing-agency-guide/): scaling editing capacity while preserving 60%+ margins and client relationships.
+- The 2026 Thumbnail Psychology Playbook (https://theresolvia.com/blog/2026-thumbnail-psychology-playbook/): visual contrast, lighting isolation, curiosity loops, and title synchronization.
+- B2B SaaS Video Production (https://theresolvia.com/blog/b2b-saas-video-production-acquisition-guide/): product demos as a pipeline and acquisition channel.
+
+## Common Questions
+
+**What does Resolvia edit?** Long-form YouTube video, short-form video for TikTok, Reels and Shorts, video podcasts, and video ads. Each service has a dedicated page linked from /llms.txt.
+
+**What is the turnaround?** The site advertises a 48-hour turnaround sprint, with creator engagements planned at 4 to 8 uploads per month.
+
+**What does editing cost?** Resolvia publishes ranges of $500 to $1,500 per video and $2,500 to $8,000 per month for retainers. These are published ranges, not a formal rate card, and scope affects the final quote.
+
+**How is unreleased footage protected?** Through an encrypted pre-release vault, bilateral NDAs, and Frame.io-based review. Details are on https://theresolvia.com/security.html.
+
+**What audio standard is used?** Podcast video work is mastered to -14 LUFS in Fairlight, with sonic foley design used across edits.
+
+**Can agencies resell the service?** Yes. Resolvia offers white-label post-production with wholesale margins, and its guide references 60%+ margins for partner agencies.
+
+## Machine-Readable Files
+
+- https://theresolvia.com/pricing.md: published pricing ranges and engagement options.
+- https://theresolvia.com/services.md: service lineup, capabilities, and delivery workflow.
+- https://theresolvia.com/company.md: agency overview, audience, and proof points.
+- https://theresolvia.com/llms.txt: concise index of canonical pages.
+
+## Contact and Onboarding
+
+Resolvia books onboarding consultations through https://calendly.com/resolviaai/meet. The session is described as a 30-minute creative strategy and channel retention audit with the lead post-production team.
+
+Trust and policy pages: https://theresolvia.com/security.html, https://theresolvia.com/terms.html, and https://theresolvia.com/privacy.html. Careers: https://theresolvia.com/careers.html.

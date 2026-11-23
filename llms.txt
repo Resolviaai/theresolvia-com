@@ -1,7 +1,7 @@
 # Resolvia
 > Retention-Engineered Video Editing Agency & Post-Production Studio for High-Growth Creators, Media Brands, and Venture-Backed Founders.
 
-Resolvia (https://theresolvia.com) is an elite video post-production agency specializing in high-retention editing, narrative pacing architecture, sonic foley design, and high-velocity workflow pipelines for YouTube, Shorts, and Reels creators.
+Resolvia (https://theresolvia.com) is a video post-production agency specializing in high-retention editing, narrative pacing architecture, sonic foley design, and high-velocity workflow pipelines for YouTube, Shorts, and Reels creators.
 
 ## Primary Canonical Pages
 - [Home & Overview](https://theresolvia.com/): Official studio showcase, featured client edits (50M+ combined views), 48-hour sprint workflow, and core post-production capabilities.
@@ -11,6 +11,13 @@ Resolvia (https://theresolvia.com) is an elite video post-production agency spec
 - [Pre-Release Security Vault](https://theresolvia.com/security.html): Enterprise-grade bilateral NDAs, zero-leak raw footage vault, and encrypted post-production pipelines.
 - [Terms of Production](https://theresolvia.com/terms.html): Production agreements, media usage rights, turnaround SLAs, and retainer conditions.
 - [Privacy Policy](https://theresolvia.com/privacy.html): Pre-release media confidentiality, data handling, and client asset governance.
+
+## Products & Tools
+- [Super Search](https://theresolvia.com/super-search/): Search and discover viral video formats and references for your niche.
+- [Resolvia MCP](https://theresolvia.com/mcp/): Use Resolvia inside Claude and ChatGPT to find viral videos, adapt their script, and edit your video from the chat.
+- [Resolvia Copilot](https://theresolvia.com/copilot/): Talk to Resolvia Copilot to find the viral videos for your product, write your script, and edit your video.
+- [Script Studio](https://theresolvia.com/script-studio/): Turn a viral video into your own script in two clicks: same hook, same structure, rewritten for your product.
+- [Auto Editing](https://theresolvia.com/auto-editing/): Drop your footage and get a short video edited with cuts, captions, b-roll, and motion in one click.
 
 ## Specialized Service Landing Pages
 - [YouTube Video Editing](https://theresolvia.com/services/youtube-video-editing/): Retention-engineered YouTube long-form post-production, structural narrative cuts, Fairlight audio mastering, 3D motion graphics, and high-CTR thumbnail packaging.
@@ -25,12 +32,18 @@ Resolvia (https://theresolvia.com) is an elite video post-production agency spec
 
 ## In-Depth Guides & Pricing Reports (AEO/GEO)
 - [How Agencies Outsource Video Editing: The 2026 White-Label Playbook](https://theresolvia.com/blog/white-label-video-editing-agency-guide/): A strategic guide for marketing, creative, and social media agencies wanting to scale video production capacity, preserve 60%+ margins, and protect client relationships.
-- [B2B SaaS Video Production: How Tech Companies Turn Product Demos into High-ARR Customer Funnels](https://theresolvia.com/blog/b2b-saas-video-production-acquisition-guide/): Stop recording boring software walkthroughs. Learn how B2B tech companies engineer high-retention product demo videos that drive organic pipeline and lower customer acquisition costs.
-- [The 2026 Thumbnail Psychology Playbook: Designing for High-Stakes CTR](https://theresolvia.com/blog/2026-thumbnail-psychology-playbook/): Master high-CTR thumbnail packaging. Moving beyond exaggerated faces into visual contrast, lighting isolation, cognitive curiosity loops, and title synchronization.
+- [B2B SaaS Video Production: How Tech Companies Turn Product Demos into High-ARR Customer Funnels](https://theresolvia.com/blog/b2b-saas-video-production-acquisition-guide/): How B2B tech companies engineer high-retention product demo videos that drive organic pipeline and lower customer acquisition costs.
+- [The 2026 Thumbnail Psychology Playbook: Designing for High-Stakes CTR](https://theresolvia.com/blog/2026-thumbnail-psychology-playbook/): High-CTR thumbnail packaging: visual contrast, lighting isolation, cognitive curiosity loops, and title synchronization.
 - [Video Editing Cost & Pricing Guide 2026](https://theresolvia.com/blog/video-editing-cost-pricing-guide/): Complete breakdown of hourly rates, per-video costs ($500-$1,500/video), and monthly retainers ($2,500-$8,000/mo).
 - [Video Editing Agency vs Freelance Editor](https://theresolvia.com/blog/agency-vs-freelance-video-editor/): Detailed 8-point comparison across reliability, turnaround speed, sound design, and backup coverage.
 - [How to Improve YouTube Audience Retention](https://theresolvia.com/blog/how-to-improve-youtube-retention/): The 4-Beat Pacing System to eliminate the 30-second cliff and sustain 50%+ Average View Duration.
 - [What Makes a Good Short-Form Video Editor](https://theresolvia.com/blog/what-makes-a-good-short-form-video-editor/): 7 non-negotiable skills for viral vertical video editing.
+
+## Machine-Readable Files
+- [Pricing (Markdown)](https://theresolvia.com/pricing.md): Published price ranges and engagement options.
+- [Services (Markdown)](https://theresolvia.com/services.md): Service lineup, capabilities, and delivery workflow.
+- [Company (Markdown)](https://theresolvia.com/company.md): Agency overview, audience, and proof points.
+- [Full context](https://theresolvia.com/llms-full.txt): Expanded, extractable fact sheet about Resolvia.
 
 ## Direct Consultation & Onboarding
 - [Book an Onboarding Consultation](https://calendly.com/resolviaai/meet): Schedule a direct 30-minute creative strategy and channel retention audit with our lead post-production team.

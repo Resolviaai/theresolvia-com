@@ -1,54 +1,33 @@
 # robots.txt for https://theresolvia.com
+
+# Default rule: allow all crawlers, including AI search-discovery bots
+# (OAI-SearchBot, PerplexityBot, Claude-SearchBot), user-triggered fetchers
+# and independent agent search APIs. Named groups below are reserved for
+# deliberate exceptions only; a named group would otherwise replace these
+# wildcard rules for that crawler and silently exclude other agents.
 User-agent: *
 Allow: /
-Allow: /services/
-Allow: /for/
-Allow: /work/
-Allow: /blog/
-Allow: /blog.html
-Allow: /careers.html
-Allow: /security.html
-Allow: /terms.html
-Allow: /privacy.html
-Allow: /llms.txt
-Allow: /llms-full.txt
 
-# Disallow internal test pages, staging previews and scratch files
+# Scratch, staging previews, test pages and temp files are not for indexation
 Disallow: /scratch/
 Disallow: /*_test.html
 Disallow: /preview_test.html
 Disallow: /deep_verify_render.html
 Disallow: /cta_banner_dump.html
 Disallow: /temp_*
+# /super-search.html is a stale flat duplicate. The canonical product page
+# is /super-search/ and is explicitly allowed so it can be crawled.
 Disallow: /super-search.html
+Allow: /super-search/
 
-# Allow Major AI Search and Retrieval Bots for GEO / Citations
+# Deliberate exception: opt out of model-training crawlers while leaving
+# search discovery on the wildcard rule above. This does not affect Google
+# Search inclusion, rankings or AI Overviews.
 User-agent: GPTBot
-Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
-
-User-agent: OAI-SearchBot
-Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
-
 User-agent: ClaudeBot
-Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
-
-User-agent: PerplexityBot
-Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
-
 User-agent: Google-Extended
-Allow: /
-Allow: /llms.txt
-Allow: /llms-full.txt
-
 User-agent: CCBot
-Allow: /
+User-agent: meta-externalagent
+Disallow: /
 
 Sitemap: https://theresolvia.com/sitemap.xml
