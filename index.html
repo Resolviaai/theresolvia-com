@@ -675,7 +675,84 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
   #lead-form-container textarea::placeholder {
     color: rgba(255, 255, 255, 0.32) !important;
   }
+    @keyframes borderBeamSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
   #lead-submit-btn {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    padding: 1.5px !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    height: 50px !important;
+    width: 100% !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), filter 0.18s !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  #lead-submit-btn:hover {
+    filter: brightness(1.06) !important;
+    transform: translateY(-1px) !important;
+  }
+  #lead-submit-btn:active {
+    transform: scale(0.98) !important;
+  }
+  #lead-submit-btn .btn-border-beam {
+    position: absolute !important;
+    inset: -150% !important;
+    background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 70deg, rgba(56, 186, 254, 0.8) 85deg, #ffffff 90deg, rgba(56, 186, 254, 0.8) 95deg, transparent 110deg) !important;
+    animation: borderBeamSpin 3.2s linear infinite !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+  }
+  #lead-submit-btn .btn-inner {
+    position: relative !important;
+    z-index: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 12.5px !important;
+    background: linear-gradient(180deg, #0077ED 0%, #0062CC 100%) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    font-size: 15.5px !important;
+    font-weight: 700 !important;
+    transition: background 0.18s !important;
+  }
+  .custom-format-option {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 9px 12px !important;
+    border-radius: 8px !important;
+    font-size: 13.5px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    cursor: pointer !important;
+    transition: background 0.15s, color 0.15s !important;
+  }
+  .custom-format-option:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+  }
+  .custom-format-option.active {
+    background: rgba(47, 134, 247, 0.18) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+  .custom-format-option.active .check-icon {
+    display: block !important;
+  }
+  .custom-format-option:not(.active) .check-icon {
+    display: none !important;
+  }
+  #lead-submit-btn-unused {
     background: linear-gradient(180deg, #0077ED 0%, #0062CC 100%) !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
     border-radius: 14px !important;
@@ -712,20 +789,21 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 <style id="resolvia-mobile-menu-css">
   #resolvia-mobile-menu {
     position: fixed !important;
-    top: 56px !important;
+    top: 54px !important;
     left: 16px !important;
     right: 16px !important;
-    max-width: 380px !important;
+    max-width: 360px !important;
     margin: 0 auto !important;
-    background: rgba(20, 23, 29, 0.96) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: rgba(14, 18, 24, 0.96) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-    padding: 14px !important;
-    z-index: 1000 !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    padding: 6px !important;
+    z-index: 9999 !important;
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
     box-sizing: border-box !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
   }
   #resolvia-mobile-menu.hidden {
     display: none !important;
@@ -734,19 +812,18 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 11px 13px !important;
+    padding: 10px 12px !important;
     border-radius: 12px !important;
     color: #ffffff !important;
     text-decoration: none !important;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    margin-bottom: 7px !important;
-    transition: background 0.15s, border-color 0.15s !important;
+    background: transparent !important;
+    border: none !important;
+    transition: background 0.15s ease !important;
     box-sizing: border-box !important;
   }
+  #resolvia-mobile-menu .resolvia-mobile-link:hover,
   #resolvia-mobile-menu .resolvia-mobile-link:active {
-    background: rgba(255, 255, 255, 0.08) !important;
-    transform: scale(0.99) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
   }
   #resolvia-mobile-menu .link-icon-box {
     display: flex !important;
@@ -754,9 +831,10 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     justify-content: center !important;
     width: 32px !important;
     height: 32px !important;
-    border-radius: 8px !important;
-    background: rgba(47, 134, 247, 0.15) !important;
-    color: #70E5FD !important;
+    border-radius: 9px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
     margin-right: 12px !important;
     flex-shrink: 0 !important;
   }
@@ -769,31 +847,42 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     font-size: 14px !important;
     font-weight: 600 !important;
     color: #ffffff !important;
-    line-height: 1.2 !important;
+    line-height: 1.25 !important;
   }
   #resolvia-mobile-menu .mobile-link-desc {
     font-size: 11.5px !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-    margin-top: 2px !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+    margin-top: 1px !important;
     line-height: 1.2 !important;
   }
-  #resolvia-mobile-menu .resolvia-mobile-cta {
-    background: linear-gradient(180deg, #0077ED 0%, #0062CC 100%) !important;
-    border: 1px solid rgba(112, 229, 253, 0.4) !important;
-    box-shadow: 0 8px 24px rgba(0, 119, 237, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
-    margin-top: 6px !important;
-    margin-bottom: 0 !important;
+  #resolvia-mobile-menu .mobile-divider {
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    margin: 3px 6px !important;
   }
-  #resolvia-mobile-menu .resolvia-mobile-cta .link-icon-box {
+  #resolvia-mobile-menu .resolvia-mobile-cta-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    height: 42px !important;
+    border-radius: 12px !important;
     background: #0077ED !important;
     color: #ffffff !important;
-  }
-  #resolvia-mobile-menu .resolvia-mobile-cta .mobile-link-title {
-    color: #ffffff !important;
+    font-size: 13.5px !important;
     font-weight: 700 !important;
+    text-decoration: none !important;
+    margin-top: 4px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+    transition: filter 0.15s, transform 0.15s !important;
+    box-sizing: border-box !important;
   }
-  #resolvia-mobile-menu .resolvia-mobile-cta .mobile-link-desc {
-    color: #70E5FD !important;
+  #resolvia-mobile-menu .resolvia-mobile-cta-btn:hover {
+    filter: brightness(1.05) !important;
+  }
+  #resolvia-mobile-menu .resolvia-mobile-cta-btn:active {
+    transform: scale(0.98) !important;
   }
   #resolvia-mobile-toggle {
     display: flex !important;
@@ -807,6 +896,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     color: #09090b !important;
     cursor: pointer !important;
     padding: 0 !important;
+    transition: background 0.15s, transform 0.15s !important;
   }
   #resolvia-mobile-toggle:hover {
     background: rgba(0, 0, 0, 0.1) !important;
@@ -873,7 +963,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 </div>
 </nav>
 
-<!-- Mobile Creative Floating Island Menu -->
+<!-- Mobile Creative Floating Island Menu (Clean Steve Jobs / Jensen Huang System) -->
 <div id="resolvia-mobile-menu" class="hidden">
   <div style="display: flex; flex-direction: column;">
     <a href="/services/youtube-video-editing/" class="resolvia-mobile-link">
@@ -886,21 +976,25 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
           <div class="mobile-link-desc">YouTube, Shorts, Reels &amp; Video Ads</div>
         </div>
       </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
     </a>
+
+    <div class="mobile-divider"></div>
 
     <a href="/#workflow" class="resolvia-mobile-link">
       <div style="display: flex; align-items: center;">
         <span class="link-icon-box">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </span>
         <div class="link-text-box">
           <div class="mobile-link-title">Process</div>
           <div class="mobile-link-desc">48-Hour Turnaround Sprint</div>
         </div>
       </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
     </a>
+
+    <div class="mobile-divider"></div>
 
     <a href="/blog.html" class="resolvia-mobile-link">
       <div style="display: flex; align-items: center;">
@@ -912,8 +1006,10 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
           <div class="mobile-link-desc">Retention Engineering &amp; Playbooks</div>
         </div>
       </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
     </a>
+
+    <div class="mobile-divider"></div>
 
     <a href="/#faq" class="resolvia-mobile-link">
       <div style="display: flex; align-items: center;">
@@ -925,20 +1021,14 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
           <div class="mobile-link-desc">Turnaround, Revisions &amp; Security</div>
         </div>
       </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
     </a>
 
-    <a href="/#contact" class="resolvia-mobile-link resolvia-mobile-cta">
-      <div style="display: flex; align-items: center;">
-        <span class="link-icon-box">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"/><path d="m2 9 10 7 10-7"/></svg>
-        </span>
-        <div class="link-text-box">
-          <div class="mobile-link-title">Request Free Sample Cut</div>
-          <div class="mobile-link-desc">Instant Lead Capture &amp; Proposal</div>
-        </div>
-      </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#70E5FD" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    <div class="mobile-divider" style="margin-top: 5px; margin-bottom: 5px;"></div>
+
+    <a href="/#contact" class="resolvia-mobile-cta-btn">
+      <span>Request Free Sample Cut</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
 </div>
@@ -1183,11 +1273,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
   <div id="lead-form-container" class="mt-[40px] w-full max-w-[680px] mx-auto rounded-[22px] max-sm:rounded-[16px] border border-white/[0.08] bg-[radial-gradient(70%_120%_at_50%_0%,#24262a_0%,#18191c_55%,#131416_100%)] p-6 sm:p-8 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.1)] text-left relative z-20 overflow-hidden">
     <div class="dot-grid pointer-events-none absolute inset-x-0 bottom-0 h-[45%] [mask-image:linear-gradient(0deg,#000_0%,transparent_100%)]"></div>
     <div class="mb-6 text-center">
-      <div class="form-badge">
-        <span class="form-badge-dot"></span>
-        <span>Free Sample Cut & Retention Audit</span>
-      </div>
-      <h3 class="mt-3 text-[22px] sm:text-[26px] font-bold tracking-tight text-white">Request Your Custom Edit</h3>
+      <h3 class="text-[22px] sm:text-[26px] font-bold tracking-tight text-white">Request Your Custom Edit</h3>
       <p class="form-desc">Drop your channel or raw rushes below. We'll edit your first video cut in 48 hours.</p>
     </div>
 
@@ -1202,24 +1288,41 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
           <input type="text" id="lead-name" name="name" required placeholder="e.g. Alex Hormozi" class="w-full h-[46px] rounded-[11px] border border-white/10 bg-black/40 px-3.5 text-[14px] text-white placeholder-white/30 outline-none transition-all focus:border-[#2F86F7] focus:bg-black/60 focus:ring-1 focus:ring-[#2F86F7]" />
         </div>
         <div>
-          <label for="lead-email" class="block text-[12.5px] font-medium text-white/75 mb-1.5">Work Email</label>
+          <label for="lead-email" class="block text-[12.5px] font-medium text-white/85 mb-1.5">Work Email <span style="color:#38BAFE; font-weight:700;">*</span></label>
           <input type="email" id="lead-email" name="email" required placeholder="you@channel.com" class="w-full h-[46px] rounded-[11px] border border-white/10 bg-black/40 px-3.5 text-[14px] text-white placeholder-white/30 outline-none transition-all focus:border-[#2F86F7] focus:bg-black/60 focus:ring-1 focus:ring-[#2F86F7]" />
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label for="lead-format" class="block text-[12.5px] font-medium text-white/75 mb-1.5">Primary Content Format</label>
-          <div class="relative">
-            <select id="lead-format" name="format" class="w-full h-[46px] appearance-none rounded-[11px] border border-white/10 bg-black/40 px-3.5 pr-8 text-[14px] text-white outline-none transition-all focus:border-[#2F86F7] focus:bg-black/60 focus:ring-1 focus:ring-[#2F86F7]">
-              <option value="short-form" class="bg-[#0B0F17] text-white">Short-Form (Shorts / Reels / TikTok)</option>
-              <option value="youtube-longform" class="bg-[#0B0F17] text-white">YouTube Long-Form Videos</option>
-              <option value="video-ads" class="bg-[#0B0F17] text-white">Paid Video Ads & Creatives</option>
-              <option value="podcast" class="bg-[#0B0F17] text-white">Podcast Video Production</option>
-              <option value="full-channel" class="bg-[#0B0F17] text-white">Full Post-Production Retainer</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-white/50">
-              <svg width="16" height="16" class="size-4" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <label class="block text-[12.5px] font-medium text-white/85 mb-1.5">Primary Content Format</label>
+          <input type="hidden" id="lead-format-value" name="format" value="Short-Form (Shorts / Reels / TikTok)" />
+          <div class="relative" id="custom-format-dropdown">
+            <button type="button" id="custom-format-trigger" class="w-full h-[46px] rounded-[11px] border border-white/10 bg-black/40 px-3.5 flex items-center justify-between text-[14px] text-white outline-none transition-all cursor-pointer hover:border-white/20 focus:border-[#2F86F7]" style="background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14);">
+              <span id="custom-format-selected" style="color: #ffffff;">Short-Form (Shorts / Reels / TikTok)</span>
+              <svg id="custom-format-chevron" width="16" height="16" style="width: 16px; height: 16px; color: rgba(255,255,255,0.6); transition: transform 0.2s;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div id="custom-format-menu" class="hidden" style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 50; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: #141a24; padding: 5px; box-shadow: 0 16px 40px rgba(0,0,0,0.9); backdrop-filter: blur(20px);">
+              <div class="custom-format-option active" data-value="Short-Form (Shorts / Reels / TikTok)">
+                <span>Short-Form (Shorts / Reels / TikTok)</span>
+                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BAFE" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="custom-format-option" data-value="YouTube Long-Form Videos">
+                <span>YouTube Long-Form Videos</span>
+                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BAFE" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="custom-format-option" data-value="Paid Video Ads & Creatives">
+                <span>Paid Video Ads &amp; Creatives</span>
+                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BAFE" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="custom-format-option" data-value="Podcast Video Production">
+                <span>Podcast Video Production</span>
+                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BAFE" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="custom-format-option" data-value="Full Post-Production Retainer">
+                <span>Full Post-Production Retainer</span>
+                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BAFE" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
             </div>
           </div>
         </div>
@@ -1234,10 +1337,15 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
         <textarea id="lead-notes" name="notes" rows="2" placeholder="e.g. Want higher 30s retention, dynamic sound design, and faster turnaround..." class="w-full rounded-[11px] border border-white/10 bg-black/40 p-3 text-[14px] text-white placeholder-white/30 outline-none transition-all focus:border-[#2F86F7] focus:bg-black/60 focus:ring-1 focus:ring-[#2F86F7] resize-none"></textarea>
       </div>
 
-      <button type="submit" id="lead-submit-btn" class="group relative flex h-[50px] w-full items-center justify-center rounded-[14px] bg-brand text-[15.5px] font-bold text-white shadow-[0_4px_14px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.25)] transition-all active:scale-98 cursor-pointer mt-1">
-        <span class="flex items-center gap-2">
-          <span>Claim Free Sample Cut & Audit</span>
-          <svg width="16" height="16" class="size-4 transition-transform group-hover:translate-x-1" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      <button type="submit" id="lead-submit-btn" class="group relative flex h-[50px] w-full items-center justify-center rounded-[14px] overflow-hidden p-[1.5px] cursor-pointer mt-1">
+        <!-- Luxury Animating Shiny Border Beam (Clean 1.5px Perimeter Light) -->
+        <span class="btn-border-beam" aria-hidden="true"></span>
+        <!-- Inner Solid Button Body -->
+        <span class="btn-inner">
+          <span class="flex items-center gap-2">
+            <span>Claim Free Sample Cut &amp; Audit</span>
+            <svg width="16" height="16" class="size-4 transition-transform group-hover:translate-x-1" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </span>
         </span>
       </button>
 
@@ -1971,6 +2079,52 @@ document.addEventListener("DOMContentLoaded", function() {
         updateScroll();
       }
 
+          // Custom Format Dropdown Handler
+    (function() {
+      var trigger = document.getElementById('custom-format-trigger');
+      var menu = document.getElementById('custom-format-menu');
+      var chevron = document.getElementById('custom-format-chevron');
+      var selectedText = document.getElementById('custom-format-selected');
+      var hiddenInput = document.getElementById('lead-format-value');
+
+      if (trigger && menu) {
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var isOpen = !menu.classList.contains('hidden');
+          if (isOpen) {
+            menu.classList.add('hidden');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          } else {
+            menu.classList.remove('hidden');
+            if (chevron) chevron.style.transform = 'rotate(180deg)';
+          }
+        });
+
+        var options = menu.querySelectorAll('.custom-format-option');
+        options.forEach(function(opt) {
+          opt.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var val = opt.getAttribute('data-value');
+            if (hiddenInput) hiddenInput.value = val;
+            if (selectedText) selectedText.textContent = val;
+
+            options.forEach(function(o) { o.classList.remove('active'); });
+            opt.classList.add('active');
+
+            menu.classList.add('hidden');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          });
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!menu.contains(e.target) && !trigger.contains(e.target) && !menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          }
+        });
+      }
+    })();
+
       // 2. Lead Capture Form Submission Handler
       var form = document.getElementById('resolvia-lead-form');
       var status = document.getElementById('lead-form-status');
@@ -1978,9 +2132,10 @@ document.addEventListener("DOMContentLoaded", function() {
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          if (btn) {
-            btn.disabled = true;
-            btn.innerHTML = '<span>Submitting Inquiry...</span>';
+          var btnInner = btn ? btn.querySelector('.btn-inner') : null;
+          if (btn) btn.disabled = true;
+          if (btnInner) {
+            btnInner.innerHTML = '<span>Submitting Inquiry...</span>';
           }
           var formData = new FormData(form);
           fetch('/', {
@@ -1989,17 +2144,48 @@ document.addEventListener("DOMContentLoaded", function() {
             body: new URLSearchParams(formData).toString()
           })
           .then(function() {
-            status.className = 'block text-center text-[13.5px] font-medium py-3 px-4 rounded-[10px] bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 mt-2';
-            status.innerHTML = '✓ Inquiry received! Our creative director will review your channel and prepare your sample cut within 24-48 hours.';
+            if (status) {
+              status.className = 'block text-center text-[13.5px] font-medium py-3 px-4 rounded-[10px] bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 mt-2';
+              status.innerHTML = '✓ Inquiry received! Our creative director will review your channel and prepare your sample cut within 24-48 hours.';
+              status.classList.remove('hidden');
+              status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
             form.reset();
-            if (btn) btn.innerHTML = '<span>Inquiry Sent Successfully</span>';
+            var selectedText = document.getElementById('custom-format-selected');
+            var hiddenInput = document.getElementById('lead-format-value');
+            if (selectedText) selectedText.textContent = 'Short-Form (Shorts / Reels / TikTok)';
+            if (hiddenInput) hiddenInput.value = 'Short-Form (Shorts / Reels / TikTok)';
+            var options = document.querySelectorAll('.custom-format-option');
+            options.forEach(function(o, i) {
+              if (i === 0) o.classList.add('active');
+              else o.classList.remove('active');
+            });
+            if (btnInner) {
+              btnInner.innerHTML = '<span>Inquiry Sent Successfully</span>';
+              btnInner.style.background = '#10b981';
+            }
+            setTimeout(function() {
+              if (btn) btn.disabled = false;
+              if (btnInner) {
+                btnInner.style.background = '';
+                btnInner.innerHTML = '<span class="flex items-center gap-2"><span>Claim Free Sample Cut &amp; Audit</span><svg width="16" height="16" class="size-4 transition-transform group-hover:translate-x-1" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>';
+              }
+            }, 6000);
           })
           .catch(function(err) {
-            status.className = 'block text-center text-[13.5px] font-medium py-3 px-4 rounded-[10px] bg-amber-500/15 border border-amber-500/30 text-amber-300 mt-2';
-            status.innerHTML = 'Unable to send inquiry. Please schedule directly via <a href="https://calendly.com/resolviaai/meet" class="underline font-bold text-white" target="_blank">Calendly</a>.';
-            if (btn) {
-              btn.disabled = false;
-              btn.innerHTML = '<span>Retry Submission</span>';
+            console.error('Lead submission error:', err);
+            if (status) {
+              status.className = 'block text-center text-[13.5px] font-medium py-3 px-4 rounded-[10px] bg-amber-500/15 border border-amber-500/30 text-amber-300 mt-2';
+              status.innerHTML = 'Unable to send inquiry. Please schedule directly via <a href="https://calendly.com/resolviaai/meet" class="underline font-bold text-white" target="_blank">Calendly</a>.';
+            }
+            if (btn) btn.disabled = false;
+            if (btnInner) {
+              btnInner.innerHTML = '<span>Retry Submission</span>';
+              btnInner.style.background = '#ef4444';
+              setTimeout(function() {
+                btnInner.style.background = '';
+                btnInner.innerHTML = '<span class="flex items-center gap-2"><span>Claim Free Sample Cut &amp; Audit</span><svg width="16" height="16" class="size-4 transition-transform group-hover:translate-x-1" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>';
+              }, 4000);
             }
           });
         });

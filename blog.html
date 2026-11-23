@@ -110,6 +110,26 @@
       -webkit-font-smoothing: antialiased !important;
       margin: 0;
       padding: 0;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Hero Ambient Dotted Grid & Glow (matching index.html hero) */
+    .dot-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px) !important;
+      background-size: 22px 22px !important;
+    }
+    .blog-hero-backdrop {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 640px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: linear-gradient(to bottom, #000 0%, #000 40%, rgba(0, 0, 0, 0.35) 70%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, rgba(0, 0, 0, 0.35) 70%, transparent 100%);
     }
 
     /* YouTube 2px Ultra-Thin Scroll Scrubber */
@@ -232,68 +252,137 @@
     .resolvia-nav-cta:hover { transform: scale(1.02) !important; }
     .resolvia-nav-cta:active { transform: scale(0.98) !important; }
 
-    /* Mobile Menu Dynamic Island */
+    /* Mobile Creative Floating Island Menu (Clean Steve Jobs / Jensen Huang System) */
     #resolvia-mobile-menu {
       position: fixed !important;
-      top: 56px !important;
+      top: 54px !important;
       left: 16px !important;
       right: 16px !important;
-      max-width: 380px !important;
+      max-width: 360px !important;
       margin: 0 auto !important;
-      background: rgba(20, 23, 29, 0.96) !important;
+      background: rgba(14, 18, 24, 0.96) !important;
       border: 1px solid rgba(255, 255, 255, 0.1) !important;
       border-radius: 20px !important;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+      padding: 6px !important;
+      z-index: 9999 !important;
       backdrop-filter: blur(24px) !important;
       -webkit-backdrop-filter: blur(24px) !important;
-      padding: 10px !important;
-      z-index: 9999 !important;
-      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease !important;
+      box-sizing: border-box !important;
+      font-family: var(--font-inter) !important;
     }
     #resolvia-mobile-menu.hidden {
       display: none !important;
     }
-    .resolvia-mobile-link {
+    #resolvia-mobile-menu .resolvia-mobile-link {
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
-      padding: 10px 14px !important;
+      padding: 10px 12px !important;
       border-radius: 12px !important;
       color: #ffffff !important;
       text-decoration: none !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
-      transition: background 0.15s !important;
+      background: transparent !important;
+      border: none !important;
+      transition: background 0.15s ease !important;
+      box-sizing: border-box !important;
     }
-    .resolvia-mobile-link:hover, .resolvia-mobile-link:active {
-      background: rgba(255, 255, 255, 0.08) !important;
+    #resolvia-mobile-menu .resolvia-mobile-link:hover,
+    #resolvia-mobile-menu .resolvia-mobile-link:active {
+      background: rgba(255, 255, 255, 0.06) !important;
     }
-    .link-icon-box {
+    #resolvia-mobile-menu .link-icon-box {
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      width: 28px !important;
-      height: 28px !important;
-      border-radius: 8px !important;
-      background: rgba(47, 134, 247, 0.15) !important;
-      color: #38BAFE !important;
+      width: 32px !important;
+      height: 32px !important;
+      border-radius: 9px !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: rgba(255, 255, 255, 0.85) !important;
       margin-right: 12px !important;
+      flex-shrink: 0 !important;
     }
-    .mobile-link-title {
-      font-weight: 600 !important;
+    #resolvia-mobile-menu .link-text-box {
+      display: flex !important;
+      flex-direction: column !important;
+      text-align: left !important;
+    }
+    #resolvia-mobile-menu .mobile-link-title {
       font-size: 14px !important;
+      font-weight: 600 !important;
       color: #ffffff !important;
+      line-height: 1.25 !important;
+    }
+    #resolvia-mobile-menu .mobile-link-desc {
+      font-size: 11.5px !important;
+      color: rgba(255, 255, 255, 0.45) !important;
+      margin-top: 1px !important;
       line-height: 1.2 !important;
     }
-    .mobile-link-desc {
-      font-size: 11.5px !important;
-      color: rgba(255, 255, 255, 0.5) !important;
-      line-height: 1.3 !important;
-      margin-top: 2px !important;
+    #resolvia-mobile-menu .mobile-divider {
+      height: 1px !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      margin: 3px 6px !important;
+    }
+    #resolvia-mobile-menu .resolvia-mobile-cta-btn {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      width: 100% !important;
+      height: 42px !important;
+      border-radius: 12px !important;
+      background: #0077ED !important;
+      color: #ffffff !important;
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      margin-top: 4px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+      transition: filter 0.15s, transform 0.15s !important;
+      box-sizing: border-box !important;
+    }
+    #resolvia-mobile-menu .resolvia-mobile-cta-btn:hover {
+      filter: brightness(1.05) !important;
+    }
+    #resolvia-mobile-menu .resolvia-mobile-cta-btn:active {
+      transform: scale(0.98) !important;
+    }
+    #resolvia-mobile-toggle {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 32px !important;
+      height: 32px !important;
+      background: rgba(0, 0, 0, 0.06) !important;
+      border: none !important;
+      border-radius: 9px !important;
+      color: #09090b !important;
+      cursor: pointer !important;
+      padding: 0 !important;
+      transition: background 0.15s, transform 0.15s !important;
+    }
+    #resolvia-mobile-toggle:hover {
+      background: rgba(0, 0, 0, 0.1) !important;
+    }
+    #resolvia-mobile-toggle:active {
+      transform: scale(0.95) !important;
+    }
+    @media (min-width: 768px) {
+      #resolvia-mobile-toggle {
+        display: none !important;
+      }
+      #resolvia-mobile-menu {
+        display: none !important;
+      }
     }
 
     /* Blog Hub Container */
     .blog-container {
+      position: relative;
+      z-index: 1;
       max-width: 1240px;
       margin: 0 auto;
       padding: 110px 20px 80px;
@@ -662,12 +751,12 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
 
-        <button id="resolvia-mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" class="md:hidden flex size-[32px] items-center justify-center rounded-[9px] bg-black/[0.06] hover:bg-black/10 active:scale-95 transition-all text-[#09090b] cursor-pointer" style="width: 32px; height: 32px; border: none;">
+        <button id="resolvia-mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" class="md:hidden flex size-[32px] items-center justify-center rounded-[9px] bg-black/[0.06] hover:bg-black/10 active:scale-95 transition-all text-[#09090b] cursor-pointer">
           <svg id="resolvia-menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="4" y1="7" x2="20" y2="7"></line>
             <line x1="4" y1="17" x2="20" y2="17"></line>
           </svg>
-          <svg id="resolvia-close-icon" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <svg id="resolvia-close-icon" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -682,7 +771,7 @@
     </nav>
   </header>
 
-  <!-- Mobile Creative Floating Island Menu -->
+  <!-- Mobile Creative Floating Island Menu (Clean Steve Jobs / Jensen Huang System) -->
   <div id="resolvia-mobile-menu" class="hidden">
     <div style="display: flex; flex-direction: column;">
       <a href="/services/youtube-video-editing/" class="resolvia-mobile-link">
@@ -690,67 +779,73 @@
           <span class="link-icon-box">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
           </span>
-          <div>
+          <div class="link-text-box">
             <div class="mobile-link-title">Services</div>
-            <div class="mobile-link-desc">YouTube, Shorts, Reels &amp; Ads</div>
+            <div class="mobile-link-desc">YouTube, Shorts, Reels &amp; Video Ads</div>
           </div>
         </div>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
       </a>
+
+      <div class="mobile-divider"></div>
 
       <a href="/#workflow" class="resolvia-mobile-link">
         <div style="display: flex; align-items: center;">
           <span class="link-icon-box">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </span>
-          <div>
+          <div class="link-text-box">
             <div class="mobile-link-title">Process</div>
-            <div class="mobile-link-desc">48-Hour Sprint Delivery</div>
+            <div class="mobile-link-desc">48-Hour Turnaround Sprint</div>
           </div>
         </div>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
       </a>
 
-      <a href="/blog.html" class="resolvia-mobile-link" style="background: rgba(255,255,255,0.06);">
+      <div class="mobile-divider"></div>
+
+      <a href="/blog.html" class="resolvia-mobile-link">
         <div style="display: flex; align-items: center;">
           <span class="link-icon-box">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
           </span>
-          <div>
+          <div class="link-text-box">
             <div class="mobile-link-title">Blog</div>
-            <div class="mobile-link-desc">Retention Guides &amp; Case Studies</div>
+            <div class="mobile-link-desc">Retention Engineering &amp; Playbooks</div>
           </div>
         </div>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
       </a>
+
+      <div class="mobile-divider"></div>
 
       <a href="/#faq" class="resolvia-mobile-link">
         <div style="display: flex; align-items: center;">
           <span class="link-icon-box">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
           </span>
-          <div>
+          <div class="link-text-box">
             <div class="mobile-link-title">FAQ</div>
-            <div class="mobile-link-desc">Pricing, Revisions &amp; Formats</div>
+            <div class="mobile-link-desc">Turnaround, Revisions &amp; Security</div>
           </div>
         </div>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
       </a>
 
-      <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.08);">
-        <a href="/#contact" class="resolvia-mobile-link" style="background: rgba(47, 134, 247, 0.15); border: 1px solid rgba(47, 134, 247, 0.35);">
-          <div style="display: flex; align-items: center;">
-            <span class="link-icon-box" style="background: #0077ED; color: #fff;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </span>
-            <div>
-              <div class="mobile-link-title" style="color: #70E5FD;">Request Free Sample Cut</div>
-              <div class="mobile-link-desc" style="color: rgba(255,255,255,0.7);">48-Hour Turnaround</div>
-            </div>
-          </div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#70E5FD" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
-      </div>
+      <div class="mobile-divider" style="margin-top: 5px; margin-bottom: 5px;"></div>
+
+      <a href="/#contact" class="resolvia-mobile-cta-btn">
+        <span>Request Free Sample Cut</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section Ambient Dotted Grid & Radial Top Glow (matching index.html hero) -->
+  <div aria-hidden="true" class="blog-hero-backdrop">
+    <div class="dot-grid pointer-events-none absolute inset-0 [background-size:22px_22px] bg-[radial-gradient(rgb(255_255_255/0.06)_1px,transparent_1.2px)]"></div>
+    <div class="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 opacity-65" style="width: 880px; height: 520px;">
+      <div class="absolute inset-0 rounded-full bg-[radial-gradient(closest-side,rgb(46_139_255/0.26),rgb(0_71_255/0.08)_50%,transparent_75%)]"></div>
     </div>
   </div>
 
@@ -997,37 +1092,46 @@
 
     // Mobile Navigation Dynamic Island Toggle
     (function() {
-      const toggle = document.getElementById('resolvia-mobile-toggle');
-      const menu = document.getElementById('resolvia-mobile-menu');
-      const menuIcon = document.getElementById('resolvia-menu-icon');
-      const closeIcon = document.getElementById('resolvia-close-icon');
+      var btn = document.getElementById('resolvia-mobile-toggle');
+      var menu = document.getElementById('resolvia-mobile-menu');
+      var menuIcon = document.getElementById('resolvia-menu-icon');
+      var closeIcon = document.getElementById('resolvia-close-icon');
+      if (!btn || !menu) return;
 
-      if (toggle && menu) {
-        toggle.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const isClosed = menu.classList.contains('hidden');
-          if (isClosed) {
-            menu.classList.remove('hidden');
-            menuIcon.style.display = 'none';
-            closeIcon.style.display = 'block';
-            toggle.setAttribute('aria-expanded', 'true');
-          } else {
-            menu.classList.add('hidden');
-            menuIcon.style.display = 'block';
-            closeIcon.style.display = 'none';
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-        });
-
-        document.addEventListener('click', function(e) {
-          if (!menu.contains(e.target) && !toggle.contains(e.target) && !menu.classList.contains('hidden')) {
-            menu.classList.add('hidden');
-            menuIcon.style.display = 'block';
-            closeIcon.style.display = 'none';
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-        });
+      function toggleMenu(e) {
+        if (e) e.stopPropagation();
+        var isOpen = !menu.classList.contains('hidden');
+        if (isOpen) {
+          menu.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+          if (menuIcon) menuIcon.classList.remove('hidden');
+          if (closeIcon) closeIcon.classList.add('hidden');
+        } else {
+          menu.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          if (menuIcon) menuIcon.classList.add('hidden');
+          if (closeIcon) closeIcon.classList.remove('hidden');
+        }
       }
+
+      btn.addEventListener('click', toggleMenu);
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+          if (!menu.classList.contains('hidden')) {
+            toggleMenu();
+          }
+        }
+      });
+
+      // Close menu on link click
+      var links = menu.querySelectorAll('a');
+      links.forEach(function(l) {
+        l.addEventListener('click', function() {
+          toggleMenu();
+        });
+      });
     })();
   </script>
 
