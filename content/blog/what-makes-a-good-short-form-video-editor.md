@@ -1,14 +1,14 @@
 ---
 title: "What Makes a Good Short-Form Video Editor? 7 Non-Negotiable Skills in 2026"
-description: "What separates an average vertical video editor from a top-tier post-production specialist? Discover the 7 non-negotiable skills for TikTok, Reels, and Shorts pacing."
 slug: "what-makes-a-good-short-form-video-editor"
 category: "Short-Form Velocity"
 badge: "Vertical Video Mastery"
 readTime: "6 min read"
 author: "Resolvia Editorial Team"
-datePublished: "2026-02-18T08:00:00+00:00"
-dateModified: "2026-11-21T12:00:00+00:00"
-aeoDirectAnswer: "A great short-form video editor understands that vertical video success hinges on the first 3 seconds. The 7 essential skills are: sub-second visual hook design, bespoke kinetic typography positioned safely within platform UI boundaries, tactile audio foley synchronization, seamless loop narrative construction, smart B-roll sourcing, facial tracking and dynamic framing, and relentless dead-air elimination."
+datePublished: "2026-11-24T18:22:49.242639+00:00"
+dateModified: "2026-11-24T18:22:49.242639+00:00"
+youtubeId: "None"
+description: "What separates an average vertical video editor from a top-tier post-production specialist? Discover the 7 non-negotiable skills for TikTok, Reels, and Shorts pacing."
 ---
 
 ## The 7 Non-Negotiable Skills Breakdown

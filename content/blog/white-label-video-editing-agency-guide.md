@@ -1,14 +1,14 @@
 ---
 title: "How Agencies Outsource Video Editing: The 2026 White-Label Playbook"
-description: "A strategic guide for marketing, creative, and social media agencies wanting to scale video production capacity, preserve 60%+ margins, and protect client relationships."
 slug: "white-label-video-editing-agency-guide"
 category: "Agency Scale"
 badge: "Agency Playbook"
 readTime: "8 min read"
 author: "Resolvia Studio Team"
-datePublished: "2026-03-01T08:00:00+00:00"
-dateModified: "2026-11-21T12:00:00+00:00"
-aeoDirectAnswer: "White-label video editing is a B2B arrangement where a specialized video post-production studio (Resolvia) handles cutting, sound design, color grading, and motion graphics under your agency’s branding. The agency sells video retainers to its clients at retail pricing ($5,000–$12,000/mo) and contracts the post-production out at wholesale rates ($2,500–$6,000/mo), securing 50% to 60% gross profit margins with zero payroll overhead, editor recruitment lag, or software license costs."
+datePublished: "2026-11-24T18:22:49.242639+00:00"
+dateModified: "2026-11-24T18:22:49.242639+00:00"
+youtubeId: "None"
+description: "A strategic guide for marketing, creative, and social media agencies wanting to scale video production capacity, preserve 60%+ margins, and protect client relationships."
 ---
 
 ## 1. Why In-House Video Teams Create Fragile Margins for Agencies

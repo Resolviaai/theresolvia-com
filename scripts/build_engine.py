@@ -736,59 +736,44 @@ def sync_blog_hub(compiled_posts):
         html = f.read()
 
     # Build card HTML for all compiled posts
+    thumbs = ['/lp/thumbs/lib-08.jpg', '/lp/thumbs/lib-02.jpg', '/lp/thumbs/lib-05.jpg', '/lp/promo-format-1.jpg', '/lp/card-trend.jpg', '/lp/thumbs/lib-01.jpg', '/lp/promo-format-2.jpg']
     cards_html = ""
+    grid_i = 0
     for p in compiled_posts:
-        title = p.get('title', '')
         slug = p.get('slug', '')
+        if slug == 'agency-vs-freelance-video-editor':
+            continue # Featured card
+        title = p.get('title', '')
         category = p.get('category', 'Retention Science')
         badge = p.get('badge', category)
         desc = p.get('description', '')
         read_time = p.get('readTime', '7 min read')
+        author = p.get('author', 'Resolvia Studio Team')
+        cover = p.get('coverImage') or thumbs[grid_i % len(thumbs)]
+        grid_i += 1
 
-        cards_html += f'''        <article class="article-card">
-          <div>
+        cards_html += f'''        <a href="/blog/{slug}/" class="article-card">
+          <div class="article-card-thumb">
+            <img src="{cover}" alt="{title}" loading="lazy" />
+            <div class="article-card-thumb-overlay"></div>
+          </div>
+          <div class="article-card-body">
             <span class="article-category">{badge}</span>
-            <h3 class="article-title"><a href="/blog/{slug}/" style="color:inherit; text-decoration:none;" class="hover:text-blue-400 transition-colors">{title} →</a></h3>
-            <p class="article-desc">
-              {desc}
-            </p>
+            <h3 class="article-title">{title}</h3>
+            <p class="article-desc">{desc}</p>
+            <div class="article-meta">
+              <span>{author} &middot; {read_time}</span>
+              <span class="article-read-link">Read Guide &rarr;</span>
+            </div>
           </div>
-          <div class="article-meta">
-            <span>{category}</span>
-            <span>{read_time}</span>
-          </div>
-        </article>
-'''
+        </a>\n'''
 
-    new_section = f'''    <!-- All Editorial & Strategic Guides -->
-    <div style="margin: 48px 0 24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <h2 style="font-size:24px; font-weight:700; color:#ffffff; margin:0;">In-Depth Guides &amp; Research Reports</h2>
-        <span style="font-size:13px; color:#2F86F7; font-weight:600;">{len(compiled_posts)} Articles Live</span>
-      </div>
-      <div class="articles-grid" style="margin-bottom: 48px;">
-{cards_html}      </div>
-    </div>
-'''
-
-    # Replace or insert this section into blog.html
-    if '<!-- All Editorial & Strategic Guides -->' in html:
-        # replace existing section
-        pattern = r'<!-- All Editorial & Strategic Guides -->.*?</div>\s*</div>'
-        html = re.sub(pattern, new_section.strip(), html, flags=re.DOTALL)
-    elif '<!-- Strategic Buying & Pricing Guides Section -->' in html:
-        # replace legacy section with the unified all-articles section
-        pattern = r'<!-- Strategic Buying & Pricing Guides Section -->.*?</div>\s*</div>'
-        html = re.sub(pattern, new_section.strip(), html, flags=re.DOTALL)
-    else:
-        # insert before Articles Grid
-        idx = html.find('<!-- Articles Grid -->')
-        if idx != -1:
-            html = html[:idx] + new_section + html[idx:]
-
-    with open(blog_html_path, 'w', encoding='utf-8') as f:
-        f.write(html)
-    print(f"✓ blog.html: Synchronized all {len(compiled_posts)} article cards.")
+    pattern = r'(<div class="articles-grid" id="articles-grid-container">).*?(</div>\s*</div>\s*<script>)'
+    if re.search(pattern, html, flags=re.DOTALL):
+        html = re.sub(pattern, rf'\1\n{cards_html}      \2', html, flags=re.DOTALL)
+        with open(blog_html_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        print(f"✓ blog.html: Synchronized all {len(compiled_posts)} article cards.")
 
 
 def sync_supabase_posts():
@@ -822,6 +807,8 @@ def sync_supabase_posts():
                 p_pub = post.get('created_at', datetime.utcnow().isoformat())
                 p_mod = post.get('updated_at', datetime.utcnow().isoformat())
                 p_yt = post.get('youtube_id', '')
+                p_cover = post.get('cover_image', '')
+                cover_line = f'coverImage: "{p_cover}"\n' if p_cover else ''
 
                 frontmatter = f"""---
 title: "{p_title}"
@@ -832,7 +819,7 @@ readTime: "{p_read}"
 author: "{p_author}"
 datePublished: "{p_pub}"
 dateModified: "{p_mod}"
-youtubeId: "{p_yt}"
+{cover_line}youtubeId: "{p_yt}"
 description: "{p_desc}"
 ---
 
