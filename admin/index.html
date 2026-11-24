@@ -292,6 +292,7 @@
           <button onclick="setPostStatusFilter('all')" class="post-filter-chip px-3 py-1.5 rounded-lg bg-white/10 text-white font-medium touch-target">All</button>
           <button onclick="setPostStatusFilter('published')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Published</button>
           <button onclick="setPostStatusFilter('draft')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Drafts</button>
+          <button onclick="setPostStatusFilter('archived')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Archived</button>
         </div>
 
         <!-- Posts List -->
@@ -337,6 +338,29 @@
               <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               <span>Publish</span>
             </button>
+
+            <!-- Contextual More Actions (Archive / Delete) -->
+            <div class="relative" id="post-actions-wrapper">
+              <button
+                type="button"
+                onclick="togglePostActionsMenu(event)"
+                class="h-[34px] w-[34px] rounded-lg border border-borderSubtle bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white transition-colors flex items-center justify-center"
+                title="Archive or Delete Article"
+                aria-label="More article actions"
+              >
+                <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"/></svg>
+              </button>
+              <div id="post-actions-menu" class="hidden absolute right-0 top-[40px] w-48 rounded-xl border border-white/10 bg-[#18191c] shadow-2xl p-1.5 z-50">
+                <button type="button" onclick="archivePost(); togglePostActionsMenu();" class="w-full px-3 py-2 rounded-lg text-left text-[12px] text-slate-300 hover:bg-white/[0.06] hover:text-white flex items-center gap-2 transition-colors">
+                  <svg class="size-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+                  <span>Archive (Hide)</span>
+                </button>
+                <button type="button" onclick="confirmDeletePost(); togglePostActionsMenu();" class="w-full px-3 py-2 rounded-lg text-left text-[12px] text-rose-400 hover:bg-rose-500/10 flex items-center gap-2 transition-colors mt-0.5">
+                  <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  <span>Delete Permanently</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -742,6 +766,26 @@
       <div class="flex items-center justify-end gap-2">
         <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 rounded-xl text-[12px] text-slate-400 hover:text-white transition-colors">Cancel</button>
         <button type="button" onclick="executeDeleteLead()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-[12.5px] font-semibold transition-colors">Delete Permanently</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DELETE POST CONFIRMATION -->
+  <div id="post-delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-[420px] rounded-2xl border border-white/10 bg-[#18191c] p-6 shadow-2xl relative text-left">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="size-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 shrink-0">
+          <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        </div>
+        <div>
+          <h4 class="text-[15px] font-bold text-white">Delete Article Permanently?</h4>
+          <p class="text-[12px] text-slate-400">This removes the article from Supabase and hides it from /blog.html.</p>
+        </div>
+      </div>
+      <p id="delete-post-title-label" class="text-[13px] text-slate-300 font-medium mb-5 bg-[#09090b] p-3 rounded-xl border border-white/[0.06] truncate"></p>
+      <div class="flex items-center justify-end gap-2">
+        <button type="button" onclick="closeDeletePostModal()" class="px-4 py-2 rounded-xl text-[12px] text-slate-400 hover:text-white transition-colors">Cancel</button>
+        <button type="button" onclick="executeDeletePost()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-[12.5px] font-semibold transition-colors">Delete Permanently</button>
       </div>
     </div>
   </div>
@@ -1556,7 +1600,11 @@
           }
         };
 
-        var badgeColor = p.status === 'published' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+        var badgeColor = p.status === 'published'
+          ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+          : (p.status === 'archived'
+              ? 'bg-slate-500/15 text-slate-400 border-slate-500/30'
+              : 'bg-amber-500/15 text-amber-300 border-amber-500/30');
 
         item.innerHTML = `
           <div class="flex items-center justify-between gap-2 mb-1.5">
@@ -1590,6 +1638,9 @@
       if (post.status === 'published') {
         statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0';
         statusBadge.textContent = 'Published';
+      } else if (post.status === 'archived') {
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold uppercase tracking-wider bg-slate-500/15 border border-slate-500/30 text-slate-400 shrink-0';
+        statusBadge.textContent = 'Archived';
       } else {
         statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold uppercase tracking-wider bg-amber-500/15 border border-amber-500/30 text-amber-300 shrink-0';
         statusBadge.textContent = 'Draft';
@@ -1795,6 +1846,98 @@ Outline the problem and retention hooks.
       }
 
       selectPost(post.id);
+    }
+
+    function togglePostActionsMenu(e) {
+      if (e) e.stopPropagation();
+      var menu = document.getElementById('post-actions-menu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function(e) {
+      var wrapper = document.getElementById('post-actions-wrapper');
+      var menu = document.getElementById('post-actions-menu');
+      if (menu && wrapper && !wrapper.contains(e.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+
+    async function archivePost() {
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (!post) {
+        showToast('Please select an article first.', true);
+        return;
+      }
+
+      post.status = 'archived';
+      post.updated_at = new Date().toISOString();
+
+      if (supabaseClient) {
+        try {
+          var updRes = await supabaseClient.from('posts').update({ status: 'archived', updated_at: post.updated_at }).eq('slug', post.slug);
+          if (updRes.error) {
+            showToast('Archive note: ' + updRes.error.message, true);
+          } else {
+            showToast('✓ Article archived and hidden from blog');
+          }
+        } catch(e) {
+          showToast('Archive note: ' + e.message, true);
+        }
+      } else {
+        showToast('✓ Article archived locally');
+      }
+
+      selectPost(post.id);
+    }
+
+    function confirmDeletePost() {
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (!post) {
+        showToast('Please select an article first.', true);
+        return;
+      }
+      document.getElementById('delete-post-title-label').textContent = (post.title || 'Untitled') + ' (/blog/' + post.slug + ')';
+      document.getElementById('post-delete-modal').classList.remove('hidden');
+    }
+
+    function closeDeletePostModal() {
+      document.getElementById('post-delete-modal').classList.add('hidden');
+    }
+
+    async function executeDeletePost() {
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (!post) {
+        closeDeletePostModal();
+        return;
+      }
+
+      var targetSlug = post.slug;
+      var targetId = post.id;
+      posts = posts.filter(function(p) { return p.id !== targetId; });
+
+      if (supabaseClient) {
+        try {
+          var delRes = await supabaseClient.from('posts').delete().eq('slug', targetSlug);
+          if (delRes.error) {
+            showToast('Delete note: ' + delRes.error.message, true);
+          } else {
+            showToast('✓ Article deleted from Supabase');
+          }
+        } catch(e) {
+          showToast('Delete note: ' + e.message, true);
+        }
+      } else {
+        showToast('✓ Article deleted locally');
+      }
+
+      closeDeletePostModal();
+      renderPostsList();
+      if (posts.length > 0) {
+        selectPost(posts[0].id);
+      } else {
+        currentPostId = null;
+        if (typeof showEmptyEditorState === 'function') showEmptyEditorState();
+      }
     }
 
     function exportMarkdownFile() {

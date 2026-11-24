@@ -1233,6 +1233,9 @@
                 `;
               }).join('');
             }
+          } else if (res.ok && Array.isArray(posts) && posts.length === 0) {
+            if (articlesSection) articlesSection.classList.add('hidden');
+            if (emptyState) emptyState.classList.remove('hidden');
           }
         } catch(e) {
           console.warn("Supabase fetch note:", e);
