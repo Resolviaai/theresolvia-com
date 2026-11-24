@@ -26,8 +26,22 @@ BLOG_OUTPUT_DIR = os.path.join(ROOT_DIR, 'blog')
 with open(os.path.join(ROOT_DIR, 'careers.html'), 'r', encoding='utf-8') as f:
     careers_html = f.read()
 
-cursor_block_m = re.search(r'(<style id="resolvia-cursor-inline">.*?</style>)', careers_html, re.DOTALL)
-cursor_block = cursor_block_m.group(0) if cursor_block_m else ''
+cursor_block = '''<script>
+  (function() {
+    if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      function loadDesktopCursors() {
+        window.removeEventListener('pointermove', loadDesktopCursors);
+        window.removeEventListener('mousemove', loadDesktopCursors);
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/assets/cursor.css';
+        document.head.appendChild(link);
+      }
+      window.addEventListener('pointermove', loadDesktopCursors, { once: true, passive: true });
+      window.addEventListener('mousemove', loadDesktopCursors, { once: true, passive: true });
+    }
+  })();
+</script>'''
 
 footer_m = re.search(r'(<footer id="footer".*?</footer>)', careers_html, re.DOTALL)
 footer_html = footer_m.group(0) if footer_m else ''
@@ -51,7 +65,7 @@ def get_navbar(active_tab='blog'):
         <span style="font-weight: 600; font-size: 15px; letter-spacing: -0.02em; color: #09090b;">Resolvia</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-1">
+      <div class="resolvia-nav-links">
         <a href="/work/" class="resolvia-nav-link{work_active}">Work</a>
         <a href="/services/youtube-video-editing/" class="resolvia-nav-link{services_active}">Services</a>
         <a href="/#workflow" class="resolvia-nav-link">Process</a>
@@ -216,6 +230,16 @@ def build_article_html(meta, body_html):
       justify-content: center !important;
       pointer-events: none !important;
       padding: 0 16px !important;
+    }}
+    .resolvia-nav-links {{
+      display: none !important;
+      align-items: center !important;
+      gap: 4px !important;
+    }}
+    @media (min-width: 768px) {{
+      .resolvia-nav-links {{
+        display: flex !important;
+      }}
     }}
     .resolvia-nav-bar {{
       pointer-events: auto !important;
@@ -722,11 +746,66 @@ def sync_blog_hub(compiled_posts):
     print(f"✓ blog.html: Synchronized all {len(compiled_posts)} article cards.")
 
 
+def sync_supabase_posts():
+    """
+    Fetches published articles from Supabase 'posts' table and syncs
+    them to content/blog/<slug>.md so they are statically compiled for Google.
+    """
+    import urllib.request
+    sp_url = os.environ.get('SUPABASE_URL', 'https://irrewfsdmixunaashckv.supabase.co')
+    sp_key = os.environ.get('SUPABASE_KEY', 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO')
+    endpoint = f"{sp_url}/rest/v1/posts?select=*&status=eq.published"
+    try:
+        req = urllib.request.Request(endpoint, headers={
+            'apikey': sp_key,
+            'Authorization': f'Bearer {sp_key}'
+        })
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            posts = json.loads(resp.read().decode('utf-8'))
+            print(f"✓ Supabase Sync: Found {len(posts)} published articles in Supabase.")
+            for post in posts:
+                slug = post.get('slug')
+                if not slug:
+                    continue
+                content_md = post.get('content_markdown') or ''
+                p_title = post.get('title', '').replace('"', '')
+                p_desc = post.get('description', '').replace('"', '')
+                p_cat = post.get('category', 'Video Editing')
+                p_badge = post.get('badge') or p_cat
+                p_read = post.get('read_time', '7 min read')
+                p_author = post.get('author', 'Resolvia Studio Team')
+                p_pub = post.get('created_at', datetime.utcnow().isoformat())
+                p_mod = post.get('updated_at', datetime.utcnow().isoformat())
+                p_yt = post.get('youtube_id', '')
+
+                frontmatter = f"""---
+title: "{p_title}"
+slug: "{slug}"
+category: "{p_cat}"
+badge: "{p_badge}"
+readTime: "{p_read}"
+author: "{p_author}"
+datePublished: "{p_pub}"
+dateModified: "{p_mod}"
+youtubeId: "{p_yt}"
+description: "{p_desc}"
+---
+
+{content_md}
+"""
+                file_path = os.path.join(CONTENT_DIR, f"{slug}.md")
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(frontmatter)
+                print(f"  → Synchronized '{slug}.md' from Supabase.")
+    except Exception as e:
+        print(f"ℹ️ Supabase Sync note (continuing with local content): {e}")
+
 def build_all():
     print("==================================================")
     print("=== RESOLVIA SCALABLE CONTENT ENGINE BUILD ===")
     print("==================================================")
     os.makedirs(CONTENT_DIR, exist_ok=True)
+    sync_supabase_posts()
     
     md_files = [f for f in os.listdir(CONTENT_DIR) if f.endswith('.md')]
     print(f"Found {len(md_files)} Markdown articles in {CONTENT_DIR}")

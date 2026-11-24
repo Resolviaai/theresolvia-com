@@ -1,4 +1,5 @@
 [build]
+  command = "python scripts/build_engine.py"
   publish = "."
 
 # 301 Permanent Redirect: www.theresolvia.com -> https://theresolvia.com

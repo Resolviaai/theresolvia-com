@@ -681,8 +681,11 @@ void main() {
         container.addEventListener("pointercancel", onLeave, { passive: true });
         window.addEventListener("pointerup", onUp, { passive: true });
 
-        // Loop & ResizeObserver
+        // Loop & ResizeObserver with IntersectionObserver pause
         let lastTime = performance.now();
+        let isVisible = true;
+        let animId = null;
+
         function loop(now) {
           const dt = Math.min((now - lastTime) / 1000, 0.1);
           lastTime = now;
@@ -690,12 +693,33 @@ void main() {
             stepSim(dt, layout, field);
             draw();
           }
-          requestAnimationFrame(loop);
+          if (isVisible) {
+            animId = requestAnimationFrame(loop);
+          } else {
+            animId = null;
+          }
         }
+
+        const io = new IntersectionObserver((entries) => {
+          const entry = entries[0];
+          isVisible = !!(entry && entry.isIntersecting);
+          if (isVisible) {
+            if (!animId) {
+              lastTime = performance.now();
+              animId = requestAnimationFrame(loop);
+            }
+          } else {
+            if (animId) {
+              cancelAnimationFrame(animId);
+              animId = null;
+            }
+          }
+        }, { threshold: 0.05 });
+        io.observe(container);
 
         // Initialize layout immediately to eliminate blank screen flicker
         updateLayout();
-        requestAnimationFrame(loop);
+        animId = requestAnimationFrame(loop);
 
         // Re-rasterize once web fonts load to ensure crisp typography
         if (document.fonts) {
@@ -704,7 +728,7 @@ void main() {
           });
         }
 
-        window.addEventListener("resize", updateLayout);
+        window.addEventListener("resize", updateLayout, { passive: true });
         const ro = new ResizeObserver(updateLayout);
         ro.observe(container);
         return;
@@ -863,8 +887,31 @@ void main() {
     ctx.fillText(text, cx, cy);
 
     ctx.restore();
-    requestAnimationFrame(renderFallback);
+    if (isFallbackVisible) {
+      fallbackAnimId = requestAnimationFrame(renderFallback);
+    } else {
+      fallbackAnimId = null;
+    }
   }
 
-  requestAnimationFrame(renderFallback);
+  let isFallbackVisible = true;
+  let fallbackAnimId = null;
+  const ioFallback = new IntersectionObserver((entries) => {
+    const entry = entries[0];
+    isFallbackVisible = !!(entry && entry.isIntersecting);
+    if (isFallbackVisible) {
+      if (!fallbackAnimId) {
+        lastTime2 = performance.now();
+        fallbackAnimId = requestAnimationFrame(renderFallback);
+      }
+    } else {
+      if (fallbackAnimId) {
+        cancelAnimationFrame(fallbackAnimId);
+        fallbackAnimId = null;
+      }
+    }
+  }, { threshold: 0.05 });
+  ioFallback.observe(container);
+
+  fallbackAnimId = requestAnimationFrame(renderFallback);
 })();

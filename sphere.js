@@ -371,15 +371,45 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.globalAlpha = 1;
 
-      requestAnimationFrame(render);
+      if (isVisible) {
+        animId = requestAnimationFrame(render);
+      } else {
+        animId = null;
+      }
     }
 
-    requestAnimationFrame(render);
+    let isVisible = false;
+    let animId = null;
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      isVisible = !!(entry && entry.isIntersecting);
+      if (isVisible) {
+        if (!animId) {
+          lastTime = performance.now();
+          animId = requestAnimationFrame(render);
+        }
+      } else {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      }
+    }, { rootMargin: "100px", threshold: 0.01 });
+
+    observer.observe(container);
+  }
+
+  function scheduleInit() {
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(initSphere, { timeout: 2500 });
+    } else {
+      setTimeout(initSphere, 200);
+    }
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initSphere);
+    document.addEventListener("DOMContentLoaded", scheduleInit);
   } else {
-    initSphere();
+    scheduleInit();
   }
 })();

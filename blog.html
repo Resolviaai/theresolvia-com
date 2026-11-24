@@ -233,6 +233,18 @@
     .resolvia-nav-cta:hover { transform: scale(1.02) !important; }
     .resolvia-nav-cta:active { transform: scale(0.98) !important; }
 
+    /* Desktop Navigation Links (Center) */
+    .resolvia-nav-links {
+      display: none !important;
+      align-items: center !important;
+      gap: 4px !important;
+    }
+    @media (min-width: 768px) {
+      .resolvia-nav-links {
+        display: flex !important;
+      }
+    }
+
     /* Mobile Creative Floating Island Menu (Fluid Physics & Micro-Interactions) */
     #resolvia-mobile-backdrop {
       position: fixed !important;
@@ -826,7 +838,8 @@
         <span class="resolvia-nav-brand-text">Resolvia</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-1">
+      <!-- Nav Links (Desktop Center) -->
+      <div class="resolvia-nav-links">
         <a href="/services/youtube-video-editing/" class="resolvia-nav-link">Services</a>
         <a href="/#workflow" class="resolvia-nav-link">Process</a>
         <a href="/blog.html" class="resolvia-nav-link active">Blog</a>
