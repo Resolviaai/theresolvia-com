@@ -101,6 +101,8 @@ def build_article_html(meta, body_html):
     aeo_answer = meta.get('aeoDirectAnswer', '')
     canonical_url = f"https://theresolvia.com/blog/{slug}/"
 
+    cover_image = meta.get('coverImage', '')
+
     # Schema JSON-LD
     schema_dict = {
         "@context": "https://schema.org",
@@ -127,6 +129,9 @@ def build_article_html(meta, body_html):
         ]
     }
 
+    if cover_image:
+        schema_dict["@graph"][0]["image"] = f"https://theresolvia.com{cover_image}"
+
     # Add FAQPage schema if FAQs exist
     faqs = meta.get('faqs', [])
     if faqs:
@@ -144,6 +149,14 @@ def build_article_html(meta, body_html):
         schema_dict["@graph"].append(faq_entity)
 
     schema_json = json.dumps(schema_dict, indent=2)
+
+    cover_image_html = ""
+    if cover_image:
+        cover_image_html = f'''
+    <!-- Hero Cover Visual -->
+    <div class="article-cover-container" style="margin: 28px 0 36px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 12px 36px -12px rgba(0,0,0,0.6);">
+      <img src="{cover_image}" alt="{title}" style="width: 100%; height: auto; display: block;" loading="eager" fetchpriority="high">
+    </div>'''
 
     aeo_box_html = ""
     if aeo_answer:
@@ -208,9 +221,11 @@ def build_article_html(meta, body_html):
   <meta property="og:url" content="{canonical_url}"/>
   <meta property="og:type" content="article"/>
   <meta property="og:site_name" content="Resolvia"/>
+  <meta property="og:image" content="{f'https://theresolvia.com{cover_image}' if cover_image else 'https://theresolvia.com/brand/resolvia_r_logo.png'}"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="{title}"/>
   <meta name="twitter:description" content="{description}"/>
+  <meta name="twitter:image" content="{f'https://theresolvia.com{cover_image}' if cover_image else 'https://theresolvia.com/brand/resolvia_r_logo.png'}"/>
 
   <link rel="stylesheet" href="/_next/static/chunks/1pmsn_rpclwta.css"/>
   <link rel="stylesheet" href="/_next/static/chunks/2rtpwwx2j42fi.css"/>
@@ -435,6 +450,24 @@ def build_article_html(meta, body_html):
       padding: 12px 14px;
       color: rgba(238, 241, 248, 0.75);
     }}
+    .article-body img {{
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 32px 0 16px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      display: block;
+    }}
+    .article-body figure {{
+      margin: 36px 0;
+    }}
+    .article-body figcaption {{
+      font-size: 13px;
+      color: rgba(238, 241, 248, 0.55);
+      text-align: center;
+      margin-top: 10px;
+    }}
     .card-surface {{
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -520,6 +553,8 @@ def build_article_html(meta, body_html):
       <span>•</span>
       <span>Updated {published[:10]}</span>
     </div>
+
+    {cover_image_html}
 
     {aeo_box_html}
 

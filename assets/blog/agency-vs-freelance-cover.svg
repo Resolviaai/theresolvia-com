@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="heroGlow" cx="50%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#0B0F17" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#070A0F" />
+    </radialGradient>
+    <linearGradient id="blueAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="panelBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.1" />
+      <stop offset="50%" stop-color="#2F86F7" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+    </linearGradient>
+    <filter id="shadowBox" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1200" height="675" fill="url(#heroGlow)" />
+
+  <!-- Subtle Studio Grid -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="675" />
+    <line x1="300" y1="0" x2="300" y2="675" />
+    <line x1="500" y1="0" x2="500" y2="675" />
+    <line x1="700" y1="0" x2="700" y2="675" />
+    <line x1="900" y1="0" x2="900" y2="675" />
+    <line x1="1100" y1="0" x2="1100" y2="675" />
+    <line x1="0" y1="120" x2="1200" y2="120" />
+    <line x1="0" y1="240" x2="1200" y2="240" />
+    <line x1="0" y1="360" x2="1200" y2="360" />
+    <line x1="0" y1="480" x2="1200" y2="480" />
+    <line x1="0" y1="600" x2="1200" y2="600" />
+  </g>
+
+  <!-- Ambient Waveform Graphic across background -->
+  <path d="M 0 520 Q 150 480 300 520 T 600 500 T 900 530 T 1200 500 L 1200 675 L 0 675 Z" fill="url(#waveGrad)" opacity="0.4" />
+
+  <!-- Central Editorial Floating Workspace Card -->
+  <g transform="translate(180, 100)" filter="url(#shadowBox)">
+    <!-- Card Surface -->
+    <rect width="840" height="475" rx="20" fill="#0f1626" fill-opacity="0.85" stroke="url(#panelBorder)" stroke-width="1.5" />
+    
+    <!-- Window Bar -->
+    <rect width="840" height="48" rx="20" fill="#141c30" />
+    <circle cx="28" cy="24" r="5" fill="#ef4444" opacity="0.8" />
+    <circle cx="44" cy="24" r="5" fill="#f59e0b" opacity="0.8" />
+    <circle cx="60" cy="24" r="5" fill="#10b981" opacity="0.8" />
+    <text x="420" y="30" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500" text-anchor="middle" letter-spacing="0.08em">RESOLVIA EDITORIAL BENCHMARK · 2026</text>
+
+    <!-- Content Header -->
+    <g transform="translate(60, 80)">
+      <rect width="130" height="24" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-opacity="0.4" stroke-width="1" />
+      <text x="65" y="16" fill="#38bdf8" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">HIRING GUIDE</text>
+      
+      <text x="0" y="62" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.03em">Agency vs. Freelance Video Editor</text>
+      <text x="0" y="94" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="400">Total Cost of Ownership, Retention Architecture, and Turnaround Reliability</text>
+    </g>
+
+    <!-- Visual Split Grid Inside Mockup -->
+    <g transform="translate(60, 210)">
+      <!-- Left Column: Solo Freelance -->
+      <rect width="335" height="200" rx="14" fill="#141b2a" stroke="#ef4444" stroke-opacity="0.25" stroke-width="1.2" />
+      <text x="24" y="36" fill="#f87171" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700">Solo Freelancer</text>
+      
+      <!-- Metrics -->
+      <text x="24" y="70" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11.5">TURNAROUND SLA</text>
+      <text x="24" y="92" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">5 – 10 Days · High Variance</text>
+      
+      <text x="24" y="126" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11.5">REDUNDANCY</text>
+      <text x="24" y="148" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="13.5" font-weight="500">Single Point of Failure</text>
+
+      <text x="24" y="180" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11.5">Best For: &lt;$1,500/mo Early Channels</text>
+
+      <!-- Right Column: Agency Pod -->
+      <g transform="translate(385, 0)">
+        <rect width="335" height="200" rx="14" fill="#101d36" stroke="#2F86F7" stroke-opacity="0.45" stroke-width="1.2" />
+        <text x="24" y="36" fill="#60a5fa" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700">Resolvia Agency Pod</text>
+        
+        <!-- Metrics -->
+        <text x="24" y="70" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="11.5">TURNAROUND SLA</text>
+        <text x="24" y="92" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Guaranteed 48 – 72 Hours</text>
+        
+        <text x="24" y="126" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="11.5">SYSTEMIC STACK</text>
+        <text x="24" y="148" fill="#38bdf8" font-family="Inter, system-ui, sans-serif" font-size="13.5" font-weight="500">Lead Editor + Audio DSP + Backup</text>
+
+        <text x="24" y="180" fill="#34d399" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="600">Best For: High-Growth &amp; 50K+ Creators</text>
+      </g>
+    </g>
+
+    <!-- Bottom Audio Timeline Visualizer -->
+    <g transform="translate(60, 432)">
+      <line x1="0" y1="12" x2="720" y2="12" stroke="#1e293b" stroke-width="2" />
+      <line x1="0" y1="12" x2="380" y2="12" stroke="#2F86F7" stroke-width="2" />
+      <circle cx="380" cy="12" r="5" fill="#38bdf8" />
+    </g>
+  </g>
+</svg>
