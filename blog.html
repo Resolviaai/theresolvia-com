@@ -818,6 +818,9 @@
       background: rgba(255, 255, 255, 0.14) !important;
       transform: translateY(-1px) !important;
     }
+    .hidden {
+      display: none !important;
+    }
   </style>
 
   <!-- Lite YouTube Component (Zero-Bloat Responsive Video Embeds) -->
@@ -974,190 +977,149 @@
       <a href="#workflows" class="filter-pill">Agency Workflows</a>
     </div>
 
-    <!-- Featured Lead Guide (Showcase Card) -->
-    <article class="featured-article" id="the-3-second-retention-law">
-      <div class="dot-grid pointer-events-none absolute inset-x-0 bottom-0 h-[45%] [mask-image:linear-gradient(0deg,#000_0%,transparent_100%)]"></div>
-      <div>
-        <span class="featured-tag">Deep-Dive Breakdown</span>
-        <h2 class="featured-headline">
-          <a href="/blog/how-to-improve-youtube-retention/" style="color:inherit; text-decoration:none;">The 3-Second Retention Law: Reverse-Engineering 50M+ View YouTube Hooks &rarr;</a>
-        </h2>
-        <p class="featured-excerpt">
-          Why 70% of viewers abandon YouTube videos before the 30-second mark, and the exact 3-step visual interrupt formula our studio uses to hold 68%+ retention across client channels.
+    <!-- Blog Empty State (When 0 Articles Published in Production) -->
+    <div id="blog-empty-state" style="padding: 64px 24px; max-width: 680px; margin: 32px auto 64px; text-align: center; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.08); background: #18191c; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
+      <div class="dot-grid" style="position: absolute; inset: 0; opacity: 0.35; pointer-events: none;"></div>
+      <div style="position: relative; z-index: 2;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+        </div>
+        <span style="font-size: 11px; font-family: 'JetBrains Mono', Menlo, monospace; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; font-weight: 600; display: block; margin-bottom: 8px;">Resolvia Editorial &middot; In Production</span>
+        <h2 style="font-size: clamp(22px, 3.2vw, 26px); font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.25;">Retention Guides &amp; Case Studies in Production</h2>
+        <p style="font-size: 14.5px; color: rgba(255, 255, 255, 0.65); line-height: 1.6; max-width: 500px; margin: 0 auto 28px;">
+          Our post-production blueprints, pacing frameworks, and creator breakdowns are currently being finalized and formatted by our editorial team.
         </p>
-        <div class="featured-meta">
-          <span>By Resolvia Lead Editor</span>
-          <span>&middot;</span>
-          <span>8 min read</span>
-          <span>&middot;</span>
-          <span>Updated Nov 2026</span>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <a href="/#contact" class="blog-btn-primary" style="background: #ffffff !important; color: #000000 !important; font-size: 13.5px; font-weight: 700; padding: 10px 20px; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.3);">
+            <span>Request Sample Cut</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="/services/youtube-video-editing/" class="blog-btn-secondary" style="background: rgba(255, 255, 255, 0.06) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; color: #ffffff !important; font-size: 13.5px; font-weight: 600; padding: 10px 18px; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <span>Explore Services</span>
+          </a>
         </div>
       </div>
-      <div class="featured-stat-box">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-size: 13px; font-weight:600; color:#fff;">Standard vs. Retention-Engineered Hook</span>
-          <span style="font-size: 12px; color:#10b981; font-weight:700;">+24% Hold</span>
-        </div>
-        <div class="retention-graph-preview">
-          <svg viewBox="0 0 300 80" width="100%" height="100%">
-            <!-- Gridlines -->
-            <line x1="0" y1="20" x2="300" y2="20" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4"/>
-            <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4"/>
-            <!-- Standard drop curve -->
-            <path d="M 0 10 Q 40 55 120 62 T 300 70" fill="none" stroke="rgba(239, 68, 68, 0.7)" stroke-width="2"/>
-            <!-- Resolvia engineered curve -->
-            <path d="M 0 10 Q 50 18 120 22 T 300 32" fill="none" stroke="#2F86F7" stroke-width="2.5"/>
-          </svg>
-        </div>
-        <div style="font-size: 12px; color:rgba(255,255,255,0.55); line-height:1.45;">
-          Visual pattern interrupts placed at 0:01, 0:04, and 0:12 eliminate the early drop-off cliff.
-        </div>
+    </div>
+
+    <!-- Dynamic Articles Section (Rendered Live from Supabase) -->
+    <div id="blog-articles-section" class="hidden">
+      <!-- Featured Lead Guide (Showcase Card) -->
+      <article class="featured-article" id="featured-article-container">
+        <!-- Rendered dynamically -->
+      </article>
+
+      <!-- Articles Grid Section Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px;">
+        <h2 style="font-size:24px; font-weight:700; color:#ffffff; margin:0; letter-spacing:-0.02em;">Published Video Editing Guides</h2>
+        <span id="published-guides-count" style="font-size:13px; color:#38BAFE; font-weight:600; background:rgba(47,134,247,0.1); padding:4px 12px; border-radius:9999px; border:1px solid rgba(47,134,247,0.25);">0 Guides Live</span>
       </div>
-    </article>
 
-    <!-- Articles Grid Section Header -->
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px;">
-      <h2 style="font-size:24px; font-weight:700; color:#ffffff; margin:0; letter-spacing:-0.02em;">Published Video Editing Guides</h2>
-      <span style="font-size:13px; color:#38BAFE; font-weight:600; background:rgba(47,134,247,0.1); padding:4px 12px; border-radius:9999px; border:1px solid rgba(47,134,247,0.25);">7 Guides Live</span>
+      <!-- Articles Grid with 16:9 Thumbnails -->
+      <div class="articles-grid" id="articles-grid-container">
+        <!-- Rendered dynamically -->
+      </div>
     </div>
 
-    <!-- The 7 Guides Grid with Real 16:9 Thumbnails -->
-    <div class="articles-grid">
+    <script>
+      (async function() {
+        var SP_URL = 'https://irrewfsdmixunaashckv.supabase.co';
+        var SP_KEY = 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO';
 
-      <!-- Card 1: YouTube Retention -->
-      <a href="/blog/how-to-improve-youtube-retention/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/thumbs/lib-08.jpg" alt="How to Improve Audience Retention on YouTube" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">Retention Science</span>
-          <h3 class="article-title">How to Improve Audience Retention on YouTube: The 4-Beat Blueprint</h3>
-          <p class="article-desc">
-            Master YouTube audience retention. Fix the 30-second cliff, engineer curiosity open loops, and use sonic foley to sustain 50%+ Average View Duration.
-          </p>
-          <div class="article-meta">
-            <span>Resolvia Studio &middot; 9 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
+        try {
+          var res = await fetch(SP_URL + '/rest/v1/posts?select=*&status=eq.published&order=created_at.desc', {
+            headers: {
+              'apikey': SP_KEY,
+              'Authorization': 'Bearer ' + SP_KEY
+            }
+          });
+          var posts = await res.json();
+          var articlesSection = document.getElementById('blog-articles-section');
+          var emptyState = document.getElementById('blog-empty-state');
+          var grid = document.getElementById('articles-grid-container');
+          var featured = document.getElementById('featured-article-container');
+          var countBadge = document.getElementById('published-guides-count');
 
-      <!-- Card 2: Thumbnail Psychology -->
-      <a href="/blog/2026-thumbnail-psychology-playbook/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/thumbs/lib-02.jpg" alt="The 2026 Thumbnail Psychology Playbook" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">CTR Optimization</span>
-          <h3 class="article-title">The 2026 Thumbnail Psychology Playbook: Designing for High-Stakes CTR</h3>
-          <p class="article-desc">
-            Moving beyond exaggerated faces into lighting isolation, 3D focal hierarchy, curiosity loops, and title synchronization for 12%+ CTR.
-          </p>
-          <div class="article-meta">
-            <span>Packaging Science &middot; 7 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
+          if (Array.isArray(posts) && posts.length > 0) {
+            if (emptyState) emptyState.classList.add('hidden');
+            if (articlesSection) articlesSection.classList.remove('hidden');
+            if (countBadge) countBadge.textContent = posts.length + (posts.length === 1 ? ' Guide Live' : ' Guides Live');
 
-      <!-- Card 3: Agency vs Freelancer -->
-      <a href="/blog/agency-vs-freelance-video-editor/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/thumbs/lib-05.jpg" alt="Video Editing Agency vs Freelance Video Editor" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">Hiring &amp; Scaling</span>
-          <h3 class="article-title">Video Editing Agency vs Freelance Video Editor: Which is Better in 2026?</h3>
-          <p class="article-desc">
-            Analyze cost, turnaround reliability, audio mastering, motion graphics, and burnout risk when scaling content production.
-          </p>
-          <div class="article-meta">
-            <span>Creator Strategy &middot; 7 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
+            // Render featured post
+            var feat = posts[0];
+            if (featured) {
+              featured.innerHTML = `
+                <div class="dot-grid pointer-events-none absolute inset-x-0 bottom-0 h-[45%] [mask-image:linear-gradient(0deg,#000_0%,transparent_100%)]"></div>
+                <div>
+                  <span class="featured-tag">${feat.badge || feat.category || 'Retention Science'}</span>
+                  <h2 class="featured-headline">
+                    <a href="/blog/${feat.slug}/" style="color:inherit; text-decoration:none;">${feat.title} &rarr;</a>
+                  </h2>
+                  <p class="featured-excerpt">
+                    ${feat.description || 'Deep-dive post-production framework and pacing law for high audience retention.'}
+                  </p>
+                  <div class="featured-meta">
+                    <span>By ${feat.author || 'Resolvia Lead Editor'}</span>
+                    <span>&middot;</span>
+                    <span>${feat.read_time || '7 min read'}</span>
+                    <span>&middot;</span>
+                    <span>${new Date(feat.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                  </div>
+                </div>
+                <div class="featured-stat-box">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size: 13px; font-weight:600; color:#fff;">Standard vs. Retention-Engineered Hook</span>
+                    <span style="font-size: 12px; color:#10b981; font-weight:700;">+24% Hold</span>
+                  </div>
+                  <div class="retention-graph-preview">
+                    <svg viewBox="0 0 300 80" width="100%" height="100%">
+                      <line x1="0" y1="20" x2="300" y2="20" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4"/>
+                      <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4"/>
+                      <path d="M 0 10 Q 40 55 120 62 T 300 70" fill="none" stroke="rgba(239, 68, 68, 0.7)" stroke-width="2"/>
+                      <path d="M 0 10 Q 50 18 120 22 T 300 32" fill="none" stroke="#2F86F7" stroke-width="2.5"/>
+                    </svg>
+                  </div>
+                  <div style="font-size: 12px; color:rgba(255,255,255,0.55); line-height:1.45;">
+                    Visual pattern interrupts placed throughout the video eliminate the early drop-off cliff.
+                  </div>
+                </div>
+              `;
+            }
 
-      <!-- Card 4: B2B SaaS Demos -->
-      <a href="/blog/b2b-saas-video-production-acquisition-guide/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/promo-format-1.jpg" alt="B2B SaaS Video Production" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">Product Funnels</span>
-          <h3 class="article-title">B2B SaaS Video Production: Turn Product Demos into High-ARR Funnels</h3>
-          <p class="article-desc">
-            Stop recording boring walkthroughs. How tech companies engineer high-retention demo videos that drive pipeline and lower CAC.
-          </p>
-          <div class="article-meta">
-            <span>B2B Growth &middot; 8 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 5: Pricing Breakdown -->
-      <a href="/blog/video-editing-cost-pricing-guide/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/card-trend.jpg" alt="How Much Does Video Editing Cost in 2026" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">Pricing Report</span>
-          <h3 class="article-title">How Much Does Professional Video Editing Cost in 2026?</h3>
-          <p class="article-desc">
-            A transparent breakdown of professional rates in 2026. Compare hourly rates, per-video pricing, and monthly agency retainers.
-          </p>
-          <div class="article-meta">
-            <span>Pricing Guide &middot; 8 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 6: Short-Form Video Editor -->
-      <a href="/blog/what-makes-a-good-short-form-video-editor/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/thumbs/lib-01.jpg" alt="What Makes a Good Short-Form Video Editor" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">Vertical Video</span>
-          <h3 class="article-title">What Makes a Good Short-Form Video Editor? 7 Non-Negotiable Skills</h3>
-          <p class="article-desc">
-            What separates an average editor from a viral specialist? The 7 non-negotiable skills for TikTok, Reels, and Shorts pacing.
-          </p>
-          <div class="article-meta">
-            <span>Short-Form Pacing &middot; 6 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 7: White-Label Agency -->
-      <a href="/blog/white-label-video-editing-agency-guide/" class="article-card">
-        <div class="article-card-thumb">
-          <img src="/lp/promo-format-2.jpg" alt="White-Label Video Editing Agency Guide" loading="lazy" />
-          <div class="article-card-thumb-overlay"></div>
-        </div>
-        <div class="article-card-body">
-          <span class="article-category">Agency Operations</span>
-          <h3 class="article-title">How Agencies Outsource Video Editing: The 2026 White-Label Playbook</h3>
-          <p class="article-desc">
-            The complete blueprint for creative agencies to resell high-retention video post-production profitably without building internal bloat.
-          </p>
-          <div class="article-meta">
-            <span>Agency Systems &middot; 9 min read</span>
-            <span class="article-read-link">Read Guide &rarr;</span>
-          </div>
-        </div>
-      </a>
-
-    </div>
+            // Render grid cards
+            if (grid) {
+              var gridPosts = posts.length > 1 ? posts.slice(1) : posts;
+              var thumbs = ['/lp/thumbs/lib-08.jpg', '/lp/thumbs/lib-02.jpg', '/lp/thumbs/lib-05.jpg', '/lp/promo-format-1.jpg', '/lp/card-trend.jpg', '/lp/thumbs/lib-01.jpg', '/lp/promo-format-2.jpg'];
+              grid.innerHTML = gridPosts.map(function(p, i) {
+                var thumb = p.cover_image || thumbs[i % thumbs.length];
+                return `
+                  <a href="/blog/${p.slug}/" class="article-card">
+                    <div class="article-card-thumb">
+                      <img src="${thumb}" alt="${p.title}" loading="lazy" />
+                      <div class="article-card-thumb-overlay"></div>
+                    </div>
+                    <div class="article-card-body">
+                      <span class="article-category">${p.category || 'Retention Science'}</span>
+                      <h3 class="article-title">${p.title}</h3>
+                      <p class="article-desc">${p.description || ''}</p>
+                      <div class="article-meta">
+                        <span>${p.author || 'Resolvia Studio'} &middot; ${p.read_time || '7 min read'}</span>
+                        <span class="article-read-link">Read Guide &rarr;</span>
+                      </div>
+                    </div>
+                  </a>
+                `;
+              }).join('');
+            }
+          } else {
+            // 0 published posts in Supabase
+            if (articlesSection) articlesSection.classList.add('hidden');
+            if (emptyState) emptyState.classList.remove('hidden');
+          }
+        } catch(e) {
+          console.warn("Supabase fetch note:", e);
+        }
+      })();
+    </script>
 
     <!-- Bottom Consultation Callout (Showcase Variant A Card) -->
     <div class="blog-cta-section">

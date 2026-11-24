@@ -2288,33 +2288,23 @@ document.addEventListener("DOMContentLoaded", function() {
           }
           var formData = new FormData(form);
 
-          // Parallel Sync to Supabase CRM (if configured in Admin)
-          try {
-            var spUrl = localStorage.getItem('resolvia_sp_url');
-            var spKey = localStorage.getItem('resolvia_sp_key') || 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO';
-            if (spUrl && spKey) {
-              fetch(spUrl.replace(/\/+$/, '') + '/rest/v1/leads', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'apikey': spKey,
-                  'Authorization': 'Bearer ' + spKey,
-                  'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify({
-                  name: formData.get('name') || '',
-                  email: formData.get('email') || '',
-                  format: formData.get('format') || '',
-                  channel_url: formData.get('channel') || '',
-                  notes: formData.get('notes') || '',
-                  status: 'new'
-                })
-              }).catch(function(e) { console.warn('Supabase lead sync note:', e); });
-            }
-          } catch (spErr) {
-            // graceful fail-silent
-          }
+          // Parallel Serverless Dispatch: Saves to Supabase & Dispatches Real-Time Resend Email Alert
+          fetch('/.netlify/functions/submit-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: formData.get('name') || '',
+              email: formData.get('email') || '',
+              format: formData.get('format') || '',
+              channel: formData.get('channel') || '',
+              notes: formData.get('notes') || '',
+              source_page: window.location.pathname
+            })
+          }).catch(function(fnErr) {
+            console.warn('Serverless lead dispatch note:', fnErr);
+          });
 
+          // Standard Netlify Form submission fallback
           fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
