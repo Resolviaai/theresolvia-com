@@ -186,10 +186,10 @@
   <!-- ========================================================================= -->
   <!-- 2. MAIN ADMIN DASHBOARD (PALE-CHARCOAL #0e0f11 - MATCHING HOMEPAGE)       -->
   <!-- ========================================================================= -->
-  <div id="admin-dashboard-app" class="hidden min-h-screen flex flex-col bg-[#0e0f11]">
+  <div id="admin-dashboard-app" class="hidden h-screen max-h-screen overflow-hidden flex flex-col bg-[#0e0f11]">
     
     <!-- TOP HEADER BAR -->
-    <header class="h-[56px] sm:h-[60px] border-b border-borderSubtle bg-[#0e0f11]/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+    <header class="h-[56px] sm:h-[60px] border-b border-borderSubtle bg-[#0e0f11]/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 z-40 shrink-0">
       <div class="flex items-center gap-3">
         <a href="/" class="flex items-center gap-2 group">
           <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-6 sm:size-7 rounded-md object-contain" />
@@ -215,13 +215,13 @@
       <!-- Right Utility Actions -->
       <div class="flex items-center gap-2 sm:gap-3">
         <!-- Settings Gear Button -->
-        <button onclick="toggleSettingsModal(true)" class="p-2 rounded-lg border border-borderSubtle bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/10 transition-colors touch-target flex items-center justify-center" title="API Credentials & Settings">
+        <button onclick="toggleSettingsModal(true)" class="size-[34px] sm:size-[36px] rounded-lg border border-borderSubtle bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/10 transition-colors touch-target flex items-center justify-center shrink-0" title="API Credentials & Settings">
           <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </button>
 
-        <!-- Sign Out Button -->
-        <button onclick="handleSignOut()" class="h-[34px] px-2.5 sm:px-3 rounded-lg border border-white/[0.08] hover:bg-white/[0.06] text-slate-300 hover:text-white text-[12px] font-medium transition-colors flex items-center gap-1.5 touch-target" title="Sign out of Admin Portal">
-          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Sign Out Button (Perfect Centering on Mobile & Desktop) -->
+        <button onclick="handleSignOut()" class="size-[34px] sm:size-auto sm:h-[36px] sm:px-3 rounded-lg border border-white/[0.08] hover:bg-white/[0.06] text-slate-300 hover:text-white text-[12px] font-medium transition-colors flex items-center justify-center gap-1.5 shrink-0" title="Sign out of Admin Portal">
+          <svg class="size-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
           <span class="hidden sm:inline">Sign Out</span>
@@ -246,7 +246,7 @@
     <!-- ========================================================================= -->
     <!-- TAB 1: EDITORIAL CMS (BLOG POSTS & CASE STUDIES)                          -->
     <!-- ========================================================================= -->
-    <main id="tab-cms" class="flex-1 flex flex-col md:flex-row h-auto md:h-[calc(100vh-60px)] overflow-hidden bg-[#0e0f11]">
+    <main id="tab-cms" class="flex-1 flex flex-col md:flex-row h-[calc(100vh-56px)] sm:h-[calc(100vh-60px)] overflow-hidden bg-[#0e0f11]">
       
       <!-- MOBILE CMS MODE SWITCHER -->
       <div class="flex md:hidden border-b border-borderSubtle bg-[#141518] px-3 py-1.5 items-center justify-between gap-1.5 shrink-0">
@@ -264,9 +264,9 @@
         </button>
       </div>
 
-      <!-- LEFT SIDEBAR: Post List (Neutral #141518) -->
-      <aside id="cms-posts-sidebar" class="w-full md:w-[300px] lg:w-[340px] border-r border-borderSubtle bg-[#141518] flex flex-col shrink-0 h-full">
-        <div class="p-3.5 border-b border-borderSubtle flex items-center justify-between gap-2">
+      <!-- LEFT SIDEBAR: Post List (Neutral #141518 - Full Height) -->
+      <aside id="cms-posts-sidebar" class="w-full md:w-[300px] lg:w-[340px] border-r border-borderSubtle bg-[#141518] flex flex-col shrink-0 h-full overflow-hidden">
+        <div class="p-3.5 border-b border-borderSubtle flex items-center justify-between gap-2 shrink-0">
           <div class="relative flex-1">
             <input type="text" id="post-search" oninput="filterPosts()" placeholder="Search articles..." class="w-full h-[40px] sm:h-[36px] bg-[#09090b] border border-borderSubtle rounded-xl px-3 pl-9 text-[13px] text-white placeholder-slate-500 outline-none focus:border-accent" />
             <svg class="size-4 text-slate-500 absolute left-3 top-3 sm:top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -277,15 +277,15 @@
           </button>
         </div>
 
-        <!-- Filter Chips -->
-        <div class="flex items-center gap-1.5 px-3.5 py-2 border-b border-borderSubtle/60 text-[11px] overflow-x-auto">
+        <!-- Filter Chips (Clean without harsh divider line) -->
+        <div class="flex items-center gap-1.5 px-3.5 py-2.5 text-[11px] overflow-x-auto shrink-0">
           <button onclick="setPostStatusFilter('all')" class="post-filter-chip px-3 py-1.5 rounded-lg bg-white/10 text-white font-medium touch-target">All</button>
           <button onclick="setPostStatusFilter('published')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Published</button>
           <button onclick="setPostStatusFilter('draft')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Drafts</button>
         </div>
 
         <!-- Posts List -->
-        <div id="posts-list-container" class="flex-1 overflow-y-auto divide-y divide-borderSubtle/50">
+        <div id="posts-list-container" class="flex-1 overflow-y-auto divide-y divide-borderSubtle/50 min-h-0">
           <!-- Rendered dynamically -->
         </div>
       </aside>
@@ -342,8 +342,8 @@
             />
           </div>
 
-          <!-- Custom Design System Category Dropdown -->
-          <div class="relative shrink-0 w-full sm:w-[220px]" id="category-dropdown-wrapper">
+          <!-- Custom Design System Category Dropdown (Fully Dynamic & User-Configurable) -->
+          <div class="relative shrink-0 w-full sm:w-[240px]" id="category-dropdown-wrapper">
             <input type="hidden" id="post-category" value="Retention Science" />
             
             <button 
@@ -363,29 +363,31 @@
               id="category-dropdown-menu" 
               class="hidden absolute right-0 top-full mt-1.5 w-full bg-[#18191c] border border-white/[0.12] rounded-xl shadow-2xl p-1.5 z-50 backdrop-blur-xl"
             >
-              <div onclick="selectCategory('Retention Science')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
-                <span>Retention Science</span>
-                <span class="cat-check size-1.5 rounded-full bg-accent"></span>
+              <div class="flex items-center justify-between px-2 py-1 border-b border-white/[0.06] mb-1">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Categories</span>
+                <button type="button" onclick="clearAllCategories()" class="text-[10.5px] text-slate-500 hover:text-rose-400 font-medium transition-colors" title="Delete all categories">Clear All</button>
               </div>
-              <div onclick="selectCategory('Thumbnail CTR')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
-                <span>Thumbnail CTR</span>
-                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
-              </div>
-              <div onclick="selectCategory('Pricing & Retainers')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
-                <span>Pricing & Retainers</span>
-                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
-              </div>
-              <div onclick="selectCategory('Hiring & Scaling')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
-                <span>Hiring & Scaling</span>
-                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
-              </div>
-              <div onclick="selectCategory('Vertical Video')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
-                <span>Vertical Video</span>
-                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
-              </div>
-              <div onclick="selectCategory('Agency Workflows')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
-                <span>Agency Workflows</span>
-                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
+              <!-- Dynamic Category Options List -->
+              <div id="category-options-list" class="space-y-0.5 max-h-[220px] overflow-y-auto"></div>
+              
+              <!-- Add Custom Category Footer -->
+              <div class="pt-1.5 mt-1 border-t border-white/[0.08]">
+                <div class="flex items-center gap-1.5">
+                  <input 
+                    type="text" 
+                    id="new-category-input" 
+                    placeholder="+ New category..." 
+                    class="flex-1 h-[32px] bg-[#09090b] border border-white/[0.08] focus:border-accent rounded-lg px-2.5 text-[12px] text-white outline-none placeholder-slate-500" 
+                    onkeydown="if(event.key==='Enter'){event.preventDefault(); addNewCategory();}" 
+                  />
+                  <button 
+                    type="button" 
+                    onclick="addNewCategory()" 
+                    class="h-[32px] px-2.5 bg-white/10 hover:bg-white/20 text-white text-[11.5px] font-semibold rounded-lg shrink-0 transition-colors"
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -406,11 +408,11 @@
           </div>
         </div>
 
-        <!-- Split Screen: Markdown Editor vs. Real-time Live Preview -->
-        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderSubtle overflow-hidden">
+        <!-- Split Screen: Markdown Editor vs. Real-time Live Preview (Full Viewport Height) -->
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderSubtle overflow-hidden h-full min-h-0">
           
           <!-- Markdown Editor Pane -->
-          <div id="pane-markdown-editor" class="flex flex-col h-full bg-[#0e0f11] overflow-hidden">
+          <div id="pane-markdown-editor" class="flex flex-col h-full bg-[#0e0f11] overflow-hidden min-h-0">
             <div class="min-h-[44px] px-2.5 sm:px-4 py-1.5 border-b border-borderSubtle bg-[#121316] flex items-center justify-between text-[11.5px] text-slate-400 font-medium overflow-x-auto gap-2">
               <span class="flex items-center gap-1.5 shrink-0 text-slate-300 font-medium">
                 <svg class="size-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
@@ -480,12 +482,21 @@
               </div>
             </div>
 
+            <!-- Attached Media Strip (Emoji-sized previews & filename tokens) -->
+            <div id="attached-media-tray" class="hidden px-3 py-1.5 border-b border-white/[0.06] bg-[#121316] flex items-center gap-2 overflow-x-auto shrink-0 text-[11.5px]">
+              <span class="text-slate-400 font-medium shrink-0 flex items-center gap-1.5 text-[11px]">
+                <svg class="size-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span>Attached:</span>
+              </span>
+              <div id="attached-media-chips" class="flex items-center gap-1.5 shrink-0"></div>
+            </div>
+
             <!-- Drag & Drop Overlay Support -->
-            <div class="relative flex-1 flex flex-col min-h-[300px]">
+            <div class="relative flex-1 flex flex-col min-h-0 h-full overflow-hidden">
               <textarea 
                 id="post-markdown" 
-                oninput="updateLivePreview()" 
-                class="flex-1 w-full bg-[#0e0f11] p-4 sm:p-5 font-mono text-[13.5px] leading-relaxed text-slate-200 outline-none resize-none selection:bg-accent/30 placeholder-slate-600" 
+                oninput="handleMarkdownInput()" 
+                class="flex-1 w-full h-full bg-[#0e0f11] p-4 sm:p-5 font-mono text-[13.5px] leading-relaxed text-slate-200 outline-none resize-none selection:bg-accent/30 placeholder-slate-600 overflow-y-auto" 
                 placeholder="Write article content in Markdown... Paste or drop photos anywhere between paragraphs!"
               ></textarea>
               <div id="drag-drop-overlay" class="hidden absolute inset-0 bg-[#0e0f11]/90 border-2 border-dashed border-accent flex flex-col items-center justify-center pointer-events-none z-20">
@@ -495,16 +506,16 @@
             </div>
           </div>
 
-          <!-- Live Visual Preview Pane -->
-          <div id="pane-visual-preview" class="hidden md:flex flex-col h-full bg-[#0e0f11] overflow-hidden">
-            <div class="h-[44px] px-4 border-b border-borderSubtle bg-[#121316] flex items-center justify-between text-[11.5px] text-slate-400 font-medium">
+          <!-- Live Visual Preview Pane (Full Viewport Height) -->
+          <div id="pane-visual-preview" class="hidden md:flex flex-col h-full bg-[#0e0f11] overflow-hidden min-h-0">
+            <div class="h-[44px] px-4 border-b border-borderSubtle bg-[#121316] flex items-center justify-between text-[11.5px] text-slate-400 font-medium shrink-0">
               <span class="flex items-center gap-2">
                 <svg class="size-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                 <span>Preview</span>
               </span>
               <span id="preview-word-count" class="text-[11px] text-slate-400 font-mono">0 words · 0 min read</span>
             </div>
-            <div id="preview-container" class="flex-1 p-5 sm:p-8 overflow-y-auto prose-resolvia min-h-[300px]">
+            <div id="preview-container" class="flex-1 p-5 sm:p-8 overflow-y-auto prose-resolvia h-full min-h-0">
               <div class="py-12 text-center text-slate-500 text-[13px]">
                 Click "+ New" to begin writing your article, or select a published post from the sidebar.
               </div>
@@ -573,8 +584,18 @@
           </div>
         </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-[13px] min-w-[840px]">
+        <div class="overflow-x-auto lg:overflow-x-visible">
+          <table class="w-full text-left border-collapse text-[13px] min-w-[760px] lg:min-w-0 lg:table-fixed">
+            <colgroup class="hidden lg:table-column-group">
+              <col class="w-[12%]">
+              <col class="w-[15%]">
+              <col class="w-[18%]">
+              <col class="w-[15%]">
+              <col class="w-[13%]">
+              <col class="w-[14%]">
+              <col class="w-[8%]">
+              <col class="w-[5%]">
+            </colgroup>
             <thead>
               <tr class="border-b border-white/[0.06] bg-[#0e0f11] text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
                 <th class="py-3 px-3">Date</th>
@@ -632,31 +653,54 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-          <div>
+          <!-- Custom Production Format Dropdown (Design System) -->
+          <div class="relative" id="lead-format-dropdown-wrapper">
             <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Production Format</label>
-            <select id="lead-form-format" class="w-full h-[40px] bg-[#09090b] border border-white/[0.08] focus:border-white/30 rounded-xl px-3 text-white text-[12.5px] outline-none transition-colors cursor-pointer">
-              <option value="Short-Form (Shorts / Reels / TikTok)">Short-Form (Shorts / Reels / TikTok)</option>
-              <option value="YouTube Long-Form Videos">YouTube Long-Form Videos</option>
-              <option value="Paid Video Ads & Creatives">Paid Video Ads & Creatives</option>
-              <option value="Full Post-Production Retainer">Full Post-Production Retainer</option>
-              <option value="Custom Project">Custom Project</option>
-            </select>
+            <input type="hidden" id="lead-form-format" value="Short-Form (Shorts / Reels / TikTok)" />
+            <button 
+              type="button" 
+              id="lead-format-btn" 
+              onclick="toggleLeadFormatMenu(event)" 
+              class="w-full h-[40px] bg-[#09090b] hover:bg-[#121316] border border-white/[0.08] hover:border-white/20 focus:border-white/30 rounded-xl px-3 flex items-center justify-between text-left text-white text-[12.5px] font-medium transition-colors select-none"
+            >
+              <span id="lead-format-label" class="truncate">Short-Form (Shorts / Reels / TikTok)</span>
+              <svg id="lead-format-chevron" class="size-4 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="lead-format-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 w-full bg-[#18191c] border border-white/[0.12] rounded-xl shadow-2xl p-1 z-50 backdrop-blur-xl space-y-0.5">
+              <div onclick="selectLeadFormat('Short-Form (Shorts / Reels / TikTok)')" class="lead-format-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Short-Form (Shorts / Reels / TikTok)</div>
+              <div onclick="selectLeadFormat('YouTube Long-Form Videos')" class="lead-format-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">YouTube Long-Form Videos</div>
+              <div onclick="selectLeadFormat('Paid Video Ads & Creatives')" class="lead-format-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Paid Video Ads & Creatives</div>
+              <div onclick="selectLeadFormat('Full Post-Production Retainer')" class="lead-format-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Full Post-Production Retainer</div>
+              <div onclick="selectLeadFormat('Custom Project')" class="lead-format-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Custom Project</div>
+            </div>
           </div>
-          <div>
+
+          <!-- Custom Pipeline Status Dropdown (Design System) -->
+          <div class="relative" id="lead-status-dropdown-wrapper">
             <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Pipeline Status</label>
-            <select id="lead-form-status" class="w-full h-[40px] bg-[#09090b] border border-white/[0.08] focus:border-white/30 rounded-xl px-3 text-white text-[12.5px] outline-none transition-colors cursor-pointer">
-              <option value="new">New (Inbox)</option>
-              <option value="contacted">Contacted</option>
-              <option value="proposal_sent">Proposal Sent</option>
-              <option value="won">Won (Client)</option>
-              <option value="archived">Archived</option>
-            </select>
+            <input type="hidden" id="lead-form-status" value="new" />
+            <button 
+              type="button" 
+              id="lead-status-btn" 
+              onclick="toggleLeadStatusMenu(event)" 
+              class="w-full h-[40px] bg-[#09090b] hover:bg-[#121316] border border-white/[0.08] hover:border-white/20 focus:border-white/30 rounded-xl px-3 flex items-center justify-between text-left text-white text-[12.5px] font-medium transition-colors select-none"
+            >
+              <span id="lead-status-label" class="truncate">New (Inbox)</span>
+              <svg id="lead-status-chevron" class="size-4 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="lead-status-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 w-full bg-[#18191c] border border-white/[0.12] rounded-xl shadow-2xl p-1 z-50 backdrop-blur-xl space-y-0.5">
+              <div onclick="selectLeadStatusOption('new', 'New (Inbox)')" class="lead-status-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">New (Inbox)</div>
+              <div onclick="selectLeadStatusOption('contacted', 'Contacted')" class="lead-status-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Contacted</div>
+              <div onclick="selectLeadStatusOption('proposal_sent', 'Proposal Sent')" class="lead-status-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Proposal Sent</div>
+              <div onclick="selectLeadStatusOption('won', 'Won (Client)')" class="lead-status-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Won (Client)</div>
+              <div onclick="selectLeadStatusOption('archived', 'Archived')" class="lead-status-opt px-3 py-2 rounded-lg text-[12px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors">Archived</div>
+            </div>
           </div>
         </div>
 
         <div>
           <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Channel / Footage Link (Optional)</label>
-          <input type="url" id="lead-form-channel" placeholder="https://youtube.com/@creator or Drive link" class="w-full h-[40px] bg-[#09090b] border border-white/[0.08] focus:border-white/30 rounded-xl px-3 text-white text-[12.5px] font-mono outline-none transition-colors" />
+          <input type="text" id="lead-form-channel" placeholder="https://youtube.com/@creator or Drive link" class="w-full h-[40px] bg-[#09090b] border border-white/[0.08] focus:border-white/30 rounded-xl px-3 text-white text-[12.5px] font-mono outline-none transition-colors" />
         </div>
 
         <div>
@@ -928,11 +972,29 @@
         }
       });
 
+      renderCategoryDropdownOptions();
+
       // Close dropdowns when clicking outside
       document.addEventListener('click', function(e) {
-        var wrapper = document.getElementById('category-dropdown-wrapper');
-        if (wrapper && !wrapper.contains(e.target)) {
+        var catWrapper = document.getElementById('category-dropdown-wrapper');
+        if (catWrapper && !catWrapper.contains(e.target)) {
           closeCategoryDropdown();
+        }
+
+        var fmtWrapper = document.getElementById('lead-format-dropdown-wrapper');
+        if (fmtWrapper && !fmtWrapper.contains(e.target)) {
+          var fMenu = document.getElementById('lead-format-menu');
+          var fChev = document.getElementById('lead-format-chevron');
+          if (fMenu) fMenu.classList.add('hidden');
+          if (fChev) fChev.style.transform = 'rotate(0deg)';
+        }
+
+        var statWrapper = document.getElementById('lead-status-dropdown-wrapper');
+        if (statWrapper && !statWrapper.contains(e.target)) {
+          var sMenu = document.getElementById('lead-status-menu');
+          var sChev = document.getElementById('lead-status-chevron');
+          if (sMenu) sMenu.classList.add('hidden');
+          if (sChev) sChev.style.transform = 'rotate(0deg)';
         }
       });
     });
@@ -981,17 +1043,28 @@
     // =========================================================================
     // CUSTOM DESIGN SYSTEM CATEGORY DROPDOWN CONTROLLER
     // =========================================================================
+    // =========================================================================
+    // DYNAMIC USER CATEGORY MANAGEMENT (USER-CONFIGURABLE & EDITABLE)
+    // =========================================================================
+    var userCategories = JSON.parse(localStorage.getItem('resolvia_user_categories') || 'null');
+    if (!userCategories || !Array.isArray(userCategories)) {
+      userCategories = ['Retention Science', 'Thumbnail CTR', 'Pricing & Retainers', 'Agency Workflows'];
+    }
+
+    function saveUserCategories() {
+      localStorage.setItem('resolvia_user_categories', JSON.stringify(userCategories));
+    }
+
     function toggleCategoryDropdown(e) {
       if (e) e.stopPropagation();
       var menu = document.getElementById('category-dropdown-menu');
       var chevron = document.getElementById('category-chevron');
       var isHidden = menu.classList.contains('hidden');
+      closeAllDropdowns();
       if (isHidden) {
+        renderCategoryDropdownOptions();
         menu.classList.remove('hidden');
-        chevron.classList.add('rotate-180');
-      } else {
-        menu.classList.add('hidden');
-        chevron.classList.remove('rotate-180');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
       }
     }
 
@@ -999,32 +1072,105 @@
       var menu = document.getElementById('category-dropdown-menu');
       var chevron = document.getElementById('category-chevron');
       if (menu) menu.classList.add('hidden');
-      if (chevron) chevron.classList.remove('rotate-180');
+      if (chevron) chevron.style.transform = 'rotate(0deg)';
+    }
+
+    function renderCategoryDropdownOptions() {
+      var container = document.getElementById('category-options-list');
+      if (!container) return;
+      var currentCat = document.getElementById('post-category').value;
+
+      if (userCategories.length === 0) {
+        container.innerHTML = `
+          <div class="px-3 py-3 text-center text-[12px] text-slate-500">
+            No categories yet.<br>Type your category below and click Add.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = userCategories.map(function(cat) {
+        var isSelected = cat === currentCat;
+        return `
+          <div class="category-opt group flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer transition-colors" onclick="selectCategory('${cat.replace(/'/g, "\\'")}')">
+            <span class="truncate flex-1">${cat}</span>
+            <div class="flex items-center gap-1.5 shrink-0" onclick="event.stopPropagation()">
+              <button type="button" onclick="editCategoryName('${cat.replace(/'/g, "\\'")}')" class="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded transition-colors" title="Rename category">
+                <svg class="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+              </button>
+              <button type="button" onclick="deleteCategoryName('${cat.replace(/'/g, "\\'")}')" class="p-1 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded transition-colors" title="Delete category">
+                <svg class="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+              <span class="cat-check size-1.5 rounded-full bg-accent ${isSelected ? '' : 'hidden'}"></span>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function selectCategory(cat) {
-      document.getElementById('post-category').value = cat;
-      document.getElementById('category-selected-label').textContent = cat;
-
-      var opts = document.querySelectorAll('.category-opt');
-      opts.forEach(function(el) {
-        var span = el.querySelector('span:first-child');
-        var check = el.querySelector('.cat-check');
-        if (span && span.textContent.trim() === cat) {
-          check.classList.remove('hidden');
-          el.classList.add('text-white');
-        } else {
-          check.classList.add('hidden');
-          el.classList.remove('text-white');
-        }
-      });
+      document.getElementById('post-category').value = cat || '';
+      document.getElementById('category-selected-label').textContent = cat || 'Select or Add Category';
+      renderCategoryDropdownOptions();
 
       var post = posts.find(function(p) { return p.id === currentPostId; });
       if (post) {
         post.category = cat;
+        post.badge = cat;
       }
-
       closeCategoryDropdown();
+    }
+
+    function addNewCategory() {
+      var input = document.getElementById('new-category-input');
+      if (!input) return;
+      var val = input.value.trim();
+      if (!val) return;
+      if (!userCategories.includes(val)) {
+        userCategories.push(val);
+        saveUserCategories();
+      }
+      input.value = '';
+      selectCategory(val);
+    }
+
+    function editCategoryName(oldCat) {
+      var newName = prompt('Rename category:', oldCat);
+      if (!newName || !newName.trim() || newName.trim() === oldCat) return;
+      newName = newName.trim();
+      var idx = userCategories.indexOf(oldCat);
+      if (idx !== -1) {
+        userCategories[idx] = newName;
+        saveUserCategories();
+        if (document.getElementById('post-category').value === oldCat) {
+          selectCategory(newName);
+        } else {
+          renderCategoryDropdownOptions();
+        }
+      }
+    }
+
+    function deleteCategoryName(cat) {
+      if (!confirm('Delete category "' + cat + '"?')) return;
+      userCategories = userCategories.filter(function(c) { return c !== cat; });
+      saveUserCategories();
+      if (document.getElementById('post-category').value === cat) {
+        if (userCategories.length > 0) {
+          selectCategory(userCategories[0]);
+        } else {
+          selectCategory('');
+        }
+      } else {
+        renderCategoryDropdownOptions();
+      }
+    }
+
+    function clearAllCategories() {
+      if (!confirm('Remove all categories? You can create your own custom categories anytime.')) return;
+      userCategories = [];
+      saveUserCategories();
+      selectCategory('');
+      renderCategoryDropdownOptions();
     }
 
     function toggleMetadataDrawer() {
@@ -1041,8 +1187,10 @@
     }
 
     // =========================================================================
-    // IN-BETWEEN BLOG IMAGE UPLOAD & INSERTION CONTROLLER
+    // INLINE PHOTO ATTACHMENT CONTROLLER (NO GIANT BASE64 TEXT IN EDITOR)
     // =========================================================================
+    window.imageAttachments = window.imageAttachments || {};
+
     function triggerInlineImageUpload() {
       document.getElementById('inline-image-input').click();
     }
@@ -1082,21 +1230,152 @@
         }
       }
 
+      // Local Attachment Token (Zero text lag, emoji-sized preview chip)
       var reader = new FileReader();
       reader.onload = function(evt) {
         var dataUrl = evt.target.result;
-        var alt = prompt("Image caption / description:", file.name.replace(/\.[^/.]+$/, ""));
+        var alt = prompt("Photo caption / description:", file.name.replace(/\.[^/.]+$/, ""));
         if (alt === null) return;
-        var mdSnippet = '\n\n![' + (alt || 'Figure') + '](' + dataUrl + ')\n\n';
-        insertToolbar(mdSnippet, '');
+        
+        var imgId = 'img_' + Math.random().toString(36).substring(2, 8);
+        window.imageAttachments[imgId] = {
+          id: imgId,
+          name: file.name,
+          caption: alt || file.name,
+          dataUrl: dataUrl
+        };
+
+        var token = '\n\n![' + (alt || file.name) + '](attachment:' + imgId + ')\n\n';
+        insertToolbar(token, '');
+        renderAttachedMediaTray();
         updateLivePreview();
       };
       reader.readAsDataURL(file);
     }
 
+    function renderAttachedMediaTray() {
+      var tray = document.getElementById('attached-media-tray');
+      var container = document.getElementById('attached-media-chips');
+      if (!tray || !container) return;
+
+      var keys = Object.keys(window.imageAttachments || {});
+      if (keys.length === 0) {
+        tray.classList.add('hidden');
+        container.innerHTML = '';
+        return;
+      }
+
+      tray.classList.remove('hidden');
+      container.innerHTML = keys.map(function(id) {
+        var item = window.imageAttachments[id];
+        return `
+          <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-[#18191c] border border-white/[0.08] hover:border-white/20 transition-all select-none group">
+            <img src="${item.dataUrl}" alt="${item.name}" class="size-5 rounded object-cover border border-white/10 shrink-0" />
+            <span class="text-[11.5px] text-white font-medium truncate max-w-[120px]" title="${item.name}">${item.name}</span>
+            <button type="button" onclick="insertAttachmentToken('${item.id}', '${item.name.replace(/'/g, "\\'")}')" class="text-slate-400 hover:text-accent p-0.5" title="Insert markdown token at cursor">
+              <svg class="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            </button>
+            <button type="button" onclick="removeAttachment('${item.id}')" class="text-slate-500 hover:text-rose-400 p-0.5" title="Remove attachment">
+              <svg class="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function insertAttachmentToken(id, name) {
+      insertToolbar('\n\n![' + name + '](attachment:' + id + ')\n\n', '');
+      updateLivePreview();
+    }
+
+    function removeAttachment(id) {
+      if (window.imageAttachments[id]) {
+        delete window.imageAttachments[id];
+        renderAttachedMediaTray();
+        updateLivePreview();
+      }
+    }
+
+    function sanitizeBase64InMarkdown(text) {
+      if (!text || !text.includes('data:image/')) return text;
+      return text.replace(/!\[([^\]]*)\]\(data:(image\/[^;]+);base64,([^\)]+)\)/g, function(match, alt, mime, b64) {
+        var imgId = 'img_' + Math.random().toString(36).substring(2, 8);
+        var fullDataUrl = 'data:' + mime + ';base64,' + b64;
+        var cleanName = (alt || 'Imported Image') + '.' + (mime.split('/')[1] || 'png');
+        window.imageAttachments[imgId] = {
+          id: imgId,
+          name: cleanName,
+          caption: alt || 'Imported Image',
+          dataUrl: fullDataUrl
+        };
+        setTimeout(renderAttachedMediaTray, 50);
+        return '![' + (alt || 'Photo') + '](attachment:' + imgId + ')';
+      });
+    }
+
+    function handleMarkdownInput() {
+      var textarea = document.getElementById('post-markdown');
+      if (textarea && textarea.value.includes('data:image/')) {
+        textarea.value = sanitizeBase64InMarkdown(textarea.value);
+      }
+      updateLivePreview();
+    }
+
     function replaceInMarkdown(target, replacement) {
       var textarea = document.getElementById('post-markdown');
       textarea.value = textarea.value.replace(target, replacement);
+    }
+
+    // =========================================================================
+    // CUSTOM LEAD FORM DROPDOWNS (DESIGN SYSTEM)
+    // =========================================================================
+    function toggleLeadFormatMenu(e) {
+      if (e) e.stopPropagation();
+      var menu = document.getElementById('lead-format-menu');
+      var chevron = document.getElementById('lead-format-chevron');
+      var isOpen = !menu.classList.contains('hidden');
+      closeAllDropdowns();
+      if (!isOpen) {
+        menu.classList.remove('hidden');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function selectLeadFormat(format) {
+      document.getElementById('lead-form-format').value = format;
+      document.getElementById('lead-format-label').textContent = format;
+      closeAllDropdowns();
+    }
+
+    function toggleLeadStatusMenu(e) {
+      if (e) e.stopPropagation();
+      var menu = document.getElementById('lead-status-menu');
+      var chevron = document.getElementById('lead-status-chevron');
+      var isOpen = !menu.classList.contains('hidden');
+      closeAllDropdowns();
+      if (!isOpen) {
+        menu.classList.remove('hidden');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function selectLeadStatusOption(status, label) {
+      document.getElementById('lead-form-status').value = status;
+      document.getElementById('lead-status-label').textContent = label;
+      closeAllDropdowns();
+    }
+
+    function closeAllDropdowns() {
+      closeCategoryDropdown();
+      var fMenu = document.getElementById('lead-format-menu');
+      var fChev = document.getElementById('lead-format-chevron');
+      if (fMenu) fMenu.classList.add('hidden');
+      if (fChev) fChev.style.transform = 'rotate(0deg)';
+
+      var sMenu = document.getElementById('lead-status-menu');
+      var sChev = document.getElementById('lead-status-chevron');
+      if (sMenu) sMenu.classList.add('hidden');
+      if (sChev) sChev.style.transform = 'rotate(0deg)';
     }
 
     // Tab Switching (Desktop & Mobile)
@@ -1289,9 +1568,12 @@
       document.getElementById('post-title').value = post.title || '';
       document.getElementById('post-youtube').value = post.youtube_id || '';
       document.getElementById('post-description').value = post.description || '';
-      document.getElementById('post-markdown').value = post.content_markdown || '';
+      
+      var cleanContent = sanitizeBase64InMarkdown(post.content_markdown || '');
+      document.getElementById('post-markdown').value = cleanContent;
+      renderAttachedMediaTray();
 
-      selectCategory(post.category || 'Retention Science');
+      selectCategory(post.category || (userCategories[0] || ''));
 
       document.getElementById('current-post-slug-label').textContent = '/blog/' + post.slug;
       var statusBadge = document.getElementById('current-post-status-badge');
@@ -1309,12 +1591,13 @@
 
     function createNewPost() {
       var newId = 'post-' + Date.now();
+      var defaultCat = userCategories[0] || '';
       var newPost = {
         id: newId,
         slug: 'new-retention-playbook',
         title: 'New High-Retention Playbook',
-        category: 'Retention Science',
-        badge: 'Retention Science',
+        category: defaultCat,
+        badge: defaultCat,
         description: 'New retention framework and cutting strategies for video creators.',
         youtube_id: '',
         status: 'draft',
@@ -1371,10 +1654,17 @@ Outline the problem and retention hooks.
       
       if (container) {
         if (raw.trim()) {
+          var renderedMarkdown = raw.replace(/\(attachment:([^\)]+)\)/g, function(match, id) {
+            if (window.imageAttachments && window.imageAttachments[id]) {
+              return '(' + window.imageAttachments[id].dataUrl + ')';
+            }
+            return match;
+          });
+
           if (window.marked) {
-            container.innerHTML = marked.parse(raw);
+            container.innerHTML = marked.parse(renderedMarkdown);
           } else {
-            container.textContent = raw;
+            container.textContent = renderedMarkdown;
           }
         } else {
           container.innerHTML = `
@@ -1451,11 +1741,20 @@ Outline the problem and retention hooks.
         return;
       }
 
+      var rawMd = document.getElementById('post-markdown').value;
+      var finalMd = rawMd.replace(/\(attachment:([^\)]+)\)/g, function(match, id) {
+        if (window.imageAttachments && window.imageAttachments[id]) {
+          return '(' + window.imageAttachments[id].dataUrl + ')';
+        }
+        return match;
+      });
+
       post.title = document.getElementById('post-title').value;
       post.category = document.getElementById('post-category').value;
+      post.badge = post.category;
       post.youtube_id = document.getElementById('post-youtube').value;
       post.description = document.getElementById('post-description').value;
-      post.content_markdown = document.getElementById('post-markdown').value;
+      post.content_markdown = finalMd;
       post.status = publish ? 'published' : 'draft';
       post.updated_at = new Date().toISOString();
 
@@ -1531,8 +1830,8 @@ ${post.content_markdown}
       document.getElementById('lead-form-id').value = '';
       document.getElementById('lead-form-name').value = '';
       document.getElementById('lead-form-email').value = '';
-      document.getElementById('lead-form-format').value = 'Short-Form (Shorts / Reels / TikTok)';
-      document.getElementById('lead-form-status').value = 'new';
+      selectLeadFormat('Short-Form (Shorts / Reels / TikTok)');
+      selectLeadStatusOption('new', 'New (Inbox)');
       document.getElementById('lead-form-channel').value = '';
       document.getElementById('lead-form-notes').value = '';
       document.getElementById('lead-crud-modal').classList.remove('hidden');
@@ -1550,8 +1849,20 @@ ${post.content_markdown}
       document.getElementById('lead-form-id').value = lead.id;
       document.getElementById('lead-form-name').value = lead.name || '';
       document.getElementById('lead-form-email').value = lead.email || '';
-      document.getElementById('lead-form-format').value = lead.format || 'Short-Form (Shorts / Reels / TikTok)';
-      document.getElementById('lead-form-status').value = lead.status || 'new';
+      selectLeadFormat(lead.format || 'Short-Form (Shorts / Reels / TikTok)');
+      
+      var statusMap = {
+        'new': 'New (Inbox)',
+        'in-review': 'In Review',
+        'contacted': 'Contacted',
+        'proposal_sent': 'Proposal Sent',
+        'won': 'Won',
+        'archived': 'Archived',
+        'closed': 'Closed'
+      };
+      var st = lead.status || 'new';
+      selectLeadStatusOption(st, statusMap[st] || 'New (Inbox)');
+
       document.getElementById('lead-form-channel').value = lead.channel_url || lead.portfolio_url || '';
       document.getElementById('lead-form-notes').value = lead.notes || lead.project_details || '';
       document.getElementById('lead-crud-modal').classList.remove('hidden');
@@ -1752,15 +2063,15 @@ ${post.content_markdown}
 
         tr.innerHTML = `
           <td class="py-3 px-3 text-slate-400 text-[11.5px] whitespace-nowrap font-mono">${dateStr}</td>
-          <td class="py-3 px-3 font-semibold text-white whitespace-nowrap text-[12.5px]">${l.name || 'Anonymous Creator'}</td>
-          <td class="py-3 px-3 whitespace-nowrap">
-            <a href="mailto:${l.email}" class="text-slate-200 hover:text-white underline-offset-4 hover:underline transition-colors font-mono text-[12px]">${l.email}</a>
+          <td class="py-3 px-3 font-semibold text-white truncate text-[12.5px]" title="${l.name || 'Anonymous Creator'}">${l.name || 'Anonymous Creator'}</td>
+          <td class="py-3 px-3 truncate">
+            <a href="mailto:${l.email}" class="text-slate-200 hover:text-white underline-offset-4 hover:underline transition-colors font-mono text-[12px] truncate block" title="${l.email}">${l.email}</a>
           </td>
-          <td class="py-3 px-3 text-slate-300 text-[12px] whitespace-nowrap">${l.format || 'Custom Production'}</td>
-          <td class="py-3 px-3">
-            ${channelLink ? `<a href="${channelLink}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white underline underline-offset-2 font-mono text-[11px] truncate max-w-[140px] inline-block transition-colors">${channelLink.replace(/^https?:\/\//, '')}</a>` : '<span class="text-slate-600">—</span>'}
+          <td class="py-3 px-3 text-slate-300 text-[12px] truncate" title="${l.format || 'Custom Production'}">${l.format || 'Custom Production'}</td>
+          <td class="py-3 px-3 truncate">
+            ${channelLink ? `<a href="${channelLink}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white underline underline-offset-2 font-mono text-[11px] truncate block transition-colors" title="${channelLink}">${channelLink.replace(/^https?:\/\//, '')}</a>` : '<span class="text-slate-600">—</span>'}
           </td>
-          <td class="py-3 px-3 text-slate-400 max-w-[190px] truncate text-[12px]" title="${detailsText}">
+          <td class="py-3 px-3 text-slate-400 truncate text-[12px]" title="${detailsText}">
             ${detailsText || '<span class="text-slate-600">None provided</span>'}
           </td>
           <td class="py-3 px-3 whitespace-nowrap">
