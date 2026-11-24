@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Resolvia Studio · Admin CMS & Lead Center</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="/brand/resolvia_r_logo.png" />
@@ -42,22 +42,26 @@
 
   <style>
     /* Resolvia Studio 4-Layer Hierarchy */
-    body {
-      background-color: #0B0F17;
+    html, body {
+      background-color: #0B0F17 !important;
       color: #e2e8f0;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
     }
     
     /* Scrollbars */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0B0F17; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.22); }
 
     /* Markdown Live Preview Prose */
-    .prose-resolvia h1 { font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .prose-resolvia h2 { font-size: 20px; font-weight: 700; color: #ffffff; margin-top: 24px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; }
-    .prose-resolvia h3 { font-size: 16px; font-weight: 600; color: #93c5fd; margin-top: 18px; margin-bottom: 8px; }
+    .prose-resolvia h1 { font-size: 24px; font-weight: 800; color: #ffffff; margin-bottom: 14px; letter-spacing: -0.02em; }
+    .prose-resolvia h2 { font-size: 19px; font-weight: 700; color: #ffffff; margin-top: 22px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; }
+    .prose-resolvia h3 { font-size: 15.5px; font-weight: 600; color: #93c5fd; margin-top: 16px; margin-bottom: 8px; }
     .prose-resolvia p { font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,0.78); margin-bottom: 14px; }
     .prose-resolvia ul { list-style-type: disc; padding-left: 20px; margin-bottom: 14px; color: rgba(255,255,255,0.75); font-size: 14px; }
     .prose-resolvia ol { list-style-type: decimal; padding-left: 20px; margin-bottom: 14px; color: rgba(255,255,255,0.75); font-size: 14px; }
@@ -65,360 +69,545 @@
     .prose-resolvia blockquote { border-left: 3px solid #2F86F7; background: rgba(47, 134, 247, 0.08); padding: 10px 14px; border-radius: 0 8px 8px 0; color: rgba(255,255,255,0.9); margin-bottom: 16px; font-style: italic; }
     .prose-resolvia code { font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px; color: #67e8f9; }
     .prose-resolvia pre { background: #000000; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; overflow-x: auto; margin-bottom: 16px; }
-    .prose-resolvia img { max-width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin: 16px 0; }
+    .prose-resolvia img { max-width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin: 18px 0; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
     .prose-resolvia a { color: #38BAFE; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Touch Target & Mobile Form Utilities */
+    @media (max-width: 768px) {
+      .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+      }
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-[#2F86F7]/30 selection:text-white">
-
-  <!-- TOP HEADER BAR -->
-  <header class="h-[60px] border-b border-borderSubtle bg-surface/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
-    <div class="flex items-center gap-4">
-      <a href="/" class="flex items-center gap-2.5 group">
-        <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-7 rounded-md object-contain" />
-        <span class="font-bold text-[15px] tracking-tight text-white flex items-center gap-1.5">
-          Resolvia
-          <span class="text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/25">CMS</span>
-        </span>
-      </a>
-
-      <!-- Primary Tabs -->
-      <nav class="hidden md:flex items-center gap-1 ml-4 border-l border-white/10 pl-4">
-        <button id="tab-cms-btn" onclick="switchTab('cms')" class="px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2">
-          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-          Editorial CMS
-        </button>
-        <button id="tab-crm-btn" onclick="switchTab('crm')" class="px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5 flex items-center gap-2">
-          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-          Leads Inbox
-          <span id="header-lead-badge" class="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-accent text-white">4</span>
-        </button>
-      </nav>
-    </div>
-
-    <!-- Right Utility Buttons -->
-    <div class="flex items-center gap-3">
-      <!-- Database Connection Status Indicator -->
-      <div id="connection-pill" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300">
-        <span class="size-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-        <span id="connection-label">Preview Mode</span>
-      </div>
-
-      <!-- Settings Gear Button -->
-      <button onclick="toggleSettingsModal(true)" class="p-2 rounded-lg border border-borderSubtle bg-white/[0.04] text-white/80 hover:text-white hover:bg-white/10 transition-colors" title="API Credentials & Integrations">
-        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-      </button>
-
-      <!-- Auth Button -->
-      <button id="auth-header-btn" onclick="toggleAuthModal(true)" class="h-[34px] px-3.5 rounded-lg bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold transition-all">
-        Sign In
-      </button>
-    </div>
-  </header>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#2F86F7]/30 selection:text-white bg-[#0B0F17]">
 
   <!-- ========================================================================= -->
-  <!-- TAB 1: EDITORIAL CMS (BLOG POSTS & CASE STUDIES)                          -->
+  <!-- 1. FULL-PAGE ADMIN LOGIN GATE SCREEN (MOBILE OPTIMIZED)                   -->
   <!-- ========================================================================= -->
-  <main id="tab-cms" class="flex-1 flex flex-col md:flex-row h-[calc(100vh-60px)] overflow-hidden">
-    
-    <!-- LEFT SIDEBAR: Post List -->
-    <aside class="w-full md:w-[320px] lg:w-[360px] border-r border-borderSubtle bg-surface/40 flex flex-col shrink-0 h-full">
-      <div class="p-3.5 border-b border-borderSubtle flex items-center justify-between gap-2">
-        <div class="relative flex-1">
-          <input type="text" id="post-search" oninput="filterPosts()" placeholder="Search articles..." class="w-full h-[36px] bg-black/40 border border-borderSubtle rounded-lg px-3 pl-8 text-[13px] text-white placeholder-white/30 outline-none focus:border-accent" />
-          <svg class="size-4 text-white/40 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        </div>
-        <button onclick="createNewPost()" class="h-[36px] px-3 bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold rounded-lg shrink-0 flex items-center gap-1.5 transition-colors">
-          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-          New
-        </button>
-      </div>
+  <div id="admin-login-screen" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 bg-[#0B0F17] relative overflow-hidden">
+    <!-- Subtle Background Ambient Radial -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(47,134,247,0.08),transparent_60%)] pointer-events-none"></div>
 
-      <!-- Filter Chips -->
-      <div class="flex items-center gap-1.5 px-3.5 py-2 border-b border-borderSubtle/60 text-[11px] overflow-x-auto">
-        <button onclick="setPostStatusFilter('all')" class="post-filter-chip px-2.5 py-1 rounded-md bg-white/10 text-white font-medium">All</button>
-        <button onclick="setPostStatusFilter('published')" class="post-filter-chip px-2.5 py-1 rounded-md text-white/50 hover:text-white font-medium">Published</button>
-        <button onclick="setPostStatusFilter('draft')" class="post-filter-chip px-2.5 py-1 rounded-md text-white/50 hover:text-white font-medium">Drafts</button>
-      </div>
-
-      <!-- Posts List -->
-      <div id="posts-list-container" class="flex-1 overflow-y-auto divide-y divide-borderSubtle/50">
-        <!-- Rendered dynamically -->
-      </div>
-    </aside>
-
-    <!-- RIGHT WORKSPACE: Editor & Live Preview -->
-    <section class="flex-1 flex flex-col h-full overflow-hidden bg-canvas">
+    <div class="w-full max-w-[390px] rounded-2xl border border-white/[0.08] bg-[#18191c] p-6 sm:p-8 shadow-2xl relative z-10">
       
-      <!-- Top Action Bar -->
-      <div class="h-[52px] border-b border-borderSubtle bg-surface/50 px-4 flex items-center justify-between shrink-0 gap-3">
-        <div class="flex items-center gap-2 overflow-hidden">
-          <span id="current-post-status-badge" class="px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0">
-            Published
-          </span>
-          <span id="current-post-slug-label" class="text-[12.5px] text-white/50 truncate font-mono">
-            /blog/how-to-improve-youtube-retention
-          </span>
-        </div>
-
-        <div class="flex items-center gap-2 shrink-0">
-          <button onclick="exportMarkdownFile()" class="h-[34px] px-3 rounded-lg border border-borderSubtle bg-white/[0.04] text-white/80 hover:text-white text-[12px] font-medium transition-colors flex items-center gap-1.5" title="Download .md file ready for content/blog/">
-            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            Export .md
-          </button>
-          <button onclick="savePost(false)" class="h-[34px] px-3.5 rounded-lg border border-borderSubtle bg-white/[0.07] text-white hover:bg-white/[0.12] text-[12.5px] font-semibold transition-colors">
-            Save Draft
-          </button>
-          <button onclick="savePost(true)" class="h-[34px] px-4 rounded-lg bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold transition-colors flex items-center gap-1.5">
-            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            Publish Live
-          </button>
-        </div>
+      <!-- Studio Brand Header -->
+      <div class="text-center mb-6">
+        <a href="/" class="inline-flex items-center justify-center size-12 rounded-xl bg-white/[0.04] border border-white/[0.08] mb-3 hover:border-white/20 transition-colors">
+          <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-8 object-contain" />
+        </a>
+        <h2 class="text-[19px] font-bold text-white tracking-tight">Resolvia Admin Portal</h2>
+        <p class="text-[12.5px] text-slate-400 mt-1">Editorial CMS & Inbound Client CRM</p>
       </div>
 
-      <!-- Metadata Drawer -->
-      <div class="p-4 border-b border-borderSubtle bg-surface/20 shrink-0 grid grid-cols-1 md:grid-cols-12 gap-3 text-[13px]">
-        <div class="md:col-span-6">
-          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">Article Title</label>
-          <input type="text" id="post-title" oninput="onTitleChanged()" class="w-full h-[38px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white text-[14px] font-semibold outline-none focus:border-accent" placeholder="Enter post title..." />
-        </div>
-        <div class="md:col-span-3">
-          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">Category</label>
-          <select id="post-category" class="w-full h-[38px] bg-black/40 border border-borderSubtle rounded-lg px-2 text-white outline-none focus:border-accent">
-            <option value="Retention Science">Retention Science</option>
-            <option value="Thumbnail CTR">Thumbnail CTR</option>
-            <option value="Pricing & Retainers">Pricing & Retainers</option>
-            <option value="Hiring & Scaling">Hiring & Scaling</option>
-            <option value="Vertical Video">Vertical Video</option>
-            <option value="Agency Workflows">Agency Workflows</option>
-          </select>
-        </div>
-        <div class="md:col-span-3">
-          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">YouTube Video ID (Optional)</label>
-          <div class="flex gap-1.5">
-            <input type="text" id="post-youtube" placeholder="e.g. dQw4w9WgXcQ" class="w-full h-[38px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12px] outline-none focus:border-accent" />
-            <button onclick="insertYouTubeEmbed()" class="px-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[11px] font-semibold shrink-0" title="Insert Lite YouTube Embed">Insert</button>
+      <!-- Feedback Alert -->
+      <div id="login-feedback" class="hidden mb-4 p-3 rounded-xl text-[12px] font-medium leading-relaxed"></div>
+
+      <!-- Login Form -->
+      <form id="admin-login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-[11.5px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Admin Email</label>
+          <div class="relative">
+            <input 
+              type="email" 
+              id="login-email" 
+              required 
+              value="resolviaai@gmail.com" 
+              placeholder="resolviaai@gmail.com" 
+              class="w-full h-[46px] bg-black/40 border border-white/[0.08] focus:border-accent rounded-xl px-3.5 pl-10 text-[13.5px] text-white placeholder-slate-500 outline-none transition-colors"
+            />
+            <svg class="size-4 text-slate-500 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            </svg>
           </div>
         </div>
-        <div class="md:col-span-8">
-          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">SEO Hook / Excerpt</label>
-          <input type="text" id="post-description" placeholder="Short 1-2 sentence meta description..." class="w-full h-[34px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white/80 outline-none focus:border-accent" />
-        </div>
-        <div class="md:col-span-4 flex items-end gap-2">
-          <div class="flex-1">
-            <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">Photo Upload (Cloudinary)</label>
-            <input type="file" id="cloudinary-file-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden" />
-            <button onclick="document.getElementById('cloudinary-file-input').click()" class="w-full h-[34px] border border-dashed border-borderSubtle hover:border-accent/60 bg-white/[0.02] hover:bg-white/[0.05] rounded-lg px-3 text-[12px] text-white/70 flex items-center justify-center gap-1.5 transition-colors">
-              <svg class="size-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              Upload Blog Photo
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-[11.5px] font-semibold uppercase tracking-wider text-slate-400">Password</label>
+          </div>
+          <div class="relative">
+            <input 
+              type="password" 
+              id="login-password" 
+              required 
+              placeholder="••••••••••••" 
+              class="w-full h-[46px] bg-black/40 border border-white/[0.08] focus:border-accent rounded-xl px-3.5 pl-10 pr-11 text-[13.5px] text-white placeholder-slate-500 outline-none transition-colors"
+            />
+            <svg class="size-4 text-slate-500 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-0 top-0 h-[46px] w-[44px] flex items-center justify-center text-slate-500 hover:text-white transition-colors" aria-label="Toggle password visibility">
+              <svg id="eye-icon" class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Split Screen: Markdown Editor vs. Real-time Live Preview -->
-      <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderSubtle overflow-hidden">
-        
-        <!-- Markdown Raw Editor -->
-        <div class="flex flex-col h-full bg-[#080b10] overflow-hidden">
-          <div class="h-[38px] px-3 border-b border-borderSubtle/60 bg-surface/30 flex items-center justify-between text-[11.5px] text-white/50 font-medium">
-            <span class="flex items-center gap-2">
-              <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-              Markdown Source
-            </span>
-            <div class="flex items-center gap-1">
-              <button onclick="insertToolbar('**', '**')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Bold">B</button>
-              <button onclick="insertToolbar('*', '*')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80 italic" title="Italic">I</button>
-              <button onclick="insertToolbar('## ', '')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Heading 2">H2</button>
-              <button onclick="insertToolbar('> ', '')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Quote">""</button>
-              <button onclick="insertToolbar('- ', '')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Bullet List">• List</button>
-            </div>
-          </div>
-          <textarea id="post-markdown" oninput="updateLivePreview()" class="flex-1 w-full bg-transparent p-4 font-mono text-[13.5px] leading-relaxed text-slate-200 outline-none resize-none selection:bg-accent/30" placeholder="Write article content in Markdown..."></textarea>
+        <div class="flex items-center justify-between text-[12.5px] pt-1">
+          <label class="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-white select-none">
+            <input type="checkbox" id="login-remember" checked class="size-4 rounded border-white/20 bg-black/40 text-accent focus:ring-0 cursor-pointer" />
+            <span>Keep me logged in</span>
+          </label>
         </div>
 
-        <!-- Live Preview -->
-        <div class="flex flex-col h-full bg-canvas overflow-hidden">
-          <div class="h-[38px] px-3 border-b border-borderSubtle/60 bg-surface/30 flex items-center justify-between text-[11.5px] text-white/50 font-medium">
-            <span class="flex items-center gap-2">
-              <svg class="size-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-              Live Visual Preview (Resolvia Styling)
-            </span>
-            <span id="preview-word-count" class="text-[11px] text-white/40">0 words</span>
-          </div>
-          <div id="preview-container" class="flex-1 p-6 overflow-y-auto prose-resolvia">
-            <!-- Rendered marked output -->
-          </div>
-        </div>
+        <button 
+          type="submit" 
+          id="login-submit-btn" 
+          class="w-full h-[46px] mt-2 rounded-xl bg-accent hover:bg-accentHover active:scale-[0.98] text-white text-[13.5px] font-semibold shadow-md shadow-accent/20 transition-all flex items-center justify-center gap-2"
+        >
+          <span>Sign In to Admin Workspace</span>
+          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
 
+      <!-- Security Trustmark -->
+      <div class="mt-6 pt-5 border-t border-white/[0.06] flex items-center justify-center gap-2 text-[11px] text-slate-500">
+        <svg class="size-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span>Supabase 256-bit Encrypted Session</span>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <!-- ========================================================================= -->
-  <!-- TAB 2: INBOUND LEADS INBOX (CRM DASHBOARD)                                -->
+  <!-- 2. MAIN ADMIN DASHBOARD (PROTECTED - HIDDEN UNTIL AUTHENTICATED)           -->
   <!-- ========================================================================= -->
-  <main id="tab-crm" class="hidden flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto overflow-y-auto">
+  <div id="admin-dashboard-app" class="hidden min-h-screen flex flex-col bg-[#0B0F17]">
     
-    <!-- CRM Metrics Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
-        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">Total Inquiries</span>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="stat-total-leads" class="text-[28px] font-extrabold text-white">4</span>
-          <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">+100% wk</span>
-        </div>
+    <!-- TOP HEADER BAR (Mobile & Desktop Responsive) -->
+    <header class="h-[56px] sm:h-[60px] border-b border-borderSubtle bg-[#0B0F17]/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-6 sm:size-7 rounded-md object-contain" />
+          <span class="font-bold text-[14px] sm:text-[15px] tracking-tight text-white flex items-center gap-1.5">
+            Resolvia
+            <span class="text-[9.5px] sm:text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/25">Studio</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation Tabs (Hidden on mobile) -->
+        <nav class="hidden md:flex items-center gap-1 ml-4 border-l border-white/10 pl-4">
+          <button id="tab-cms-btn" onclick="switchTab('cms')" class="px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2">
+            <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+            Editorial CMS
+          </button>
+          <button id="tab-crm-btn" onclick="switchTab('crm')" class="px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-slate-400 hover:text-white hover:bg-white/5 flex items-center gap-2">
+            <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            Inbound Leads
+            <span id="header-lead-badge" class="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-accent text-white">4</span>
+          </button>
+        </nav>
       </div>
-      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
-        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">New Uncontacted</span>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="stat-new-leads" class="text-[28px] font-extrabold text-accent">2</span>
-          <span class="text-[11px] font-semibold text-accent bg-accent/15 px-2 py-0.5 rounded-full">Active</span>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Database Connection Status Indicator -->
+        <div id="connection-pill" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] sm:text-[11px] font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300">
+          <span class="size-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          <span id="connection-label" class="hidden sm:inline">Connecting...</span>
         </div>
+
+        <!-- Settings Gear Button -->
+        <button onclick="toggleSettingsModal(true)" class="p-2 rounded-lg border border-borderSubtle bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/10 transition-colors touch-target flex items-center justify-center" title="API Credentials & Settings">
+          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </button>
+
+        <!-- Sign Out Button -->
+        <button onclick="handleSignOut()" class="h-[34px] px-2.5 sm:px-3 rounded-lg border border-white/[0.08] hover:bg-white/[0.06] text-slate-300 hover:text-white text-[12px] font-medium transition-colors flex items-center gap-1.5 touch-target" title="Sign out of Admin Portal">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          <span class="hidden sm:inline">Sign Out</span>
+        </button>
       </div>
-      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
-        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">Proposal Sent</span>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="stat-proposal-leads" class="text-[28px] font-extrabold text-purple-400">1</span>
-          <span class="text-[11px] font-semibold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">In Pipeline</span>
-        </div>
-      </div>
-      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
-        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">Won Clients</span>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="stat-won-leads" class="text-[28px] font-extrabold text-emerald-400">1</span>
-          <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">Retainers</span>
-        </div>
+    </header>
+
+    <!-- MOBILE PRIMARY TAB SWITCHER (Visible strictly on screens < md) -->
+    <div class="flex md:hidden border-b border-borderSubtle bg-[#0d111a] px-3 py-2 items-center justify-between gap-2 shrink-0">
+      <div class="grid grid-cols-2 gap-1.5 w-full bg-black/40 p-1 rounded-xl border border-white/[0.06]">
+        <button id="mobile-tab-cms-btn" onclick="switchTab('cms')" class="h-[36px] rounded-lg text-[12.5px] font-semibold transition-all bg-white/10 text-white flex items-center justify-center gap-1.5">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+          <span>CMS</span>
+        </button>
+        <button id="mobile-tab-crm-btn" onclick="switchTab('crm')" class="h-[36px] rounded-lg text-[12.5px] font-semibold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          <span>Leads (<span id="mobile-lead-badge">4</span>)</span>
+        </button>
       </div>
     </div>
 
-    <!-- Table Container -->
-    <div class="rounded-2xl border border-borderSubtle bg-surface/80 overflow-hidden shadow-lg">
-      <div class="p-4 border-b border-borderSubtle flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-2 w-full sm:w-auto">
-          <input type="text" id="lead-search" oninput="filterLeads()" placeholder="Filter by creator name, email or channel..." class="w-full sm:w-[320px] h-[36px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-[13px] text-white placeholder-white/30 outline-none focus:border-accent" />
-        </div>
-        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-          <button onclick="exportLeadsCSV()" class="h-[36px] px-3.5 rounded-lg border border-borderSubtle bg-white/[0.04] text-white hover:bg-white/10 text-[12.5px] font-medium transition-colors flex items-center gap-1.5">
-            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            Export CSV
+    <!-- ========================================================================= -->
+    <!-- TAB 1: EDITORIAL CMS (BLOG POSTS & CASE STUDIES)                          -->
+    <!-- ========================================================================= -->
+    <main id="tab-cms" class="flex-1 flex flex-col md:flex-row h-auto md:h-[calc(100vh-60px)] overflow-hidden bg-[#0B0F17]">
+      
+      <!-- MOBILE CMS MODE SWITCHER (Articles List vs. Editor vs. Preview on phone) -->
+      <div class="flex md:hidden border-b border-borderSubtle bg-[#111622]/80 px-3 py-1.5 items-center justify-between gap-1.5 shrink-0">
+        <button id="cms-view-list-btn" onclick="setMobileCmsView('list')" class="flex-1 h-[34px] rounded-lg text-[12px] font-semibold transition-all bg-white/10 text-white flex items-center justify-center gap-1">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+          <span>Articles</span>
+        </button>
+        <button id="cms-view-write-btn" onclick="setMobileCmsView('write')" class="flex-1 h-[34px] rounded-lg text-[12px] font-semibold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+          <span>Write</span>
+        </button>
+        <button id="cms-view-preview-btn" onclick="setMobileCmsView('preview')" class="flex-1 h-[34px] rounded-lg text-[12px] font-semibold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          <span>Preview</span>
+        </button>
+      </div>
+
+      <!-- LEFT SIDEBAR: Post List (Full-width on mobile when active, fixed width on desktop) -->
+      <aside id="cms-posts-sidebar" class="w-full md:w-[300px] lg:w-[340px] border-r border-borderSubtle bg-[#0d111a] flex flex-col shrink-0 h-full">
+        <div class="p-3.5 border-b border-borderSubtle flex items-center justify-between gap-2">
+          <div class="relative flex-1">
+            <input type="text" id="post-search" oninput="filterPosts()" placeholder="Search articles..." class="w-full h-[40px] sm:h-[36px] bg-black/40 border border-borderSubtle rounded-xl px-3 pl-9 text-[13px] text-white placeholder-slate-500 outline-none focus:border-accent" />
+            <svg class="size-4 text-slate-500 absolute left-3 top-3 sm:top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <button onclick="createNewPost()" class="h-[40px] sm:h-[36px] px-3.5 bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold rounded-xl shrink-0 flex items-center gap-1.5 transition-colors touch-target">
+            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+            <span>New</span>
           </button>
         </div>
+
+        <!-- Filter Chips -->
+        <div class="flex items-center gap-1.5 px-3.5 py-2 border-b border-borderSubtle/60 text-[11px] overflow-x-auto">
+          <button onclick="setPostStatusFilter('all')" class="post-filter-chip px-3 py-1.5 rounded-lg bg-white/10 text-white font-medium touch-target">All</button>
+          <button onclick="setPostStatusFilter('published')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Published</button>
+          <button onclick="setPostStatusFilter('draft')" class="post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target">Drafts</button>
+        </div>
+
+        <!-- Posts List -->
+        <div id="posts-list-container" class="flex-1 overflow-y-auto divide-y divide-borderSubtle/50">
+          <!-- Rendered dynamically -->
+        </div>
+      </aside>
+
+      <!-- RIGHT WORKSPACE: Editor & Live Preview (Hidden on mobile when in 'list' view) -->
+      <section id="cms-editor-workspace" class="hidden md:flex flex-1 flex-col h-full overflow-hidden bg-[#0B0F17]">
+        
+        <!-- Top Action Bar (Clean & Focused) -->
+        <div class="min-h-[52px] py-2 border-b border-borderSubtle bg-[#111622]/80 px-3 sm:px-6 flex flex-wrap items-center justify-between shrink-0 gap-2">
+          <div class="flex items-center gap-2 overflow-hidden max-w-[200px] sm:max-w-none">
+            <span id="current-post-status-badge" class="px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0">
+              Published
+            </span>
+            <span id="current-post-slug-label" class="text-[11.5px] sm:text-[12px] text-slate-400 truncate font-mono">
+              /blog/how-to-improve-youtube-retention
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <!-- Toggle Advanced Settings & Media Drawer -->
+            <button 
+              id="toggle-metadata-btn" 
+              onclick="toggleMetadataDrawer()" 
+              class="h-[34px] px-2.5 sm:px-3 rounded-lg border border-borderSubtle bg-white/[0.04] text-slate-300 hover:text-white text-[11.5px] sm:text-[12px] font-medium transition-colors flex items-center gap-1.5" 
+              title="Expand SEO, Cover Photo & YouTube Settings"
+            >
+              <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+              <span>Media & SEO</span>
+            </button>
+
+            <button onclick="exportMarkdownFile()" class="h-[34px] px-2.5 sm:px-3 rounded-lg border border-borderSubtle bg-white/[0.04] text-slate-300 hover:text-white text-[11.5px] sm:text-[12px] font-medium transition-colors hidden sm:flex items-center gap-1.5" title="Download .md file ready for content/blog/">
+              <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Export</span>
+            </button>
+
+            <button onclick="savePost(false)" class="h-[34px] px-2.5 sm:px-3.5 rounded-lg border border-borderSubtle bg-white/[0.06] text-white hover:bg-white/[0.1] text-[11.5px] sm:text-[12.5px] font-medium transition-colors">
+              Draft
+            </button>
+            <button onclick="savePost(true)" class="h-[34px] px-3 sm:px-4 rounded-lg bg-accent hover:bg-accentHover text-white text-[11.5px] sm:text-[12.5px] font-semibold transition-colors flex items-center gap-1.5">
+              <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Publish</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Clean Title & Custom Category Dropdown Bar (Mobile Responsive Stack) -->
+        <div class="px-4 sm:px-6 py-3 border-b border-borderSubtle bg-[#0B0F17] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+          <div class="flex-1">
+            <input 
+              type="text" 
+              id="post-title" 
+              oninput="onTitleChanged()" 
+              class="w-full bg-transparent border-0 text-[17px] sm:text-[20px] font-bold text-white placeholder-slate-600 outline-none tracking-tight" 
+              placeholder="Article Title..." 
+            />
+          </div>
+
+          <!-- Custom Design System Category Dropdown -->
+          <div class="relative shrink-0 w-full sm:w-[220px]" id="category-dropdown-wrapper">
+            <input type="hidden" id="post-category" value="Retention Science" />
+            
+            <button 
+              type="button" 
+              id="category-dropdown-btn" 
+              onclick="toggleCategoryDropdown(event)" 
+              class="w-full h-[40px] sm:h-[36px] bg-[#18191c] hover:bg-[#202227] border border-white/[0.08] hover:border-white/20 focus:border-accent rounded-xl px-3 flex items-center justify-between text-left text-white text-[12.5px] font-medium transition-colors select-none touch-target"
+            >
+              <span id="category-selected-label" class="truncate">Retention Science</span>
+              <svg id="category-chevron" class="size-4 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Floating Custom Dropdown Menu -->
+            <div 
+              id="category-dropdown-menu" 
+              class="hidden absolute right-0 top-full mt-1.5 w-full bg-[#18191c] border border-white/[0.12] rounded-xl shadow-2xl p-1.5 z-50 backdrop-blur-xl"
+            >
+              <div onclick="selectCategory('Retention Science')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
+                <span>Retention Science</span>
+                <span class="cat-check size-1.5 rounded-full bg-accent"></span>
+              </div>
+              <div onclick="selectCategory('Thumbnail CTR')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
+                <span>Thumbnail CTR</span>
+                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
+              </div>
+              <div onclick="selectCategory('Pricing & Retainers')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
+                <span>Pricing & Retainers</span>
+                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
+              </div>
+              <div onclick="selectCategory('Hiring & Scaling')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
+                <span>Hiring & Scaling</span>
+                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
+              </div>
+              <div onclick="selectCategory('Vertical Video')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
+                <span>Vertical Video</span>
+                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
+              </div>
+              <div onclick="selectCategory('Agency Workflows')" class="category-opt px-3 py-2.5 sm:py-2 rounded-lg text-[12.5px] font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] cursor-pointer flex items-center justify-between transition-colors">
+                <span>Agency Workflows</span>
+                <span class="cat-check size-1.5 rounded-full bg-accent hidden"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsible Media & SEO Drawer (Progressive Disclosure) -->
+        <div id="metadata-drawer" class="hidden px-4 sm:px-6 py-4 border-b border-borderSubtle bg-[#111622]/90 shrink-0 grid grid-cols-1 md:grid-cols-12 gap-3.5 text-[13px] transition-all">
+          <div class="md:col-span-8">
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">SEO Excerpt / Social Meta</label>
+            <input type="text" id="post-description" placeholder="1-2 punchy sentences summarizing the retention strategy..." class="w-full h-[40px] sm:h-[36px] bg-black/40 border border-white/[0.08] rounded-xl px-3 text-white text-[12.5px] outline-none focus:border-accent" />
+          </div>
+          <div class="md:col-span-4">
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">YouTube Video ID (Optional)</label>
+            <div class="flex gap-1.5">
+              <input type="text" id="post-youtube" placeholder="e.g. dQw4w9WgXcQ" class="w-full h-[40px] sm:h-[36px] bg-black/40 border border-white/[0.08] rounded-xl px-3 text-white font-mono text-[12px] outline-none focus:border-accent" />
+              <button onclick="insertYouTubeEmbed()" class="px-3 bg-white/10 hover:bg-white/20 text-white rounded-xl text-[11.5px] font-semibold shrink-0 touch-target" title="Insert Lite YouTube Player at Cursor">Insert</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Split Screen: Markdown Editor vs. Real-time Live Preview (Stacked on mobile, split on desktop) -->
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderSubtle overflow-hidden">
+          
+          <!-- Markdown Editor Pane (Visible when in 'write' mode on mobile) -->
+          <div id="pane-markdown-editor" class="flex flex-col h-full bg-[#080b10] overflow-hidden">
+            <div class="min-h-[42px] px-3 sm:px-4 py-1.5 border-b border-borderSubtle bg-[#111622]/60 flex items-center justify-between text-[11.5px] text-slate-400 font-medium overflow-x-auto">
+              <span class="flex items-center gap-1.5 shrink-0">
+                <svg class="size-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                <span class="hidden sm:inline">Markdown</span>
+              </span>
+              
+              <!-- Editor Toolbar Actions (With minimum 40px touch padding) -->
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="insertToolbar('**', '**')" class="px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300 hover:text-white font-bold touch-target" title="Bold">B</button>
+                <button onclick="insertToolbar('*', '*')" class="px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300 hover:text-white italic touch-target" title="Italic">I</button>
+                <button onclick="insertToolbar('## ', '')" class="px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300 hover:text-white font-semibold touch-target" title="Heading 2">H2</button>
+                <button onclick="insertToolbar('> ', '')" class="px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300 hover:text-white touch-target" title="Blockquote">""</button>
+                <button onclick="insertToolbar('- ', '')" class="px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300 hover:text-white touch-target" title="Bullet List">•</button>
+                
+                <span class="h-4 w-px bg-white/10 mx-1"></span>
+
+                <!-- INSERT IMAGE AT CURSOR BUTTON -->
+                <input type="file" id="inline-image-input" accept="image/*" onchange="handleInlineImageUpload(event)" class="hidden" />
+                <button 
+                  onclick="triggerInlineImageUpload()" 
+                  class="px-2.5 py-1.5 rounded hover:bg-accent/20 hover:text-accent text-slate-300 transition-colors flex items-center gap-1.5 font-medium touch-target" 
+                  title="Upload & Insert Image In Between Paragraphs"
+                >
+                  <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span class="text-[11.5px]">Photo</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Drag & Drop Overlay Support -->
+            <div class="relative flex-1 flex flex-col min-h-[300px]">
+              <textarea 
+                id="post-markdown" 
+                oninput="updateLivePreview()" 
+                class="flex-1 w-full bg-transparent p-4 sm:p-5 font-mono text-[13.5px] leading-relaxed text-slate-200 outline-none resize-none selection:bg-accent/30 placeholder-slate-600" 
+                placeholder="Write article content in Markdown... Paste or drop photos anywhere between paragraphs!"
+              ></textarea>
+              <div id="drag-drop-overlay" class="hidden absolute inset-0 bg-[#0B0F17]/90 border-2 border-dashed border-accent flex flex-col items-center justify-center pointer-events-none z-20">
+                <svg class="size-8 text-accent mb-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                <span class="text-[13.5px] font-semibold text-white">Drop photo to insert at cursor position</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Visual Preview Pane (Visible when in 'preview' mode on mobile) -->
+          <div id="pane-visual-preview" class="hidden md:flex flex-col h-full bg-[#0B0F17] overflow-hidden">
+            <div class="h-[42px] px-4 border-b border-borderSubtle bg-[#111622]/60 flex items-center justify-between text-[11.5px] text-slate-400 font-medium">
+              <span class="flex items-center gap-2">
+                <svg class="size-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Live Blog Preview</span>
+              </span>
+              <span id="preview-word-count" class="text-[11px] text-slate-500 font-mono">0 words · ~0 min read</span>
+            </div>
+            <div id="preview-container" class="flex-1 p-5 sm:p-8 overflow-y-auto prose-resolvia min-h-[300px]">
+              <!-- Rendered markdown output -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: INBOUND LEADS INBOX (CRM DASHBOARD - MOBILE RESPONSIVE)            -->
+    <!-- ========================================================================= -->
+    <main id="tab-crm" class="hidden flex-1 p-3 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto overflow-y-auto bg-[#0B0F17]">
+      
+      <!-- CRM Metric Cards (2x2 Grid on Mobile, 4 Cols on Desktop) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5">
+        <div class="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#18191c] p-3.5 sm:p-5 shadow-sm">
+          <span class="text-[10.5px] sm:text-[11.5px] font-semibold text-slate-400 uppercase tracking-wider block truncate">Total Inquiries</span>
+          <div class="mt-2 sm:mt-3 flex items-baseline justify-between">
+            <span id="stat-total-leads" class="text-[22px] sm:text-[28px] font-extrabold text-white font-mono tracking-tight">4</span>
+            <span class="text-[9.5px] sm:text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">+100% wk</span>
+          </div>
+        </div>
+        <div class="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#18191c] p-3.5 sm:p-5 shadow-sm">
+          <span class="text-[10.5px] sm:text-[11.5px] font-semibold text-slate-400 uppercase tracking-wider block truncate">New Leads</span>
+          <div class="mt-2 sm:mt-3 flex items-baseline justify-between">
+            <span id="stat-new-leads" class="text-[22px] sm:text-[28px] font-extrabold text-accent font-mono tracking-tight">2</span>
+            <span class="text-[9.5px] sm:text-[11px] font-semibold text-accent bg-accent/15 border border-accent/25 px-2 py-0.5 rounded-full">Active</span>
+          </div>
+        </div>
+        <div class="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#18191c] p-3.5 sm:p-5 shadow-sm">
+          <span class="text-[10.5px] sm:text-[11.5px] font-semibold text-slate-400 uppercase tracking-wider block truncate">Proposal Sent</span>
+          <div class="mt-2 sm:mt-3 flex items-baseline justify-between">
+            <span id="stat-proposal-leads" class="text-[22px] sm:text-[28px] font-extrabold text-purple-400 font-mono tracking-tight">1</span>
+            <span class="text-[9.5px] sm:text-[11px] font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-full">Pipeline</span>
+          </div>
+        </div>
+        <div class="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#18191c] p-3.5 sm:p-5 shadow-sm">
+          <span class="text-[10.5px] sm:text-[11.5px] font-semibold text-slate-400 uppercase tracking-wider block truncate">Won Clients</span>
+          <div class="mt-2 sm:mt-3 flex items-baseline justify-between">
+            <span id="stat-won-leads" class="text-[22px] sm:text-[28px] font-extrabold text-emerald-400 font-mono tracking-tight">1</span>
+            <span class="text-[9.5px] sm:text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">Retainers</span>
+          </div>
+        </div>
       </div>
 
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse text-[13px]">
-          <thead>
-            <tr class="border-b border-borderSubtle/60 bg-black/20 text-white/50 text-[11px] uppercase tracking-wider">
-              <th class="py-3 px-4">Date</th>
-              <th class="py-3 px-4">Name / Creator</th>
-              <th class="py-3 px-4">Work Email</th>
-              <th class="py-3 px-4">Format</th>
-              <th class="py-3 px-4">Channel / Footage</th>
-              <th class="py-3 px-4">Retention Challenge</th>
-              <th class="py-3 px-4 text-right">Status</th>
-            </tr>
-          </thead>
-          <tbody id="leads-table-body" class="divide-y divide-borderSubtle/40">
-            <!-- Populated dynamically -->
-          </tbody>
-        </table>
+      <!-- Inbound Leads Table Container (Horizontal Scroll with Mobile Support) -->
+      <div class="rounded-2xl border border-white/[0.08] bg-[#18191c] overflow-hidden shadow-xl">
+        <div class="p-3.5 sm:p-4 border-b border-white/[0.08] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 bg-[#111622]/40">
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <div class="relative w-full sm:w-[320px]">
+              <input type="text" id="lead-search" oninput="filterLeads()" placeholder="Search creator, email or channel..." class="w-full h-[40px] sm:h-[36px] bg-black/40 border border-white/[0.08] focus:border-accent rounded-xl px-3 pl-9 text-[13px] text-white placeholder-slate-500 outline-none transition-colors" />
+              <svg class="size-4 text-slate-500 absolute left-3 top-3 sm:top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 justify-end">
+            <button onclick="exportLeadsCSV()" class="h-[40px] sm:h-[36px] w-full sm:w-auto px-4 rounded-xl border border-white/[0.08] bg-white/[0.04] text-slate-200 hover:bg-white/10 text-[12.5px] font-medium transition-colors flex items-center justify-center gap-1.5 touch-target">
+              <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Export CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-[13px] min-w-[720px]">
+            <thead>
+              <tr class="border-b border-white/[0.06] bg-black/20 text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
+                <th class="py-3.5 px-4">Date</th>
+                <th class="py-3.5 px-4">Name / Creator</th>
+                <th class="py-3.5 px-4">Work Email</th>
+                <th class="py-3.5 px-4">Format</th>
+                <th class="py-3.5 px-4">Channel / Footage</th>
+                <th class="py-3.5 px-4">Retention Challenge</th>
+                <th class="py-3.5 px-4 text-right">Status</th>
+              </tr>
+            </thead>
+            <tbody id="leads-table-body" class="divide-y divide-white/[0.04]">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
+
+  </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: SETTINGS & CREDENTIALS                                             -->
+  <!-- 3. MODAL: SETTINGS & CREDENTIALS                                          -->
   <!-- ========================================================================= -->
   <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="w-full max-w-[540px] rounded-2xl border border-white/10 bg-surface p-6 shadow-2xl relative text-left">
+    <div class="w-full max-w-[540px] rounded-2xl border border-white/10 bg-[#18191c] p-5 sm:p-6 shadow-2xl relative text-left max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-4 border-b border-borderSubtle">
         <div class="flex items-center gap-2.5">
           <div class="size-8 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent">
             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
           </div>
           <div>
-            <h3 class="text-[16px] font-bold text-white">API & Database Integrations</h3>
-            <p class="text-[12px] text-white/50">Stored securely in your local browser storage</p>
+            <h3 class="text-[15px] sm:text-[16px] font-bold text-white">API & Database Integrations</h3>
+            <p class="text-[11.5px] sm:text-[12px] text-slate-400">Stored securely in your local browser storage</p>
           </div>
         </div>
-        <button onclick="toggleSettingsModal(false)" class="text-white/40 hover:text-white p-1 rounded-md">
+        <button onclick="toggleSettingsModal(false)" class="text-slate-400 hover:text-white p-1 rounded-md touch-target flex items-center justify-center">
           <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
       <div class="space-y-4 py-4 text-[13px]">
         <div>
-          <label class="block text-[12px] font-semibold text-white/80 mb-1">Supabase Project URL</label>
-          <input type="text" id="cfg-supabase-url" placeholder="https://hqqnviehspjqnwekafzq.supabase.co" class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+          <label class="block text-[12px] font-semibold text-slate-300 mb-1">Supabase Project URL</label>
+          <input type="text" id="cfg-supabase-url" placeholder="https://irrewfsdmixunaashckv.supabase.co" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-xl px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
         </div>
         <div>
-          <label class="block text-[12px] font-semibold text-white/80 mb-1">Supabase Anon Key</label>
-          <input type="password" id="cfg-supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+          <label class="block text-[12px] font-semibold text-slate-300 mb-1">Supabase Anon Key</label>
+          <input type="password" id="cfg-supabase-key" placeholder="sb_publishable_..." class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-xl px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
         </div>
         <div class="border-t border-borderSubtle/60 pt-3">
-          <label class="block text-[12px] font-semibold text-white/80 mb-1">Cloudinary Cloud Name</label>
-          <input type="text" id="cfg-cloudinary-name" placeholder="e.g. resolvia" class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+          <label class="block text-[12px] font-semibold text-slate-300 mb-1">Cloudinary Cloud Name</label>
+          <input type="text" id="cfg-cloudinary-name" placeholder="e.g. resolvia" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-xl px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
         </div>
         <div>
-          <label class="block text-[12px] font-semibold text-white/80 mb-1">Cloudinary Upload Preset (Unsigned)</label>
-          <input type="text" id="cfg-cloudinary-preset" placeholder="e.g. resolvia_blog_uploads" class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
-          <span class="text-[11px] text-white/40 block mt-1">Allows drag-and-drop blog photo uploads directly to Cloudinary CDN</span>
+          <label class="block text-[12px] font-semibold text-slate-300 mb-1">Cloudinary Upload Preset (Unsigned)</label>
+          <input type="text" id="cfg-cloudinary-preset" placeholder="e.g. resolvia_blog_uploads" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-xl px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+          <span class="text-[11px] text-slate-500 block mt-1">Allows instant drag-and-drop blog photo uploads directly to Cloudinary CDN</span>
         </div>
       </div>
 
       <div class="flex items-center justify-between pt-3 border-t border-borderSubtle">
-        <button onclick="testConnection()" class="px-3.5 py-2 rounded-lg text-[12.5px] font-medium border border-borderSubtle text-white/80 hover:bg-white/5">
+        <button onclick="testConnection()" class="px-3 py-2 rounded-xl text-[12px] font-medium border border-borderSubtle text-slate-300 hover:bg-white/5 touch-target">
           Test Connection
         </button>
         <div class="flex gap-2">
-          <button onclick="toggleSettingsModal(false)" class="px-4 py-2 rounded-lg text-[12.5px] text-white/60 hover:text-white">Cancel</button>
-          <button onclick="saveSettings()" class="px-5 py-2 rounded-lg bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold">Save Settings</button>
+          <button onclick="toggleSettingsModal(false)" class="px-3 py-2 rounded-xl text-[12px] text-slate-400 hover:text-white touch-target">Cancel</button>
+          <button onclick="saveSettings()" class="px-4 py-2 rounded-xl bg-accent hover:bg-accentHover text-white text-[12px] font-semibold touch-target">Save Settings</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: SUPABASE AUTHENTICATION                                            -->
+  <!-- JAVASCRIPT CMS, CRM, DROPDOWN, MOBILE VIEW & AUTH CONTROLLER               -->
   <!-- ========================================================================= -->
-  <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="w-full max-w-[420px] rounded-2xl border border-white/10 bg-surface p-6 shadow-2xl relative text-left">
-      <div class="text-center mb-6">
-        <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-10 rounded-lg mx-auto mb-3" />
-        <h3 class="text-[18px] font-bold text-white">Sign In to Resolvia CMS</h3>
-        <p class="text-[12.5px] text-white/50">Manage editorial playbooks and inbound inquiries</p>
-      </div>
-
-      <form onsubmit="handleAuthSubmit(event)" class="space-y-4 text-[13px]">
-        <div>
-          <label class="block text-[12px] font-semibold text-white/80 mb-1">Admin Email</label>
-          <input type="email" id="auth-email" required placeholder="admin@theresolvia.com" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white outline-none focus:border-accent" />
-        </div>
-        <div>
-          <label class="block text-[12px] font-semibold text-white/80 mb-1">Password</label>
-          <input type="password" id="auth-password" placeholder="••••••••••••" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white outline-none focus:border-accent" />
-        </div>
-
-        <div id="auth-feedback" class="hidden py-2 px-3 rounded-lg text-[12px]"></div>
-
-        <div class="space-y-2 pt-2">
-          <button type="submit" class="w-full h-[42px] rounded-lg bg-accent hover:bg-accentHover text-white font-semibold transition-colors">
-            Sign In with Password
-          </button>
-          <button type="button" onclick="handleMagicLink()" class="w-full h-[38px] rounded-lg border border-borderSubtle text-white/80 hover:bg-white/5 text-[12px] font-medium transition-colors">
-            Send Magic Link to Email
-          </button>
-        </div>
-      </form>
-
-      <div class="mt-4 pt-4 border-t border-borderSubtle text-center">
-        <button onclick="toggleAuthModal(false)" class="text-[12px] text-white/50 hover:text-white">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT CMS & CRM CONTROLLER -->
   <script>
     // --- Mock / Seed Data (For instant offline usability & preview) ---
     var mockPosts = [
@@ -541,46 +730,386 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
 
     // State Variables
     var currentTab = 'cms';
+    var mobileCmsView = 'write'; // 'list', 'write', 'preview'
     var supabaseClient = null;
     var posts = [...mockPosts];
     var leads = [...mockLeads];
     var currentPostId = mockPosts[0].id;
     var postStatusFilter = 'all';
 
-    // Initialize on Load
+    // =========================================================================
+    // AUTHENTICATION LOGIC & SESSION GATE
+    // =========================================================================
+    function checkAuthSession() {
+      var session = sessionStorage.getItem('resolvia_admin_session') || localStorage.getItem('resolvia_admin_session');
+      if (session) {
+        try {
+          var parsed = JSON.parse(session);
+          if (parsed && parsed.email) {
+            revealDashboard(parsed.email);
+            return true;
+          }
+        } catch(e) {
+          console.error("Session parse error:", e);
+        }
+      }
+      document.getElementById('admin-login-screen').classList.remove('hidden');
+      document.getElementById('admin-dashboard-app').classList.add('hidden');
+      return false;
+    }
+
+    function revealDashboard(email) {
+      document.getElementById('admin-login-screen').classList.add('hidden');
+      document.getElementById('admin-dashboard-app').classList.remove('hidden');
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      var email = document.getElementById('login-email').value.trim();
+      var password = document.getElementById('login-password').value.trim();
+      var remember = document.getElementById('login-remember').checked;
+      var feedback = document.getElementById('login-feedback');
+      var btn = document.getElementById('login-submit-btn');
+
+      feedback.className = 'hidden mb-4 p-3 rounded-xl text-[12px] font-medium leading-relaxed';
+      btn.disabled = true;
+      btn.innerHTML = `
+        <svg class="animate-spin size-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+        <span>Verifying Credentials...</span>
+      `;
+
+      var authenticated = false;
+
+      // 1. Check Supabase Auth
+      if (supabaseClient) {
+        try {
+          var res = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
+          if (!res.error && res.data && res.data.user) {
+            authenticated = true;
+          }
+        } catch(err) {
+          console.warn("Supabase auth error:", err);
+        }
+      }
+
+      // 2. Direct Credential Fallback for Admin
+      if (!authenticated) {
+        if (email.toLowerCase() === 'resolviaai@gmail.com' && password === 'adad5656') {
+          authenticated = true;
+        }
+      }
+
+      if (authenticated) {
+        var sessionData = JSON.stringify({ email: email, timestamp: Date.now() });
+        sessionStorage.setItem('resolvia_admin_session', sessionData);
+        if (remember) {
+          localStorage.setItem('resolvia_admin_session', sessionData);
+        }
+
+        feedback.className = 'mb-4 p-3 rounded-xl text-[12px] font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-400';
+        feedback.textContent = '✓ Access granted. Loading studio workspace...';
+        
+        setTimeout(function() {
+          revealDashboard(email);
+          btn.disabled = false;
+          btn.innerHTML = `
+            <span>Sign In to Admin Workspace</span>
+            <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          `;
+        }, 300);
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <span>Sign In to Admin Workspace</span>
+          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        `;
+        feedback.className = 'mb-4 p-3 rounded-xl text-[12px] font-medium bg-rose-500/15 border border-rose-500/30 text-rose-300';
+        feedback.textContent = 'Invalid email or password. Please verify your credentials.';
+      }
+    }
+
+    function handleSignOut() {
+      sessionStorage.removeItem('resolvia_admin_session');
+      localStorage.removeItem('resolvia_admin_session');
+      if (supabaseClient) {
+        try { supabaseClient.auth.signOut(); } catch(e){}
+      }
+      document.getElementById('admin-dashboard-app').classList.add('hidden');
+      document.getElementById('admin-login-screen').classList.remove('hidden');
+      document.getElementById('login-password').value = '';
+    }
+
+    function togglePasswordVisibility() {
+      var input = document.getElementById('login-password');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // =========================================================================
+    // INITIALIZATION ON DOM LOAD
+    // =========================================================================
     document.addEventListener('DOMContentLoaded', function() {
       loadSavedSettings();
       initSupabase();
+      checkAuthSession();
       renderPostsList();
       selectPost(currentPostId);
       renderLeadsTable();
       updateCRMStats();
+
+      // Drag & Drop Image listener for markdown textarea
+      var textarea = document.getElementById('post-markdown');
+      var overlay = document.getElementById('drag-drop-overlay');
+
+      textarea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        overlay.classList.remove('hidden');
+      });
+      textarea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        overlay.classList.add('hidden');
+      });
+      textarea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        overlay.classList.add('hidden');
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+          uploadAndInsertImage(e.dataTransfer.files[0]);
+        }
+      });
+
+      // Paste image listener
+      textarea.addEventListener('paste', function(e) {
+        if (e.clipboardData && e.clipboardData.items) {
+          for (var i = 0; i < e.clipboardData.items.length; i++) {
+            var item = e.clipboardData.items[i];
+            if (item.type.indexOf('image') !== -1) {
+              var blob = item.getAsFile();
+              if (blob) {
+                e.preventDefault();
+                uploadAndInsertImage(blob);
+                break;
+              }
+            }
+          }
+        }
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function(e) {
+        var wrapper = document.getElementById('category-dropdown-wrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+          closeCategoryDropdown();
+        }
+      });
     });
 
-    // Tab Switching
+    // =========================================================================
+    // MOBILE CMS VIEW CONTROLLER (Articles vs. Write vs. Preview)
+    // =========================================================================
+    function setMobileCmsView(view) {
+      mobileCmsView = view;
+      var sidebar = document.getElementById('cms-posts-sidebar');
+      var workspace = document.getElementById('cms-editor-workspace');
+      var paneEditor = document.getElementById('pane-markdown-editor');
+      var panePreview = document.getElementById('pane-visual-preview');
+
+      var btnList = document.getElementById('cms-view-list-btn');
+      var btnWrite = document.getElementById('cms-view-write-btn');
+      var btnPreview = document.getElementById('cms-view-preview-btn');
+
+      // Reset button styles
+      var activeClass = 'flex-1 h-[34px] rounded-lg text-[12px] font-semibold transition-all bg-white/10 text-white flex items-center justify-center gap-1';
+      var inactiveClass = 'flex-1 h-[34px] rounded-lg text-[12px] font-semibold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1';
+
+      btnList.className = view === 'list' ? activeClass : inactiveClass;
+      btnWrite.className = view === 'write' ? activeClass : inactiveClass;
+      btnPreview.className = view === 'preview' ? activeClass : inactiveClass;
+
+      if (view === 'list') {
+        sidebar.classList.remove('hidden');
+        workspace.classList.add('hidden');
+        workspace.classList.remove('flex');
+      } else if (view === 'write') {
+        sidebar.classList.add('hidden');
+        workspace.classList.remove('hidden');
+        workspace.classList.add('flex');
+        paneEditor.classList.remove('hidden');
+        panePreview.classList.add('hidden');
+      } else if (view === 'preview') {
+        sidebar.classList.add('hidden');
+        workspace.classList.remove('hidden');
+        workspace.classList.add('flex');
+        paneEditor.classList.add('hidden');
+        panePreview.classList.remove('hidden');
+        panePreview.classList.add('flex');
+      }
+    }
+
+    // =========================================================================
+    // CUSTOM DESIGN SYSTEM CATEGORY DROPDOWN CONTROLLER
+    // =========================================================================
+    function toggleCategoryDropdown(e) {
+      if (e) e.stopPropagation();
+      var menu = document.getElementById('category-dropdown-menu');
+      var chevron = document.getElementById('category-chevron');
+      var isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        menu.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function closeCategoryDropdown() {
+      var menu = document.getElementById('category-dropdown-menu');
+      var chevron = document.getElementById('category-chevron');
+      if (menu) menu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+
+    function selectCategory(cat) {
+      document.getElementById('post-category').value = cat;
+      document.getElementById('category-selected-label').textContent = cat;
+
+      var opts = document.querySelectorAll('.category-opt');
+      opts.forEach(function(el) {
+        var span = el.querySelector('span:first-child');
+        var check = el.querySelector('.cat-check');
+        if (span && span.textContent.trim() === cat) {
+          check.classList.remove('hidden');
+          el.classList.add('text-white');
+        } else {
+          check.classList.add('hidden');
+          el.classList.remove('text-white');
+        }
+      });
+
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (post) {
+        post.category = cat;
+      }
+
+      closeCategoryDropdown();
+    }
+
+    function toggleMetadataDrawer() {
+      var drawer = document.getElementById('metadata-drawer');
+      var btn = document.getElementById('toggle-metadata-btn');
+      var isHidden = drawer.classList.contains('hidden');
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        btn.classList.add('bg-white/10', 'text-white');
+      } else {
+        drawer.classList.add('hidden');
+        btn.classList.remove('bg-white/10', 'text-white');
+      }
+    }
+
+    // =========================================================================
+    // IN-BETWEEN BLOG IMAGE UPLOAD & INSERTION CONTROLLER
+    // =========================================================================
+    function triggerInlineImageUpload() {
+      document.getElementById('inline-image-input').click();
+    }
+
+    function handleInlineImageUpload(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      uploadAndInsertImage(file);
+      e.target.value = '';
+    }
+
+    async function uploadAndInsertImage(file) {
+      var cName = localStorage.getItem('resolvia_cld_name');
+      var cPreset = localStorage.getItem('resolvia_cld_preset');
+
+      if (cName && cPreset) {
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', cPreset);
+
+        var placeholder = '\n\n![Uploading ' + file.name + '...]()\n\n';
+        insertToolbar(placeholder, '');
+
+        try {
+          var uploadRes = await fetch('https://api.cloudinary.com/v1_1/' + cName + '/image/upload', {
+            method: 'POST',
+            body: formData
+          });
+          var data = await uploadRes.json();
+          if (data.secure_url) {
+            replaceInMarkdown(placeholder, '\n\n![' + file.name + '](' + data.secure_url + ')\n\n');
+            updateLivePreview();
+            return;
+          }
+        } catch(err) {
+          console.error("Cloudinary upload error:", err);
+        }
+      }
+
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        var dataUrl = evt.target.result;
+        var alt = prompt("Image caption / description:", file.name.replace(/\.[^/.]+$/, ""));
+        if (alt === null) return;
+        var mdSnippet = '\n\n![' + (alt || 'Figure') + '](' + dataUrl + ')\n\n';
+        insertToolbar(mdSnippet, '');
+        updateLivePreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function replaceInMarkdown(target, replacement) {
+      var textarea = document.getElementById('post-markdown');
+      textarea.value = textarea.value.replace(target, replacement);
+    }
+
+    // Tab Switching (Desktop & Mobile)
     function switchTab(tab) {
       currentTab = tab;
       var cmsTab = document.getElementById('tab-cms');
       var crmTab = document.getElementById('tab-crm');
+      
       var cmsBtn = document.getElementById('tab-cms-btn');
       var crmBtn = document.getElementById('tab-crm-btn');
+      var mobileCmsBtn = document.getElementById('mobile-tab-cms-btn');
+      var mobileCrmBtn = document.getElementById('mobile-tab-crm-btn');
 
       if (tab === 'cms') {
         cmsTab.classList.remove('hidden');
         crmTab.classList.add('hidden');
+        
         cmsBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2';
-        crmBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5 flex items-center gap-2';
+        crmBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-slate-400 hover:text-white hover:bg-white/5 flex items-center gap-2';
+
+        if (mobileCmsBtn && mobileCrmBtn) {
+          mobileCmsBtn.className = 'h-[36px] rounded-lg text-[12.5px] font-semibold transition-all bg-white/10 text-white flex items-center justify-center gap-1.5';
+          mobileCrmBtn.className = 'h-[36px] rounded-lg text-[12.5px] font-semibold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1.5';
+        }
       } else {
         cmsTab.classList.add('hidden');
         crmTab.classList.remove('hidden');
+        
         crmBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2';
-        cmsBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5 flex items-center gap-2';
+        cmsBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-slate-400 hover:text-white hover:bg-white/5 flex items-center gap-2';
+
+        if (mobileCmsBtn && mobileCrmBtn) {
+          mobileCrmBtn.className = 'h-[36px] rounded-lg text-[12.5px] font-semibold transition-all bg-white/10 text-white flex items-center justify-center gap-1.5';
+          mobileCmsBtn.className = 'h-[36px] rounded-lg text-[12.5px] font-semibold transition-all text-slate-400 hover:text-white flex items-center justify-center gap-1.5';
+        }
       }
     }
 
     // Settings & Supabase Connection
     function loadSavedSettings() {
-      var url = localStorage.getItem('resolvia_sp_url') || '';
+      var url = localStorage.getItem('resolvia_sp_url') || 'https://irrewfsdmixunaashckv.supabase.co';
       var key = localStorage.getItem('resolvia_sp_key') || 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO';
       var cName = localStorage.getItem('resolvia_cld_name') || '';
       var cPreset = localStorage.getItem('resolvia_cld_preset') || '';
@@ -607,7 +1136,7 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
     }
 
     function initSupabase() {
-      var url = localStorage.getItem('resolvia_sp_url');
+      var url = localStorage.getItem('resolvia_sp_url') || 'https://irrewfsdmixunaashckv.supabase.co';
       var key = localStorage.getItem('resolvia_sp_key') || 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO';
 
       if (url && key && window.supabase) {
@@ -629,11 +1158,11 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
       var pill = document.getElementById('connection-pill');
       var label = document.getElementById('connection-label');
       if (connected) {
-        pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 border border-emerald-500/30 text-emerald-300';
-        label.textContent = 'Supabase Connected';
+        pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] sm:text-[11px] font-medium bg-emerald-500/10 border border-emerald-500/30 text-emerald-300';
+        label.textContent = 'Supabase';
       } else {
-        pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300';
-        label.textContent = 'Preview Mode';
+        pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] sm:text-[11px] font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300';
+        label.textContent = 'Preview';
       }
     }
 
@@ -662,10 +1191,6 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
       document.getElementById('settings-modal').classList.toggle('hidden', !show);
     }
 
-    function toggleAuthModal(show) {
-      document.getElementById('auth-modal').classList.toggle('hidden', !show);
-    }
-
     // Post Management
     function renderPostsList() {
       var container = document.getElementById('posts-list-container');
@@ -674,12 +1199,12 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
 
       var filtered = posts.filter(function(p) {
         var matchFilter = postStatusFilter === 'all' || p.status === postStatusFilter;
-        var matchSearch = p.title.toLowerCase().includes(search) || p.slug.toLowerCase().includes(search);
+        var matchSearch = (p.title || '').toLowerCase().includes(search) || (p.slug || '').toLowerCase().includes(search);
         return matchFilter && matchSearch;
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="p-6 text-center text-[12.5px] text-white/40">No articles match your filter.</div>';
+        container.innerHTML = '<div class="p-6 text-center text-[12.5px] text-slate-500">No articles match your filter.</div>';
         return;
       }
 
@@ -687,17 +1212,23 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
         var active = p.id === currentPostId;
         var item = document.createElement('div');
         item.className = 'p-3.5 cursor-pointer transition-colors ' + (active ? 'bg-accent/15 border-l-2 border-accent' : 'hover:bg-white/[0.03]');
-        item.onclick = function() { selectPost(p.id); };
+        item.onclick = function() { 
+          selectPost(p.id);
+          // On mobile, auto-switch to Write view when article is tapped
+          if (window.innerWidth < 768) {
+            setMobileCmsView('write');
+          }
+        };
 
         var badgeColor = p.status === 'published' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border-amber-500/30';
 
         item.innerHTML = `
           <div class="flex items-center justify-between gap-2 mb-1.5">
-            <span class="text-[10.5px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded border ${badgeColor}">${p.status}</span>
-            <span class="text-[11px] text-white/40">${p.read_time || '7 min'}</span>
+            <span class="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded border ${badgeColor}">${p.status}</span>
+            <span class="text-[11px] text-slate-400">${p.read_time || '7 min'}</span>
           </div>
-          <h4 class="text-[13.5px] font-semibold text-white leading-snug line-clamp-2">${p.title}</h4>
-          <span class="text-[11.5px] text-white/45 block mt-1 font-mono truncate">/${p.slug}</span>
+          <h4 class="text-[13px] font-semibold text-white leading-snug line-clamp-2">${p.title || 'Untitled Post'}</h4>
+          <span class="text-[11px] text-slate-400 block mt-1 font-mono truncate">/${p.slug}</span>
         `;
         container.appendChild(item);
       });
@@ -709,18 +1240,19 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
       if (!post) return;
 
       document.getElementById('post-title').value = post.title || '';
-      document.getElementById('post-category').value = post.category || 'Retention Science';
       document.getElementById('post-youtube').value = post.youtube_id || '';
       document.getElementById('post-description').value = post.description || '';
       document.getElementById('post-markdown').value = post.content_markdown || '';
 
+      selectCategory(post.category || 'Retention Science');
+
       document.getElementById('current-post-slug-label').textContent = '/blog/' + post.slug;
       var statusBadge = document.getElementById('current-post-status-badge');
       if (post.status === 'published') {
-        statusBadge.className = 'px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0';
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0';
         statusBadge.textContent = 'Published';
       } else {
-        statusBadge.className = 'px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-amber-500/15 border border-amber-500/30 text-amber-300 shrink-0';
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold uppercase tracking-wider bg-amber-500/15 border border-amber-500/30 text-amber-300 shrink-0';
         statusBadge.textContent = 'Draft';
       }
 
@@ -744,7 +1276,7 @@ Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software l
         created_at: new Date().toISOString(),
         content_markdown: `# New High-Retention Playbook
 
-Start writing your article here...
+Start writing your article here... Paste or insert images anywhere throughout the body!
 
 ## First Major Insight
 Outline the problem and retention hooks.
@@ -754,6 +1286,10 @@ Outline the problem and retention hooks.
       currentPostId = newId;
       renderPostsList();
       selectPost(newId);
+
+      if (window.innerWidth < 768) {
+        setMobileCmsView('write');
+      }
     }
 
     function onTitleChanged() {
@@ -813,42 +1349,6 @@ Outline the problem and retention hooks.
       insertToolbar(snippet, '');
     }
 
-    async function handleImageUpload(e) {
-      var file = e.target.files[0];
-      if (!file) return;
-
-      var cName = localStorage.getItem('resolvia_cld_name');
-      var cPreset = localStorage.getItem('resolvia_cld_preset');
-
-      if (!cName || !cPreset) {
-        var manualUrl = prompt("Cloudinary unsigned preset not configured in Settings.\nPlease enter image URL directly, or configure Cloudinary in Settings:", "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80");
-        if (manualUrl) {
-          insertToolbar('![' + file.name + '](' + manualUrl + ')', '');
-        }
-        return;
-      }
-
-      var formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', cPreset);
-
-      try {
-        var uploadRes = await fetch('https://api.cloudinary.com/v1_1/' + cName + '/image/upload', {
-          method: 'POST',
-          body: formData
-        });
-        var data = await uploadRes.json();
-        if (data.secure_url) {
-          insertToolbar('![' + file.name + '](' + data.secure_url + ')', '');
-        } else {
-          alert('Upload failed: ' + (data.error ? data.error.message : 'Unknown error'));
-        }
-      } catch(err) {
-        console.error('Cloudinary error:', err);
-        alert('Upload failed: ' + err.message);
-      }
-    }
-
     async function savePost(publish) {
       var post = posts.find(function(p) { return p.id === currentPostId; });
       if (!post) return;
@@ -876,12 +1376,12 @@ Outline the problem and retention hooks.
 
           var upsertRes = await supabaseClient.from('posts').upsert(payload, { onConflict: 'slug' });
           if (upsertRes.error) {
-            alert('Supabase error: ' + upsertRes.error.message);
+            alert('Supabase sync note: ' + upsertRes.error.message);
           } else {
-            alert(publish ? '✓ Article published to Supabase!' : '✓ Draft saved to Supabase!');
+            alert(publish ? '✓ Article published live to Supabase!' : '✓ Draft saved to Supabase!');
           }
         } catch(e) {
-          alert('Sync error: ' + e.message);
+          alert('Sync note: ' + e.message);
         }
       } else {
         alert(publish ? '✓ Article marked as Published in local storage!' : '✓ Draft saved in local storage!');
@@ -920,18 +1420,22 @@ ${post.content_markdown}
       URL.revokeObjectURL(url);
     }
 
-    // CRM Leads Table
+    // =========================================================================
+    // CRM LEADS CONTROLLER
+    // =========================================================================
     function renderLeadsTable() {
       var tbody = document.getElementById('leads-table-body');
       var search = (document.getElementById('lead-search').value || '').toLowerCase();
       tbody.innerHTML = '';
 
       var filtered = leads.filter(function(l) {
-        return l.name.toLowerCase().includes(search) || l.email.toLowerCase().includes(search) || (l.channel_url && l.channel_url.toLowerCase().includes(search));
+        return (l.name || '').toLowerCase().includes(search) || 
+               (l.email || '').toLowerCase().includes(search) || 
+               (l.channel_url && l.channel_url.toLowerCase().includes(search));
       });
 
       if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-white/40">No inquiries found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="py-10 text-center text-slate-500 text-[13px]">No inquiries found matching your filter.</td></tr>';
         return;
       }
 
@@ -940,35 +1444,35 @@ ${post.content_markdown}
         tr.className = 'hover:bg-white/[0.02] transition-colors';
 
         var statusStyles = {
-          'new': 'bg-accent/15 text-accent border-accent/30',
-          'contacted': 'bg-amber-500/15 text-amber-300 border-amber-500/30',
-          'proposal_sent': 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-          'won': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-          'archived': 'bg-slate-500/15 text-slate-400 border-slate-500/30'
+          'new': 'bg-accent/15 text-accent border border-accent/30',
+          'contacted': 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
+          'proposal_sent': 'bg-purple-500/15 text-purple-300 border border-purple-500/30',
+          'won': 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
+          'archived': 'bg-slate-500/15 text-slate-400 border border-slate-500/30'
         };
 
         var dateStr = new Date(l.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 
         tr.innerHTML = `
-          <td class="py-3 px-4 text-white/50 text-[11.5px] whitespace-nowrap">${dateStr}</td>
-          <td class="py-3 px-4 font-semibold text-white">${l.name}</td>
-          <td class="py-3 px-4">
+          <td class="py-3.5 px-4 text-slate-400 text-[11.5px] whitespace-nowrap font-mono">${dateStr}</td>
+          <td class="py-3.5 px-4 font-semibold text-white">${l.name}</td>
+          <td class="py-3.5 px-4">
             <a href="mailto:${l.email}" class="text-accent hover:underline">${l.email}</a>
           </td>
-          <td class="py-3 px-4 text-white/80">${l.format}</td>
-          <td class="py-3 px-4">
-            ${l.channel_url ? `<a href="${l.channel_url}" target="_blank" class="text-[#38BAFE] hover:underline font-mono text-[12px] truncate max-w-[180px] inline-block">${l.channel_url}</a>` : '<span class="text-white/30">—</span>'}
+          <td class="py-3.5 px-4 text-slate-300">${l.format}</td>
+          <td class="py-3.5 px-4">
+            ${l.channel_url ? `<a href="${l.channel_url}" target="_blank" class="text-[#38BAFE] hover:underline font-mono text-[12px] truncate max-w-[180px] inline-block">${l.channel_url}</a>` : '<span class="text-slate-600">—</span>'}
           </td>
-          <td class="py-3 px-4 text-white/70 max-w-[260px] truncate" title="${l.notes || ''}">
-            ${l.notes || '<span class="text-white/30">None provided</span>'}
+          <td class="py-3.5 px-4 text-slate-400 max-w-[260px] truncate" title="${l.notes || ''}">
+            ${l.notes || '<span class="text-slate-600">None provided</span>'}
           </td>
-          <td class="py-3 px-4 text-right">
-            <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-[11px] font-semibold uppercase tracking-wider px-2 py-1 rounded border ${statusStyles[l.status] || statusStyles.new} bg-transparent outline-none cursor-pointer">
-              <option value="new" class="bg-surface text-white" ${l.status === 'new' ? 'selected' : ''}>New</option>
-              <option value="contacted" class="bg-surface text-white" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
-              <option value="proposal_sent" class="bg-surface text-white" ${l.status === 'proposal_sent' ? 'selected' : ''}>Proposal Sent</option>
-              <option value="won" class="bg-surface text-white" ${l.status === 'won' ? 'selected' : ''}>Won</option>
-              <option value="archived" class="bg-surface text-white" ${l.status === 'archived' ? 'selected' : ''}>Archived</option>
+          <td class="py-3.5 px-4 text-right">
+            <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-lg ${statusStyles[l.status] || statusStyles.new} bg-[#18191c] outline-none cursor-pointer">
+              <option value="new" class="bg-[#18191c] text-white" ${l.status === 'new' ? 'selected' : ''}>New</option>
+              <option value="contacted" class="bg-[#18191c] text-white" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+              <option value="proposal_sent" class="bg-[#18191c] text-white" ${l.status === 'proposal_sent' ? 'selected' : ''}>Proposal Sent</option>
+              <option value="won" class="bg-[#18191c] text-white" ${l.status === 'won' ? 'selected' : ''}>Won</option>
+              <option value="archived" class="bg-[#18191c] text-white" ${l.status === 'archived' ? 'selected' : ''}>Archived</option>
             </select>
           </td>
         `;
@@ -994,6 +1498,8 @@ ${post.content_markdown}
       document.getElementById('stat-proposal-leads').textContent = leads.filter(function(l){ return l.status === 'proposal_sent'; }).length;
       document.getElementById('stat-won-leads').textContent = leads.filter(function(l){ return l.status === 'won'; }).length;
       document.getElementById('header-lead-badge').textContent = leads.filter(function(l){ return l.status === 'new'; }).length;
+      var mobileBadge = document.getElementById('mobile-lead-badge');
+      if (mobileBadge) mobileBadge.textContent = leads.filter(function(l){ return l.status === 'new'; }).length;
     }
 
     function exportLeadsCSV() {
@@ -1027,9 +1533,9 @@ ${post.content_markdown}
     function setPostStatusFilter(filter) {
       postStatusFilter = filter;
       document.querySelectorAll('.post-filter-chip').forEach(function(el) {
-        el.className = 'post-filter-chip px-2.5 py-1 rounded-md text-white/50 hover:text-white font-medium';
+        el.className = 'post-filter-chip px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium touch-target';
       });
-      event.target.className = 'post-filter-chip px-2.5 py-1 rounded-md bg-white/10 text-white font-medium';
+      event.target.className = 'post-filter-chip px-3 py-1.5 rounded-lg bg-white/10 text-white font-medium touch-target';
       renderPostsList();
     }
   </script>
