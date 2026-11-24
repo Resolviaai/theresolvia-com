@@ -9,6 +9,8 @@ User-agent: *
 Allow: /
 
 # Scratch, staging previews, test pages and temp files are not for indexation
+Disallow: /admin
+Disallow: /admin/
 Disallow: /scratch/
 Disallow: /*_test.html
 Disallow: /preview_test.html

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resolvia Studio · Admin CMS & Lead Center</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="/brand/resolvia_r_logo.png" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#0B0F17',
+            surface: '#18191c',
+            recessed: '#111215',
+            accent: '#2F86F7',
+            accentHover: '#1E6CDD',
+            borderSubtle: 'rgba(255, 255, 255, 0.08)',
+            borderFocus: 'rgba(47, 134, 247, 0.5)'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Menlo', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Supabase JS Client & Marked JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Lite YouTube Component -->
+  <link rel="stylesheet" href="/assets/css/lite-youtube.css" />
+  <script src="/assets/js/lite-youtube.js" defer></script>
+
+  <style>
+    /* Resolvia Studio 4-Layer Hierarchy */
+    body {
+      background-color: #0B0F17;
+      color: #e2e8f0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0B0F17; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+
+    /* Markdown Live Preview Prose */
+    .prose-resolvia h1 { font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .prose-resolvia h2 { font-size: 20px; font-weight: 700; color: #ffffff; margin-top: 24px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; }
+    .prose-resolvia h3 { font-size: 16px; font-weight: 600; color: #93c5fd; margin-top: 18px; margin-bottom: 8px; }
+    .prose-resolvia p { font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,0.78); margin-bottom: 14px; }
+    .prose-resolvia ul { list-style-type: disc; padding-left: 20px; margin-bottom: 14px; color: rgba(255,255,255,0.75); font-size: 14px; }
+    .prose-resolvia ol { list-style-type: decimal; padding-left: 20px; margin-bottom: 14px; color: rgba(255,255,255,0.75); font-size: 14px; }
+    .prose-resolvia li { margin-bottom: 6px; }
+    .prose-resolvia blockquote { border-left: 3px solid #2F86F7; background: rgba(47, 134, 247, 0.08); padding: 10px 14px; border-radius: 0 8px 8px 0; color: rgba(255,255,255,0.9); margin-bottom: 16px; font-style: italic; }
+    .prose-resolvia code { font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px; color: #67e8f9; }
+    .prose-resolvia pre { background: #000000; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; overflow-x: auto; margin-bottom: 16px; }
+    .prose-resolvia img { max-width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin: 16px 0; }
+    .prose-resolvia a { color: #38BAFE; text-decoration: underline; text-underline-offset: 3px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#2F86F7]/30 selection:text-white">
+
+  <!-- TOP HEADER BAR -->
+  <header class="h-[60px] border-b border-borderSubtle bg-surface/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+    <div class="flex items-center gap-4">
+      <a href="/" class="flex items-center gap-2.5 group">
+        <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-7 rounded-md object-contain" />
+        <span class="font-bold text-[15px] tracking-tight text-white flex items-center gap-1.5">
+          Resolvia
+          <span class="text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/25">CMS</span>
+        </span>
+      </a>
+
+      <!-- Primary Tabs -->
+      <nav class="hidden md:flex items-center gap-1 ml-4 border-l border-white/10 pl-4">
+        <button id="tab-cms-btn" onclick="switchTab('cms')" class="px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2">
+          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+          Editorial CMS
+        </button>
+        <button id="tab-crm-btn" onclick="switchTab('crm')" class="px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5 flex items-center gap-2">
+          <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          Leads Inbox
+          <span id="header-lead-badge" class="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-accent text-white">4</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Right Utility Buttons -->
+    <div class="flex items-center gap-3">
+      <!-- Database Connection Status Indicator -->
+      <div id="connection-pill" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300">
+        <span class="size-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+        <span id="connection-label">Preview Mode</span>
+      </div>
+
+      <!-- Settings Gear Button -->
+      <button onclick="toggleSettingsModal(true)" class="p-2 rounded-lg border border-borderSubtle bg-white/[0.04] text-white/80 hover:text-white hover:bg-white/10 transition-colors" title="API Credentials & Integrations">
+        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </button>
+
+      <!-- Auth Button -->
+      <button id="auth-header-btn" onclick="toggleAuthModal(true)" class="h-[34px] px-3.5 rounded-lg bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold transition-all">
+        Sign In
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- TAB 1: EDITORIAL CMS (BLOG POSTS & CASE STUDIES)                          -->
+  <!-- ========================================================================= -->
+  <main id="tab-cms" class="flex-1 flex flex-col md:flex-row h-[calc(100vh-60px)] overflow-hidden">
+    
+    <!-- LEFT SIDEBAR: Post List -->
+    <aside class="w-full md:w-[320px] lg:w-[360px] border-r border-borderSubtle bg-surface/40 flex flex-col shrink-0 h-full">
+      <div class="p-3.5 border-b border-borderSubtle flex items-center justify-between gap-2">
+        <div class="relative flex-1">
+          <input type="text" id="post-search" oninput="filterPosts()" placeholder="Search articles..." class="w-full h-[36px] bg-black/40 border border-borderSubtle rounded-lg px-3 pl-8 text-[13px] text-white placeholder-white/30 outline-none focus:border-accent" />
+          <svg class="size-4 text-white/40 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <button onclick="createNewPost()" class="h-[36px] px-3 bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold rounded-lg shrink-0 flex items-center gap-1.5 transition-colors">
+          <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+          New
+        </button>
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="flex items-center gap-1.5 px-3.5 py-2 border-b border-borderSubtle/60 text-[11px] overflow-x-auto">
+        <button onclick="setPostStatusFilter('all')" class="post-filter-chip px-2.5 py-1 rounded-md bg-white/10 text-white font-medium">All</button>
+        <button onclick="setPostStatusFilter('published')" class="post-filter-chip px-2.5 py-1 rounded-md text-white/50 hover:text-white font-medium">Published</button>
+        <button onclick="setPostStatusFilter('draft')" class="post-filter-chip px-2.5 py-1 rounded-md text-white/50 hover:text-white font-medium">Drafts</button>
+      </div>
+
+      <!-- Posts List -->
+      <div id="posts-list-container" class="flex-1 overflow-y-auto divide-y divide-borderSubtle/50">
+        <!-- Rendered dynamically -->
+      </div>
+    </aside>
+
+    <!-- RIGHT WORKSPACE: Editor & Live Preview -->
+    <section class="flex-1 flex flex-col h-full overflow-hidden bg-canvas">
+      
+      <!-- Top Action Bar -->
+      <div class="h-[52px] border-b border-borderSubtle bg-surface/50 px-4 flex items-center justify-between shrink-0 gap-3">
+        <div class="flex items-center gap-2 overflow-hidden">
+          <span id="current-post-status-badge" class="px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0">
+            Published
+          </span>
+          <span id="current-post-slug-label" class="text-[12.5px] text-white/50 truncate font-mono">
+            /blog/how-to-improve-youtube-retention
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="exportMarkdownFile()" class="h-[34px] px-3 rounded-lg border border-borderSubtle bg-white/[0.04] text-white/80 hover:text-white text-[12px] font-medium transition-colors flex items-center gap-1.5" title="Download .md file ready for content/blog/">
+            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Export .md
+          </button>
+          <button onclick="savePost(false)" class="h-[34px] px-3.5 rounded-lg border border-borderSubtle bg-white/[0.07] text-white hover:bg-white/[0.12] text-[12.5px] font-semibold transition-colors">
+            Save Draft
+          </button>
+          <button onclick="savePost(true)" class="h-[34px] px-4 rounded-lg bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold transition-colors flex items-center gap-1.5">
+            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Publish Live
+          </button>
+        </div>
+      </div>
+
+      <!-- Metadata Drawer -->
+      <div class="p-4 border-b border-borderSubtle bg-surface/20 shrink-0 grid grid-cols-1 md:grid-cols-12 gap-3 text-[13px]">
+        <div class="md:col-span-6">
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">Article Title</label>
+          <input type="text" id="post-title" oninput="onTitleChanged()" class="w-full h-[38px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white text-[14px] font-semibold outline-none focus:border-accent" placeholder="Enter post title..." />
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">Category</label>
+          <select id="post-category" class="w-full h-[38px] bg-black/40 border border-borderSubtle rounded-lg px-2 text-white outline-none focus:border-accent">
+            <option value="Retention Science">Retention Science</option>
+            <option value="Thumbnail CTR">Thumbnail CTR</option>
+            <option value="Pricing & Retainers">Pricing & Retainers</option>
+            <option value="Hiring & Scaling">Hiring & Scaling</option>
+            <option value="Vertical Video">Vertical Video</option>
+            <option value="Agency Workflows">Agency Workflows</option>
+          </select>
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">YouTube Video ID (Optional)</label>
+          <div class="flex gap-1.5">
+            <input type="text" id="post-youtube" placeholder="e.g. dQw4w9WgXcQ" class="w-full h-[38px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12px] outline-none focus:border-accent" />
+            <button onclick="insertYouTubeEmbed()" class="px-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[11px] font-semibold shrink-0" title="Insert Lite YouTube Embed">Insert</button>
+          </div>
+        </div>
+        <div class="md:col-span-8">
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">SEO Hook / Excerpt</label>
+          <input type="text" id="post-description" placeholder="Short 1-2 sentence meta description..." class="w-full h-[34px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white/80 outline-none focus:border-accent" />
+        </div>
+        <div class="md:col-span-4 flex items-end gap-2">
+          <div class="flex-1">
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-white/50 mb-1">Photo Upload (Cloudinary)</label>
+            <input type="file" id="cloudinary-file-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden" />
+            <button onclick="document.getElementById('cloudinary-file-input').click()" class="w-full h-[34px] border border-dashed border-borderSubtle hover:border-accent/60 bg-white/[0.02] hover:bg-white/[0.05] rounded-lg px-3 text-[12px] text-white/70 flex items-center justify-center gap-1.5 transition-colors">
+              <svg class="size-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Upload Blog Photo
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Split Screen: Markdown Editor vs. Real-time Live Preview -->
+      <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borderSubtle overflow-hidden">
+        
+        <!-- Markdown Raw Editor -->
+        <div class="flex flex-col h-full bg-[#080b10] overflow-hidden">
+          <div class="h-[38px] px-3 border-b border-borderSubtle/60 bg-surface/30 flex items-center justify-between text-[11.5px] text-white/50 font-medium">
+            <span class="flex items-center gap-2">
+              <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+              Markdown Source
+            </span>
+            <div class="flex items-center gap-1">
+              <button onclick="insertToolbar('**', '**')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Bold">B</button>
+              <button onclick="insertToolbar('*', '*')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80 italic" title="Italic">I</button>
+              <button onclick="insertToolbar('## ', '')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Heading 2">H2</button>
+              <button onclick="insertToolbar('> ', '')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Quote">""</button>
+              <button onclick="insertToolbar('- ', '')" class="px-1.5 py-0.5 rounded hover:bg-white/10 text-white/80" title="Bullet List">• List</button>
+            </div>
+          </div>
+          <textarea id="post-markdown" oninput="updateLivePreview()" class="flex-1 w-full bg-transparent p-4 font-mono text-[13.5px] leading-relaxed text-slate-200 outline-none resize-none selection:bg-accent/30" placeholder="Write article content in Markdown..."></textarea>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="flex flex-col h-full bg-canvas overflow-hidden">
+          <div class="h-[38px] px-3 border-b border-borderSubtle/60 bg-surface/30 flex items-center justify-between text-[11.5px] text-white/50 font-medium">
+            <span class="flex items-center gap-2">
+              <svg class="size-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Live Visual Preview (Resolvia Styling)
+            </span>
+            <span id="preview-word-count" class="text-[11px] text-white/40">0 words</span>
+          </div>
+          <div id="preview-container" class="flex-1 p-6 overflow-y-auto prose-resolvia">
+            <!-- Rendered marked output -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- TAB 2: INBOUND LEADS INBOX (CRM DASHBOARD)                                -->
+  <!-- ========================================================================= -->
+  <main id="tab-crm" class="hidden flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto overflow-y-auto">
+    
+    <!-- CRM Metrics Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
+        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">Total Inquiries</span>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="stat-total-leads" class="text-[28px] font-extrabold text-white">4</span>
+          <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">+100% wk</span>
+        </div>
+      </div>
+      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
+        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">New Uncontacted</span>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="stat-new-leads" class="text-[28px] font-extrabold text-accent">2</span>
+          <span class="text-[11px] font-semibold text-accent bg-accent/15 px-2 py-0.5 rounded-full">Active</span>
+        </div>
+      </div>
+      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
+        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">Proposal Sent</span>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="stat-proposal-leads" class="text-[28px] font-extrabold text-purple-400">1</span>
+          <span class="text-[11px] font-semibold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">In Pipeline</span>
+        </div>
+      </div>
+      <div class="rounded-xl border border-borderSubtle bg-surface/60 p-4 shadow-sm">
+        <span class="text-[12px] font-medium text-white/50 uppercase tracking-wider">Won Clients</span>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="stat-won-leads" class="text-[28px] font-extrabold text-emerald-400">1</span>
+          <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">Retainers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="rounded-2xl border border-borderSubtle bg-surface/80 overflow-hidden shadow-lg">
+      <div class="p-4 border-b border-borderSubtle flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <input type="text" id="lead-search" oninput="filterLeads()" placeholder="Filter by creator name, email or channel..." class="w-full sm:w-[320px] h-[36px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-[13px] text-white placeholder-white/30 outline-none focus:border-accent" />
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <button onclick="exportLeadsCSV()" class="h-[36px] px-3.5 rounded-lg border border-borderSubtle bg-white/[0.04] text-white hover:bg-white/10 text-[12.5px] font-medium transition-colors flex items-center gap-1.5">
+            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-[13px]">
+          <thead>
+            <tr class="border-b border-borderSubtle/60 bg-black/20 text-white/50 text-[11px] uppercase tracking-wider">
+              <th class="py-3 px-4">Date</th>
+              <th class="py-3 px-4">Name / Creator</th>
+              <th class="py-3 px-4">Work Email</th>
+              <th class="py-3 px-4">Format</th>
+              <th class="py-3 px-4">Channel / Footage</th>
+              <th class="py-3 px-4">Retention Challenge</th>
+              <th class="py-3 px-4 text-right">Status</th>
+            </tr>
+          </thead>
+          <tbody id="leads-table-body" class="divide-y divide-borderSubtle/40">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: SETTINGS & CREDENTIALS                                             -->
+  <!-- ========================================================================= -->
+  <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-[540px] rounded-2xl border border-white/10 bg-surface p-6 shadow-2xl relative text-left">
+      <div class="flex items-center justify-between pb-4 border-b border-borderSubtle">
+        <div class="flex items-center gap-2.5">
+          <div class="size-8 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent">
+            <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-bold text-white">API & Database Integrations</h3>
+            <p class="text-[12px] text-white/50">Stored securely in your local browser storage</p>
+          </div>
+        </div>
+        <button onclick="toggleSettingsModal(false)" class="text-white/40 hover:text-white p-1 rounded-md">
+          <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="space-y-4 py-4 text-[13px]">
+        <div>
+          <label class="block text-[12px] font-semibold text-white/80 mb-1">Supabase Project URL</label>
+          <input type="text" id="cfg-supabase-url" placeholder="https://hqqnviehspjqnwekafzq.supabase.co" class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+        </div>
+        <div>
+          <label class="block text-[12px] font-semibold text-white/80 mb-1">Supabase Anon Key</label>
+          <input type="password" id="cfg-supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+        </div>
+        <div class="border-t border-borderSubtle/60 pt-3">
+          <label class="block text-[12px] font-semibold text-white/80 mb-1">Cloudinary Cloud Name</label>
+          <input type="text" id="cfg-cloudinary-name" placeholder="e.g. resolvia" class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+        </div>
+        <div>
+          <label class="block text-[12px] font-semibold text-white/80 mb-1">Cloudinary Upload Preset (Unsigned)</label>
+          <input type="text" id="cfg-cloudinary-preset" placeholder="e.g. resolvia_blog_uploads" class="w-full h-[40px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white font-mono text-[12.5px] outline-none focus:border-accent" />
+          <span class="text-[11px] text-white/40 block mt-1">Allows drag-and-drop blog photo uploads directly to Cloudinary CDN</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-borderSubtle">
+        <button onclick="testConnection()" class="px-3.5 py-2 rounded-lg text-[12.5px] font-medium border border-borderSubtle text-white/80 hover:bg-white/5">
+          Test Connection
+        </button>
+        <div class="flex gap-2">
+          <button onclick="toggleSettingsModal(false)" class="px-4 py-2 rounded-lg text-[12.5px] text-white/60 hover:text-white">Cancel</button>
+          <button onclick="saveSettings()" class="px-5 py-2 rounded-lg bg-accent hover:bg-accentHover text-white text-[12.5px] font-semibold">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: SUPABASE AUTHENTICATION                                            -->
+  <!-- ========================================================================= -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-[420px] rounded-2xl border border-white/10 bg-surface p-6 shadow-2xl relative text-left">
+      <div class="text-center mb-6">
+        <img src="/brand/resolvia_r_logo.png" alt="Resolvia" class="size-10 rounded-lg mx-auto mb-3" />
+        <h3 class="text-[18px] font-bold text-white">Sign In to Resolvia CMS</h3>
+        <p class="text-[12.5px] text-white/50">Manage editorial playbooks and inbound inquiries</p>
+      </div>
+
+      <form onsubmit="handleAuthSubmit(event)" class="space-y-4 text-[13px]">
+        <div>
+          <label class="block text-[12px] font-semibold text-white/80 mb-1">Admin Email</label>
+          <input type="email" id="auth-email" required placeholder="admin@theresolvia.com" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white outline-none focus:border-accent" />
+        </div>
+        <div>
+          <label class="block text-[12px] font-semibold text-white/80 mb-1">Password</label>
+          <input type="password" id="auth-password" placeholder="••••••••••••" class="w-full h-[42px] bg-black/40 border border-borderSubtle rounded-lg px-3 text-white outline-none focus:border-accent" />
+        </div>
+
+        <div id="auth-feedback" class="hidden py-2 px-3 rounded-lg text-[12px]"></div>
+
+        <div class="space-y-2 pt-2">
+          <button type="submit" class="w-full h-[42px] rounded-lg bg-accent hover:bg-accentHover text-white font-semibold transition-colors">
+            Sign In with Password
+          </button>
+          <button type="button" onclick="handleMagicLink()" class="w-full h-[38px] rounded-lg border border-borderSubtle text-white/80 hover:bg-white/5 text-[12px] font-medium transition-colors">
+            Send Magic Link to Email
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-4 pt-4 border-t border-borderSubtle text-center">
+        <button onclick="toggleAuthModal(false)" class="text-[12px] text-white/50 hover:text-white">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT CMS & CRM CONTROLLER -->
+  <script>
+    // --- Mock / Seed Data (For instant offline usability & preview) ---
+    var mockPosts = [
+      {
+        id: '1',
+        slug: 'how-to-improve-youtube-retention',
+        title: 'How to Improve YouTube Audience Retention: The 4-Beat System',
+        category: 'Retention Science',
+        badge: 'Retention Science',
+        description: 'Complete playbook for eliminating the initial 30-second drop-off cliff and keeping Average View Duration (AVD) above 50% on long-form content.',
+        youtube_id: 'dQw4w9WgXcQ',
+        status: 'published',
+        read_time: '9 min read',
+        author: 'Resolvia Studio Team',
+        created_at: '2026-11-20T08:00:00Z',
+        content_markdown: `# How to Improve YouTube Audience Retention
+
+Audience retention is the single highest-weighted signal in the YouTube recommendation algorithm.
+
+## The 4-Beat Pacing Law
+
+Every high-retention video follows 4 cyclical beats:
+1. **Hook Anchor (0-15s)**: Validate the exact expectation set in the title.
+2. **Cognitive Escalation (30-90s)**: Introduce micro-stakes so the viewer is invested.
+3. **Pacing Reset (every 25s)**: Change camera angles, swap motion textures, or introduce foley sound cues.
+4. **Payoff Delivery**: Provide the promised transformation without saying "in conclusion".
+
+<lite-youtube videoid="dQw4w9WgXcQ" playlabel="Watch Retention Breakdown"></lite-youtube>
+
+> "Never say 'in conclusion' or 'thank you for watching': viewers leave instantly."
+`
+      },
+      {
+        id: '2',
+        slug: '2026-thumbnail-psychology-playbook',
+        title: '2026 Thumbnail Psychology Playbook: Micro-Expressions & Visual Gravity',
+        category: 'Thumbnail CTR',
+        badge: 'Thumbnail CTR',
+        description: 'Visual saliency heatmaps, 3-element focal composition, and mobile feed CTR benchmarks for modern creators.',
+        youtube_id: '',
+        status: 'published',
+        read_time: '7 min read',
+        author: 'Resolvia Studio Team',
+        created_at: '2026-11-18T10:00:00Z',
+        content_markdown: `# 2026 Thumbnail Psychology Playbook
+
+Thumbnails are visual billboards competing against a feed of infinite scrolls.
+
+## The 3-Element Visual Rule
+Never pack more than 3 distinct focal points into a thumbnail:
+- **Subject**: One expressive face or dynamic object.
+- **Context Element**: The curiosity trigger.
+- **Contrast Accent**: A color or light pop that separates it from dark mode feeds.
+`
+      },
+      {
+        id: '3',
+        slug: 'video-editing-cost-pricing-guide',
+        title: 'Video Editing Agency Pricing Guide: Retainers vs Per-Project vs In-House',
+        category: 'Pricing & Retainers',
+        badge: 'Pricing & Retainers',
+        description: 'Transparent breakdown of video editing agency costs, salary benchmarks, and turnaround SLAs in 2026.',
+        youtube_id: '',
+        status: 'published',
+        read_time: '12 min read',
+        author: 'Resolvia Studio Team',
+        created_at: '2026-11-15T12:00:00Z',
+        content_markdown: `# Video Editing Agency Pricing Guide
+
+How much should you invest in post-production?
+
+## Retainer vs In-House Economics
+Hiring an in-house senior editor costs \$85K-\$110K plus benefits and software licenses. An agency retainer provides a distributed team of editors, sound designers, and motion graphic artists at a predictable flat monthly rate.
+`
+      }
+    ];
+
+    var mockLeads = [
+      {
+        id: 'lead-1',
+        name: 'Alex Hormozi',
+        email: 'alex@acquisition.com',
+        format: 'Short-Form (Shorts / Reels / TikTok)',
+        channel_url: 'https://youtube.com/@AlexHormozi',
+        notes: 'Need dynamic sound design, kinetic pacing, and faster 24h turnaround for daily shorts.',
+        status: 'won',
+        created_at: '2026-11-24T05:30:00Z'
+      },
+      {
+        id: 'lead-2',
+        name: 'SaaS Growth Studio',
+        email: 'founder@scaleup.io',
+        format: 'Paid Video Ads & Creatives',
+        channel_url: 'https://scaleup.io',
+        notes: 'Running \$40k/mo Meta ads. Need high-hook variation cuts.',
+        status: 'proposal_sent',
+        created_at: '2026-11-23T18:15:00Z'
+      },
+      {
+        id: 'lead-3',
+        name: 'The Modern Creator',
+        email: 'marcus@moderncreator.co',
+        format: 'YouTube Long-Form Videos',
+        channel_url: 'https://youtube.com/@TheModernCreator',
+        notes: 'Average view duration drops at minute 4. Need 4-Beat pacing system.',
+        status: 'new',
+        created_at: '2026-11-24T08:45:00Z'
+      },
+      {
+        id: 'lead-4',
+        name: 'Retention Pulse',
+        email: 'team@retentionpulse.com',
+        format: 'Full Post-Production Retainer',
+        channel_url: 'https://youtube.com/@retentionpulse',
+        notes: 'Looking for 8 long-form videos + 24 shorts monthly.',
+        status: 'new',
+        created_at: '2026-11-24T09:12:00Z'
+      }
+    ];
+
+    // State Variables
+    var currentTab = 'cms';
+    var supabaseClient = null;
+    var posts = [...mockPosts];
+    var leads = [...mockLeads];
+    var currentPostId = mockPosts[0].id;
+    var postStatusFilter = 'all';
+
+    // Initialize on Load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSavedSettings();
+      initSupabase();
+      renderPostsList();
+      selectPost(currentPostId);
+      renderLeadsTable();
+      updateCRMStats();
+    });
+
+    // Tab Switching
+    function switchTab(tab) {
+      currentTab = tab;
+      var cmsTab = document.getElementById('tab-cms');
+      var crmTab = document.getElementById('tab-crm');
+      var cmsBtn = document.getElementById('tab-cms-btn');
+      var crmBtn = document.getElementById('tab-crm-btn');
+
+      if (tab === 'cms') {
+        cmsTab.classList.remove('hidden');
+        crmTab.classList.add('hidden');
+        cmsBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2';
+        crmBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5 flex items-center gap-2';
+      } else {
+        cmsTab.classList.add('hidden');
+        crmTab.classList.remove('hidden');
+        crmBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors bg-white/10 text-white flex items-center gap-2';
+        cmsBtn.className = 'px-3.5 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5 flex items-center gap-2';
+      }
+    }
+
+    // Settings & Supabase Connection
+    function loadSavedSettings() {
+      var url = localStorage.getItem('resolvia_sp_url') || '';
+      var key = localStorage.getItem('resolvia_sp_key') || 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO';
+      var cName = localStorage.getItem('resolvia_cld_name') || '';
+      var cPreset = localStorage.getItem('resolvia_cld_preset') || '';
+
+      document.getElementById('cfg-supabase-url').value = url;
+      document.getElementById('cfg-supabase-key').value = key;
+      document.getElementById('cfg-cloudinary-name').value = cName;
+      document.getElementById('cfg-cloudinary-preset').value = cPreset;
+    }
+
+    function saveSettings() {
+      var url = document.getElementById('cfg-supabase-url').value.trim();
+      var key = document.getElementById('cfg-supabase-key').value.trim();
+      var cName = document.getElementById('cfg-cloudinary-name').value.trim();
+      var cPreset = document.getElementById('cfg-cloudinary-preset').value.trim();
+
+      localStorage.setItem('resolvia_sp_url', url);
+      localStorage.setItem('resolvia_sp_key', key);
+      localStorage.setItem('resolvia_cld_name', cName);
+      localStorage.setItem('resolvia_cld_preset', cPreset);
+
+      toggleSettingsModal(false);
+      initSupabase();
+    }
+
+    function initSupabase() {
+      var url = localStorage.getItem('resolvia_sp_url');
+      var key = localStorage.getItem('resolvia_sp_key') || 'sb_publishable_xvpxIf1s8f_D3nQ3dvTZwQ_i1xcD_uO';
+
+      if (url && key && window.supabase) {
+        try {
+          supabaseClient = window.supabase.createClient(url, key);
+          updateConnectionStatus(true);
+          fetchPostsFromSupabase();
+          fetchLeadsFromSupabase();
+        } catch(e) {
+          console.error("Supabase init error:", e);
+          updateConnectionStatus(false);
+        }
+      } else {
+        updateConnectionStatus(false);
+      }
+    }
+
+    function updateConnectionStatus(connected) {
+      var pill = document.getElementById('connection-pill');
+      var label = document.getElementById('connection-label');
+      if (connected) {
+        pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 border border-emerald-500/30 text-emerald-300';
+        label.textContent = 'Supabase Connected';
+      } else {
+        pill.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300';
+        label.textContent = 'Preview Mode';
+      }
+    }
+
+    async function fetchPostsFromSupabase() {
+      if (!supabaseClient) return;
+      var res = await supabaseClient.from('posts').select('*').order('created_at', { ascending: false });
+      if (!res.error && res.data && res.data.length > 0) {
+        posts = res.data;
+        renderPostsList();
+        selectPost(posts[0].id);
+      }
+    }
+
+    async function fetchLeadsFromSupabase() {
+      if (!supabaseClient) return;
+      var res = await supabaseClient.from('leads').select('*').order('created_at', { ascending: false });
+      if (!res.error && res.data && res.data.length > 0) {
+        leads = res.data;
+        renderLeadsTable();
+        updateCRMStats();
+      }
+    }
+
+    // Modal Toggles
+    function toggleSettingsModal(show) {
+      document.getElementById('settings-modal').classList.toggle('hidden', !show);
+    }
+
+    function toggleAuthModal(show) {
+      document.getElementById('auth-modal').classList.toggle('hidden', !show);
+    }
+
+    // Post Management
+    function renderPostsList() {
+      var container = document.getElementById('posts-list-container');
+      var search = (document.getElementById('post-search').value || '').toLowerCase();
+      container.innerHTML = '';
+
+      var filtered = posts.filter(function(p) {
+        var matchFilter = postStatusFilter === 'all' || p.status === postStatusFilter;
+        var matchSearch = p.title.toLowerCase().includes(search) || p.slug.toLowerCase().includes(search);
+        return matchFilter && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="p-6 text-center text-[12.5px] text-white/40">No articles match your filter.</div>';
+        return;
+      }
+
+      filtered.forEach(function(p) {
+        var active = p.id === currentPostId;
+        var item = document.createElement('div');
+        item.className = 'p-3.5 cursor-pointer transition-colors ' + (active ? 'bg-accent/15 border-l-2 border-accent' : 'hover:bg-white/[0.03]');
+        item.onclick = function() { selectPost(p.id); };
+
+        var badgeColor = p.status === 'published' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+
+        item.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-[10.5px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded border ${badgeColor}">${p.status}</span>
+            <span class="text-[11px] text-white/40">${p.read_time || '7 min'}</span>
+          </div>
+          <h4 class="text-[13.5px] font-semibold text-white leading-snug line-clamp-2">${p.title}</h4>
+          <span class="text-[11.5px] text-white/45 block mt-1 font-mono truncate">/${p.slug}</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function selectPost(id) {
+      currentPostId = id;
+      var post = posts.find(function(p) { return p.id === id; });
+      if (!post) return;
+
+      document.getElementById('post-title').value = post.title || '';
+      document.getElementById('post-category').value = post.category || 'Retention Science';
+      document.getElementById('post-youtube').value = post.youtube_id || '';
+      document.getElementById('post-description').value = post.description || '';
+      document.getElementById('post-markdown').value = post.content_markdown || '';
+
+      document.getElementById('current-post-slug-label').textContent = '/blog/' + post.slug;
+      var statusBadge = document.getElementById('current-post-status-badge');
+      if (post.status === 'published') {
+        statusBadge.className = 'px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0';
+        statusBadge.textContent = 'Published';
+      } else {
+        statusBadge.className = 'px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-amber-500/15 border border-amber-500/30 text-amber-300 shrink-0';
+        statusBadge.textContent = 'Draft';
+      }
+
+      renderPostsList();
+      updateLivePreview();
+    }
+
+    function createNewPost() {
+      var newId = 'post-' + Date.now();
+      var newPost = {
+        id: newId,
+        slug: 'new-retention-playbook',
+        title: 'New High-Retention Playbook',
+        category: 'Retention Science',
+        badge: 'Retention Science',
+        description: 'New retention framework and cutting strategies for video creators.',
+        youtube_id: '',
+        status: 'draft',
+        read_time: '7 min read',
+        author: 'Resolvia Studio Team',
+        created_at: new Date().toISOString(),
+        content_markdown: `# New High-Retention Playbook
+
+Start writing your article here...
+
+## First Major Insight
+Outline the problem and retention hooks.
+`
+      };
+      posts.unshift(newPost);
+      currentPostId = newId;
+      renderPostsList();
+      selectPost(newId);
+    }
+
+    function onTitleChanged() {
+      var title = document.getElementById('post-title').value;
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (post) {
+        post.title = title;
+        post.slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        document.getElementById('current-post-slug-label').textContent = '/blog/' + post.slug;
+        renderPostsList();
+      }
+    }
+
+    function updateLivePreview() {
+      var raw = document.getElementById('post-markdown').value;
+      var container = document.getElementById('preview-container');
+      
+      if (window.marked) {
+        container.innerHTML = marked.parse(raw);
+      } else {
+        container.textContent = raw;
+      }
+
+      var wordCount = raw.trim() ? raw.trim().split(/\s+/).length : 0;
+      document.getElementById('preview-word-count').textContent = wordCount + ' words · ~' + Math.ceil(wordCount / 200) + ' min read';
+    }
+
+    function insertToolbar(before, after) {
+      var textarea = document.getElementById('post-markdown');
+      var start = textarea.selectionStart;
+      var end = textarea.selectionEnd;
+      var text = textarea.value;
+      var sel = text.substring(start, end);
+
+      textarea.value = text.substring(0, start) + before + sel + after + text.substring(end);
+      textarea.focus();
+      textarea.selectionStart = start + before.length;
+      textarea.selectionEnd = start + before.length + sel.length;
+      updateLivePreview();
+    }
+
+    function insertYouTubeEmbed() {
+      var input = document.getElementById('post-youtube').value.trim();
+      if (!input) {
+        alert("Please paste a YouTube URL or Video ID (e.g. dQw4w9WgXcQ)");
+        return;
+      }
+
+      var vid = input;
+      if (input.includes('v=')) {
+        vid = input.split('v=')[1].split('&')[0];
+      } else if (input.includes('youtu.be/')) {
+        vid = input.split('youtu.be/')[1].split('?')[0];
+      }
+
+      var snippet = '\n\n<lite-youtube videoid="' + vid + '" playlabel="Watch Retention Breakdown"></lite-youtube>\n\n';
+      insertToolbar(snippet, '');
+    }
+
+    async function handleImageUpload(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+
+      var cName = localStorage.getItem('resolvia_cld_name');
+      var cPreset = localStorage.getItem('resolvia_cld_preset');
+
+      if (!cName || !cPreset) {
+        var manualUrl = prompt("Cloudinary unsigned preset not configured in Settings.\nPlease enter image URL directly, or configure Cloudinary in Settings:", "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80");
+        if (manualUrl) {
+          insertToolbar('![' + file.name + '](' + manualUrl + ')', '');
+        }
+        return;
+      }
+
+      var formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', cPreset);
+
+      try {
+        var uploadRes = await fetch('https://api.cloudinary.com/v1_1/' + cName + '/image/upload', {
+          method: 'POST',
+          body: formData
+        });
+        var data = await uploadRes.json();
+        if (data.secure_url) {
+          insertToolbar('![' + file.name + '](' + data.secure_url + ')', '');
+        } else {
+          alert('Upload failed: ' + (data.error ? data.error.message : 'Unknown error'));
+        }
+      } catch(err) {
+        console.error('Cloudinary error:', err);
+        alert('Upload failed: ' + err.message);
+      }
+    }
+
+    async function savePost(publish) {
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (!post) return;
+
+      post.title = document.getElementById('post-title').value;
+      post.category = document.getElementById('post-category').value;
+      post.youtube_id = document.getElementById('post-youtube').value;
+      post.description = document.getElementById('post-description').value;
+      post.content_markdown = document.getElementById('post-markdown').value;
+      post.status = publish ? 'published' : 'draft';
+      post.updated_at = new Date().toISOString();
+
+      if (supabaseClient) {
+        try {
+          var payload = {
+            slug: post.slug,
+            title: post.title,
+            description: post.description,
+            category: post.category,
+            badge: post.category,
+            youtube_id: post.youtube_id,
+            content_markdown: post.content_markdown,
+            status: post.status
+          };
+
+          var upsertRes = await supabaseClient.from('posts').upsert(payload, { onConflict: 'slug' });
+          if (upsertRes.error) {
+            alert('Supabase error: ' + upsertRes.error.message);
+          } else {
+            alert(publish ? '✓ Article published to Supabase!' : '✓ Draft saved to Supabase!');
+          }
+        } catch(e) {
+          alert('Sync error: ' + e.message);
+        }
+      } else {
+        alert(publish ? '✓ Article marked as Published in local storage!' : '✓ Draft saved in local storage!');
+      }
+
+      selectPost(post.id);
+    }
+
+    function exportMarkdownFile() {
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      if (!post) return;
+
+      var frontmatter = `---
+title: "${post.title.replace(/"/g, '\\"')}"
+description: "${post.description.replace(/"/g, '\\"')}"
+slug: "${post.slug}"
+category: "${post.category}"
+badge: "${post.badge || post.category}"
+readTime: "${post.read_time || '7 min read'}"
+author: "${post.author || 'Resolvia Studio Team'}"
+datePublished: "${post.created_at || new Date().toISOString()}"
+dateModified: "${new Date().toISOString()}"
+---
+
+${post.content_markdown}
+`;
+
+      var blob = new Blob([frontmatter], { type: 'text/markdown' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = post.slug + '.md';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // CRM Leads Table
+    function renderLeadsTable() {
+      var tbody = document.getElementById('leads-table-body');
+      var search = (document.getElementById('lead-search').value || '').toLowerCase();
+      tbody.innerHTML = '';
+
+      var filtered = leads.filter(function(l) {
+        return l.name.toLowerCase().includes(search) || l.email.toLowerCase().includes(search) || (l.channel_url && l.channel_url.toLowerCase().includes(search));
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-white/40">No inquiries found.</td></tr>';
+        return;
+      }
+
+      filtered.forEach(function(l) {
+        var tr = document.createElement('tr');
+        tr.className = 'hover:bg-white/[0.02] transition-colors';
+
+        var statusStyles = {
+          'new': 'bg-accent/15 text-accent border-accent/30',
+          'contacted': 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+          'proposal_sent': 'bg-purple-500/15 text-purple-300 border-purple-500/30',
+          'won': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+          'archived': 'bg-slate-500/15 text-slate-400 border-slate-500/30'
+        };
+
+        var dateStr = new Date(l.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        tr.innerHTML = `
+          <td class="py-3 px-4 text-white/50 text-[11.5px] whitespace-nowrap">${dateStr}</td>
+          <td class="py-3 px-4 font-semibold text-white">${l.name}</td>
+          <td class="py-3 px-4">
+            <a href="mailto:${l.email}" class="text-accent hover:underline">${l.email}</a>
+          </td>
+          <td class="py-3 px-4 text-white/80">${l.format}</td>
+          <td class="py-3 px-4">
+            ${l.channel_url ? `<a href="${l.channel_url}" target="_blank" class="text-[#38BAFE] hover:underline font-mono text-[12px] truncate max-w-[180px] inline-block">${l.channel_url}</a>` : '<span class="text-white/30">—</span>'}
+          </td>
+          <td class="py-3 px-4 text-white/70 max-w-[260px] truncate" title="${l.notes || ''}">
+            ${l.notes || '<span class="text-white/30">None provided</span>'}
+          </td>
+          <td class="py-3 px-4 text-right">
+            <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-[11px] font-semibold uppercase tracking-wider px-2 py-1 rounded border ${statusStyles[l.status] || statusStyles.new} bg-transparent outline-none cursor-pointer">
+              <option value="new" class="bg-surface text-white" ${l.status === 'new' ? 'selected' : ''}>New</option>
+              <option value="contacted" class="bg-surface text-white" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+              <option value="proposal_sent" class="bg-surface text-white" ${l.status === 'proposal_sent' ? 'selected' : ''}>Proposal Sent</option>
+              <option value="won" class="bg-surface text-white" ${l.status === 'won' ? 'selected' : ''}>Won</option>
+              <option value="archived" class="bg-surface text-white" ${l.status === 'archived' ? 'selected' : ''}>Archived</option>
+            </select>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateLeadStatus(id, newStatus) {
+      var lead = leads.find(function(l) { return l.id === id; });
+      if (lead) {
+        lead.status = newStatus;
+        if (supabaseClient) {
+          supabaseClient.from('leads').update({ status: newStatus }).eq('id', id);
+        }
+        updateCRMStats();
+        renderLeadsTable();
+      }
+    }
+
+    function updateCRMStats() {
+      document.getElementById('stat-total-leads').textContent = leads.length;
+      document.getElementById('stat-new-leads').textContent = leads.filter(function(l){ return l.status === 'new'; }).length;
+      document.getElementById('stat-proposal-leads').textContent = leads.filter(function(l){ return l.status === 'proposal_sent'; }).length;
+      document.getElementById('stat-won-leads').textContent = leads.filter(function(l){ return l.status === 'won'; }).length;
+      document.getElementById('header-lead-badge').textContent = leads.filter(function(l){ return l.status === 'new'; }).length;
+    }
+
+    function exportLeadsCSV() {
+      var headers = ['Date', 'Name', 'Email', 'Format', 'Channel URL', 'Retention Notes', 'Status'];
+      var rows = leads.map(function(l) {
+        return [
+          '"' + l.created_at + '"',
+          '"' + (l.name || '').replace(/"/g, '""') + '"',
+          '"' + (l.email || '').replace(/"/g, '""') + '"',
+          '"' + (l.format || '').replace(/"/g, '""') + '"',
+          '"' + (l.channel_url || '').replace(/"/g, '""') + '"',
+          '"' + (l.notes || '').replace(/"/g, '""') + '"',
+          '"' + l.status + '"'
+        ].join(',');
+      });
+
+      var csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'resolvia_inbound_leads_' + new Date().toISOString().slice(0,10) + '.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function filterLeads() {
+      renderLeadsTable();
+    }
+
+    function setPostStatusFilter(filter) {
+      postStatusFilter = filter;
+      document.querySelectorAll('.post-filter-chip').forEach(function(el) {
+        el.className = 'post-filter-chip px-2.5 py-1 rounded-md text-white/50 hover:text-white font-medium';
+      });
+      event.target.className = 'post-filter-chip px-2.5 py-1 rounded-md bg-white/10 text-white font-medium';
+      renderPostsList();
+    }
+  </script>
+</body>
+</html>
