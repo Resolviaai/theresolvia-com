@@ -1,5 +1,4 @@
 [build]
-  command = "python scripts/build_engine.py"
   publish = "."
 
 # 301 Permanent Redirect: www.theresolvia.com -> https://theresolvia.com
@@ -98,39 +97,10 @@
   to = "/for/agencies/index.html"
   status = 200
 
+# Dynamic Database-Driven Blog Post Routing (Supabase)
 [[redirects]]
-  from = "/blog/video-editing-cost-pricing-guide"
-  to = "/blog/video-editing-cost-pricing-guide/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog/agency-vs-freelance-video-editor"
-  to = "/blog/agency-vs-freelance-video-editor/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog/how-to-improve-youtube-retention"
-  to = "/blog/how-to-improve-youtube-retention/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog/what-makes-a-good-short-form-video-editor"
-  to = "/blog/what-makes-a-good-short-form-video-editor/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog/white-label-video-editing-agency-guide"
-  to = "/blog/white-label-video-editing-agency-guide/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog/2026-thumbnail-psychology-playbook"
-  to = "/blog/2026-thumbnail-psychology-playbook/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/blog/b2b-saas-video-production-acquisition-guide"
-  to = "/blog/b2b-saas-video-production-acquisition-guide/index.html"
+  from = "/blog/*"
+  to = "/blog/post.html"
   status = 200
 
 # Global Security & Performance Headers
