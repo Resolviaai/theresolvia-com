@@ -1,4 +1,4 @@
-# Company — Resolvia
+# Company · Resolvia
 
 > Data status: as published on theresolvia.com, checked 2026-11-24.
 

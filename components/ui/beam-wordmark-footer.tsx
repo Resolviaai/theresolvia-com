@@ -3,7 +3,7 @@
 import * as React from "react"
 
 /**
- * Beam Wordmark Footer — a midnight-navy closing section crossed by a slow
+ * Beam Wordmark Footer: a midnight-navy closing section crossed by a slow
  * diagonal shaft of light, with the brand set as a giant, bottom-cropped
  * wordmark that the light runs through.
  *

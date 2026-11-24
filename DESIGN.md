@@ -24,12 +24,12 @@ Every screen strictly adheres to a 4-layer depth model to maintain visual hierar
 
 ### Layer 1: Surfaces & Container Cards
 All card containers must belong to one of two standardized variants:
-- **Variant A — Primary Showcase Card (The `#mcp` / Lead Capture Standard)**:
+- **Variant A · Primary Showcase Card (The `#mcp` / Lead Capture Standard)**:
   - `background: radial-gradient(70% 120% at 50% 0%, #24262a 0%, #18191c 55%, #131416 100%)`
   - `border: 1px solid rgba(255, 255, 255, 0.08)`
   - `border-radius: 22px` (desktop), `16px` (mobile `<640px`)
   - Optional subtle dot-grid mask: `.dot-grid` with `linear-gradient(0deg, #000 0%, transparent 100%)`
-- **Variant B — Secondary Tile / Feature Card**:
+- **Variant B · Secondary Tile / Feature Card**:
   - `background: linear-gradient(180deg, #141a24 0%, #1d1f23 100%)` or `rgba(255, 255, 255, 0.03)`
   - `border: 1px solid rgba(255, 255, 255, 0.08)`
   - `border-radius: 16px`
@@ -91,7 +91,7 @@ Inner recessed areas (input fields, code blocks, stat callouts):
 
 ## 5. Blog & Editorial System Standards
 
-1. **Canvas**: `#0B0F17` — no disparate template styles.
+1. **Canvas**: `#0B0F17` · no disparate template styles.
 2. **Card Structure**:
    - Every article card must feature a 16:9 high-resolution preview image (`/lp/thumbs/lib-*.jpg` or `/lp/promo-format-*.jpg`).
    - Category pill: `text-[#2F86F7]`, `bg-[rgba(47,134,247,0.1)]`, uppercase 11px font.

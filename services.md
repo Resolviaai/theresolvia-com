@@ -1,4 +1,4 @@
-# Services — Resolvia
+# Services · Resolvia
 
 > Retention-engineered video editing agency & post-production studio.
 > Data status: as published on theresolvia.com, checked 2026-11-24.
