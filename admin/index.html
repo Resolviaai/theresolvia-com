@@ -587,14 +587,14 @@
         <div class="overflow-x-auto lg:overflow-x-visible">
           <table class="w-full text-left border-collapse text-[13px] min-w-[760px] lg:min-w-0 lg:table-fixed">
             <colgroup class="hidden lg:table-column-group">
-              <col class="w-[12%]">
-              <col class="w-[15%]">
-              <col class="w-[18%]">
+              <col class="w-[11%]">
+              <col class="w-[13%]">
               <col class="w-[15%]">
               <col class="w-[13%]">
-              <col class="w-[14%]">
-              <col class="w-[8%]">
-              <col class="w-[5%]">
+              <col class="w-[11%]">
+              <col class="w-[15%]">
+              <col class="w-[13%]">
+              <col class="w-[9%]">
             </colgroup>
             <thead>
               <tr class="border-b border-white/[0.06] bg-[#0e0f11] text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
@@ -2075,7 +2075,7 @@ ${post.content_markdown}
             ${detailsText || '<span class="text-slate-600">None provided</span>'}
           </td>
           <td class="py-3 px-3 whitespace-nowrap">
-            <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-[11px] font-medium px-2 py-1 rounded-lg bg-[#09090b] text-slate-200 border border-white/[0.08] hover:border-white/20 outline-none cursor-pointer transition-colors">
+            <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-[11.5px] font-medium px-2.5 py-1 rounded-lg bg-[#09090b] text-slate-200 border border-white/[0.08] hover:border-white/20 outline-none cursor-pointer transition-colors max-w-[125px]">
               <option value="new" class="bg-[#18191c] text-white" ${l.status === 'new' ? 'selected' : ''}>New</option>
               <option value="contacted" class="bg-[#18191c] text-white" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
               <option value="proposal_sent" class="bg-[#18191c] text-white" ${l.status === 'proposal_sent' ? 'selected' : ''}>Proposal Sent</option>
@@ -2084,11 +2084,11 @@ ${post.content_markdown}
             </select>
           </td>
           <td class="py-3 px-3 text-right whitespace-nowrap">
-            <div class="flex items-center justify-end gap-1">
-              <button onclick="openEditLeadModal('${l.id}')" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors" title="Edit lead details">
+            <div class="flex items-center justify-end gap-1.5">
+              <button onclick="openEditLeadModal('${l.id}')" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors" title="Edit lead details">
                 <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
               </button>
-              <button onclick="confirmDeleteLead('${l.id}')" class="p-1 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" title="Delete lead">
+              <button onclick="confirmDeleteLead('${l.id}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors" title="Delete lead">
                 <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
               </button>
             </div>
