@@ -494,12 +494,7 @@
           }
           .tts-icon-layer[data-shown="true"] { opacity: 1; transform: scale(1); filter: blur(0); }
           #tts-scrubber:hover #tts-scrubber-thumb,
-          #tts-scrubber.is-dragging #tts-scrubber-thumb { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; }
-          #tts-scrubber:hover #tts-wave-lit,
-          #tts-scrubber.is-dragging #tts-wave-lit { opacity: 1; }
-          @media (hover: none) {
-            #tts-scrubber-thumb { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; }
-          }
+          #tts-scrubber.is-dragging #tts-scrubber-thumb { opacity: 1 !important; transform: translate(-50%, -50%) scaleY(1.06) !important; }
           .tts-ghost-btn {
             height: 34px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.35);
             color: rgba(238, 241, 248, 0.8); font-size: 12px; font-weight: 500;
@@ -531,13 +526,13 @@
 
           <span id="tts-elapsed" style="font-size: 12px; font-variant-numeric: tabular-nums; color: rgba(238, 241, 248, 0.7); flex-shrink: 0; min-width: 34px; text-align: right;">0:00</span>
 
-          <!-- Interactive Waveform / Scrubber Track -->
-          <div id="tts-scrubber" class="tts-scrubber-wrap" role="slider" aria-label="Seek article audio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" style="position: relative; flex: 1; min-width: 80px; height: 32px; display: flex; align-items: center; cursor: pointer; touch-action: none; user-select: none;">
-            <div id="tts-wave-track" style="position: relative; width: 100%; height: 22px; --played: 0%;">
-              <div id="tts-wave-dim" style="position: absolute; inset: 0; display: flex; align-items: center; gap: 2px;"></div>
-              <div id="tts-wave-lit" style="position: absolute; inset: 0; display: flex; align-items: center; gap: 2px; clip-path: inset(0 calc(100% - var(--played)) 0 0); opacity: 0.92; transition: opacity 0.15s;"></div>
+          <!-- Interactive Studio Waveform + Vertical Playhead Needle -->
+          <div id="tts-scrubber" class="tts-scrubber-wrap" role="slider" aria-label="Seek article audio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" style="position: relative; flex: 1; min-width: 80px; height: 42px; display: flex; align-items: center; cursor: pointer; touch-action: none; user-select: none;">
+            <div id="tts-wave-track" style="position: relative; width: 100%; height: 34px; --played: 0%;">
+              <div id="tts-wave-dim" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; gap: 3px;"></div>
+              <div id="tts-wave-lit" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; gap: 3px; clip-path: inset(0 calc(100% - var(--played)) 0 0);"></div>
             </div>
-            <div id="tts-scrubber-thumb" style="position: absolute; top: 50%; left: 0%; width: 12px; height: 12px; border-radius: 9999px; background: #ffffff; box-shadow: 0 0 0 2px #2F86F7; opacity: 0; transform: translate(-50%, -50%) scale(0.5); transition: opacity 0.15s, transform 0.15s cubic-bezier(0.32,0.72,0,1); pointer-events: none;"></div>
+            <div id="tts-scrubber-thumb" style="position: absolute; top: 50%; left: 0%; width: 2.5px; height: 38px; border-radius: 9999px; background: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.45); opacity: 0.95; transform: translate(-50%, -50%); transition: transform 0.12s ease; pointer-events: none;"></div>
           </div>
 
           <span id="tts-remaining" style="font-size: 12px; font-variant-numeric: tabular-nums; color: rgba(238, 241, 248, 0.7); flex-shrink: 0; min-width: 40px;">-0:00</span>
@@ -562,10 +557,9 @@
           </div>
         </div>
 
-        <!-- Subtle Status & Download Telemetry Strip -->
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 0 2px; font-size: 11px; color: rgba(238, 241, 248, 0.48);">
-          <span id="tts-status-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Listen on your device · Zero server upload</span>
-          <span id="tts-meta-text" style="white-space: nowrap; flex-shrink: 0;">Simone · Ready</span>
+        <!-- Subtle Loading Strip (Hidden during normal idle/playback, shown only during initial download/prep) -->
+        <div id="tts-status-strip" style="display: none; align-items: center; justify-content: flex-start; gap: 8px; margin-top: 6px; padding: 0 2px; font-size: 11px; color: rgba(238, 241, 248, 0.55);">
+          <span id="tts-status-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
         </div>
       </div>
 
@@ -694,17 +688,18 @@
 
         shellEl.style.display = 'block';
 
-        // Build decorative waveform bars (44 bars) and estimate total duration (0 KB AI runtime loaded yet)
+        // Build crisp symmetrical studio waveform bars (54 thin vertical bars) + estimate duration (0 KB AI runtime loaded yet)
         (function renderInitialWave() {
           var dimEl = document.getElementById('tts-wave-dim');
           var litEl = document.getElementById('tts-wave-lit');
           if (dimEl && litEl && dimEl.children.length === 0) {
             var dimHtml = '';
             var litHtml = '';
-            for (var i = 0; i < 44; i++) {
-              var h = 24 + Math.round(Math.abs(Math.sin(i * 0.72) * Math.cos(i * 0.31)) * 68);
-              dimHtml += '<span style="flex:1; border-radius:9999px; background:rgba(238,241,248,0.18); height:' + h + '%;"></span>';
-              litHtml += '<span style="flex:1; border-radius:9999px; background:#2F86F7; height:' + h + '%;"></span>';
+            for (var i = 0; i < 54; i++) {
+              var n = Math.abs(Math.sin(i * 0.63 + 0.4) * 0.58 + Math.cos(i * 1.45) * 0.42);
+              var h = 20 + Math.round(n * 76);
+              dimHtml += '<span style="flex:1; max-width:2.5px; border-radius:9999px; background:rgba(255,255,255,0.22); height:' + h + '%;"></span>';
+              litHtml += '<span style="flex:1; max-width:2.5px; border-radius:9999px; background:#ffffff; height:' + h + '%;"></span>';
             }
             dimEl.innerHTML = dimHtml;
             litEl.innerHTML = litHtml;
@@ -724,7 +719,7 @@
         var sharedCtx = null;
         function loadTTSModule() {
           if (!ttsModPromise) {
-            ttsModPromise = import('/assets/js/blog-tts-player.js?v=3').then(function(mod) {
+            ttsModPromise = import('/assets/js/blog-tts-player.js?v=4').then(function(mod) {
               mod.bindPlayerControls();
               return mod;
             });

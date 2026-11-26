@@ -92,8 +92,19 @@ function cacheEls() {
   els.voiceLabel = document.getElementById('tts-voice-label');
   els.voiceMenu = document.getElementById('tts-voice-menu');
   els.downloadBtn = document.getElementById('tts-download-btn');
+  els.statusStrip = document.getElementById('tts-status-strip');
   els.statusText = document.getElementById('tts-status-text');
-  els.metaText = document.getElementById('tts-meta-text');
+}
+
+function setStatusNotice(msg) {
+  if (!els.statusStrip || !els.statusText) return;
+  if (msg) {
+    els.statusText.textContent = msg;
+    els.statusStrip.style.display = 'flex';
+  } else {
+    els.statusText.textContent = '';
+    els.statusStrip.style.display = 'none';
+  }
 }
 
 function getRate() {
@@ -265,28 +276,22 @@ function updateUI() {
 
   if (state.mode === 'loading') {
     setIconState('spin');
-    els.playBtn.setAttribute('aria-label', 'Loading voice engine');
+    els.playBtn.setAttribute('aria-label', 'Loading audio');
   } else if (state.mode === 'playing' || state.mode === 'fallback_playing') {
     setIconState('pause');
     els.playBtn.setAttribute('aria-label', 'Pause');
-    if (els.metaText) {
-      els.metaText.textContent = state.useFallback ? 'Device Voice' : vMeta.short + ' · On-device AI';
-    }
-    if (els.statusText) {
-      els.statusText.textContent = 'Section ' + (state.currentIndex + 1) + ' of ' + state.chunks.length + ' · Cached locally';
-    }
+    setStatusNotice('');
     startTimeLoop();
   } else if (state.mode === 'paused' || state.mode === 'fallback_paused') {
     setIconState('play');
     els.playBtn.setAttribute('aria-label', 'Play');
     cancelAnimationFrame(state.rafId);
-    if (els.statusText) els.statusText.textContent = 'Paused · Section ' + (state.currentIndex + 1) + ' of ' + state.chunks.length;
+    setStatusNotice('');
   } else {
     setIconState('play');
     els.playBtn.setAttribute('aria-label', 'Play');
     cancelAnimationFrame(state.rafId);
-    if (els.statusText) els.statusText.textContent = 'Listen on your device · Zero server upload';
-    if (els.metaText) els.metaText.textContent = vMeta.short + ' · Ready';
+    if (!state.downloadingWav) setStatusNotice('');
   }
   updateTimeDisplay();
 }
@@ -347,7 +352,7 @@ function playNextNeuralChunk(sessionToken) {
 
   const item = state.bufferMap.get(state.currentIndex);
   if (!item) {
-    if (els.statusText) els.statusText.textContent = 'Synthesizing section ' + (state.currentIndex + 1) + '...';
+    setStatusNotice('Buffering audio...');
     return;
   }
 
@@ -457,12 +462,12 @@ function ensureWorker(audioCtx, onReadyCallback) {
     state.worker.onmessage = (e) => {
       const msg = e.data || {};
       if (msg.type === 'progress') {
-        if (state.mode === 'loading' && els.statusText) {
-          els.statusText.textContent = 'Downloading AI voice (' + msg.pct + '%) · Cached once on device';
+        if (state.mode === 'loading') {
+          setStatusNotice('Loading voice (' + msg.pct + '%)...');
         }
       } else if (msg.type === 'status') {
-        if (state.mode === 'loading' && els.statusText) {
-          els.statusText.textContent = msg.message;
+        if (state.mode === 'loading') {
+          setStatusNotice('Preparing audio...');
         }
       } else if (msg.type === 'ready') {
         state.workerReady = true;
