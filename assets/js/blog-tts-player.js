@@ -96,15 +96,14 @@ function cacheEls() {
   els.statusText = document.getElementById('tts-status-text');
 }
 
-function setStatusNotice(msg) {
-  if (!els.statusStrip || !els.statusText) return;
-  if (msg) {
-    els.statusText.textContent = msg;
-    els.statusStrip.style.display = 'flex';
-  } else {
-    els.statusText.textContent = '';
-    els.statusStrip.style.display = 'none';
-  }
+function setStatusNotice() {
+  // Status strip removed by design so card height stays locked and never expands
+}
+
+function setPlayingGlow(isPlaying) {
+  if (!els.root) return;
+  if (isPlaying) els.root.classList.add('is-playing');
+  else els.root.classList.remove('is-playing');
 }
 
 function getRate() {
@@ -276,22 +275,23 @@ function updateUI() {
 
   if (state.mode === 'loading') {
     setIconState('spin');
+    setPlayingGlow(false);
     els.playBtn.setAttribute('aria-label', 'Loading audio');
   } else if (state.mode === 'playing' || state.mode === 'fallback_playing') {
     setIconState('pause');
+    setPlayingGlow(true);
     els.playBtn.setAttribute('aria-label', 'Pause');
-    setStatusNotice('');
     startTimeLoop();
   } else if (state.mode === 'paused' || state.mode === 'fallback_paused') {
     setIconState('play');
+    setPlayingGlow(false);
     els.playBtn.setAttribute('aria-label', 'Play');
     cancelAnimationFrame(state.rafId);
-    setStatusNotice('');
   } else {
     setIconState('play');
+    setPlayingGlow(false);
     els.playBtn.setAttribute('aria-label', 'Play');
     cancelAnimationFrame(state.rafId);
-    if (!state.downloadingWav) setStatusNotice('');
   }
   updateTimeDisplay();
 }
@@ -352,9 +352,11 @@ function playNextNeuralChunk(sessionToken) {
 
   const item = state.bufferMap.get(state.currentIndex);
   if (!item) {
-    setStatusNotice('Buffering audio...');
+    // Keep card height locked while spinner/stream catches up without buffering text
+    setIconState('spin');
     return;
   }
+  if (state.mode === 'playing') setIconState('pause');
 
   const realDur = item.audio.length / item.sampleRate;
   if (Math.abs((state.chunkDurations[state.currentIndex] || 0) - realDur) > 0.1) {
