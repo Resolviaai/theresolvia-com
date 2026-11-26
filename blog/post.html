@@ -484,36 +484,41 @@
       <div id="blog-audio-player" tabindex="0" role="region" aria-label="Article audio player" style="margin: 0 0 28px; padding: 8px 16px; border-radius: 14px; background: rgba(14, 16, 22, 0.85); border: 1px solid rgba(255, 255, 255, 0.18); box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.9), 0 6px 18px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.22); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); position: relative; outline: none; transition: box-shadow 0.28s ease, border-color 0.28s ease;">
         <style>
           @keyframes ttsSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-          @keyframes ttsBorderSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+          @keyframes ttsBorderOrbit { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
           #blog-audio-player:focus-visible { border-color: rgba(0, 119, 237, 0.65); }
 
-          /* Active Playing Shine Border (inspired by Get Your First Edit bevel & blue glow) */
-          #blog-audio-player::before {
-            content: "";
+          /* Active Playing Orbiting Shine Border (hidden when paused/idle) */
+          #tts-shine-ring {
             position: absolute;
             inset: -1px;
             border-radius: 14px;
             padding: 1.5px;
-            background: conic-gradient(from 0deg, transparent 0deg 220deg, rgba(0, 119, 237, 0.85) 265deg, rgba(255, 255, 255, 0.9) 295deg, rgba(56, 189, 248, 0.8) 325deg, transparent 360deg);
+            overflow: hidden;
+            pointer-events: none;
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.28s ease;
+          }
+          #tts-shine-beam {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 140%;
+            aspect-ratio: 1;
+            background: conic-gradient(from 0deg, transparent 0deg 250deg, rgba(0, 119, 237, 0.9) 285deg, rgba(255, 255, 255, 0.95) 315deg, rgba(56, 189, 248, 0.85) 340deg, transparent 360deg);
+            transform: translate(-50%, -50%) rotate(0deg);
           }
           #blog-audio-player.is-playing {
-            border-color: rgba(0, 119, 237, 0.45);
-            box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.92), 0 8px 26px rgba(0, 119, 237, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+            border-color: rgba(0, 119, 237, 0.35);
+            box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.92), 0 8px 26px rgba(0, 119, 237, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.32);
           }
-          #blog-audio-player.is-playing::before {
+          #blog-audio-player.is-playing #tts-shine-ring {
             opacity: 1;
-            animation: ttsShinePulse 2.8s linear infinite;
           }
-          @keyframes ttsShinePulse {
-            0% { filter: hue-rotate(0deg) brightness(1); }
-            50% { filter: hue-rotate(8deg) brightness(1.25); }
-            100% { filter: hue-rotate(0deg) brightness(1); }
+          #blog-audio-player.is-playing #tts-shine-beam {
+            animation: ttsBorderOrbit 2.6s linear infinite;
           }
 
           .tts-player-row { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; min-height: 42px; }
@@ -548,6 +553,9 @@
           .tts-voice-btn-style:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.22); color: #ffffff; }
           .tts-voice-btn-style:active { transform: scale(0.97); }
         </style>
+
+        <!-- Orbiting Specular Shine Border Layer -->
+        <div id="tts-shine-ring" aria-hidden="true"><div id="tts-shine-beam"></div></div>
 
         <!-- Single Compact Studio Row (Locked Height, Never Expands) -->
         <div class="tts-player-row">
@@ -758,7 +766,7 @@
         var sharedCtx = null;
         function loadTTSModule() {
           if (!ttsModPromise) {
-            ttsModPromise = import('/assets/js/blog-tts-player.js?v=5').then(function(mod) {
+            ttsModPromise = import('/assets/js/blog-tts-player.js?v=6').then(function(mod) {
               mod.bindPlayerControls();
               return mod;
             });

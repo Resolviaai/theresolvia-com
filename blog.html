@@ -982,136 +982,22 @@
       </div>
     </div>
 
-    <!-- Dynamic Articles Section (Rendered Live from Supabase) -->
+    <!-- Dynamic Articles Section (100% Database-Driven from Supabase with Zero-Flicker Skeleton/Cache) -->
     <div id="blog-articles-section">
       <!-- Featured Lead Guide (Showcase Card) -->
       <article class="featured-article" id="featured-article-container">
-        <div class="dot-grid pointer-events-none absolute inset-x-0 bottom-0 h-[45%] [mask-image:linear-gradient(0deg,#000_0%,transparent_100%)]"></div>
-        <div style="flex: 1; min-width: 280px;">
-          <span class="featured-tag">Creator Buying Guide</span>
-          <h2 class="featured-headline">
-            <a href="/blog/agency-vs-freelance-video-editor/" style="color:inherit; text-decoration:none;">Video Editing Agency vs Freelance Video Editor: Which Is Better for Your Channel in 2026? &rarr;</a>
-          </h2>
-          <p class="featured-excerpt">
-            A comprehensive guide for creators and founders comparing video editing agencies vs freelance video editors. Analyze total cost of ownership, turnaround SLAs, audio mastering, and retention science.
-          </p>
-          <div class="featured-meta">
-            <span>By Resolvia Editorial Team</span>
-            <span>&middot;</span>
-            <span>8 min read</span>
-            <span>&middot;</span>
-            <span>Nov 2026</span>
-          </div>
-        </div>
-        <div class="featured-stat-box" style="flex: 1; min-width: 280px; max-width: 440px;">
-          <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px;">
-            <img src="/assets/blog/agency-vs-freelance-cover.svg" alt="Video Editing Agency vs Freelance Video Editor" style="width: 100%; height: auto; display: block;" />
-          </div>
-          <div style="font-size: 12px; color:rgba(255,255,255,0.55); line-height:1.45;">
-            Operational pod redundancy and Fairlight broadcast audio eliminate the 30-second drop-off cliff.
-          </div>
-        </div>
+        <div style="width:100%; height:140px; border-radius:12px; background:linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%); background-size:200% 100%; animation:resolviaSkel 1.4s infinite;"></div>
       </article>
+      <style>@keyframes resolviaSkel { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }</style>
 
       <!-- Articles Grid Section Header -->
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px;">
+      <div id="published-guides-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px;">
         <h2 style="font-size:24px; font-weight:700; color:#ffffff; margin:0; letter-spacing:-0.02em;">Published Video Editing Guides</h2>
-        <span id="published-guides-count" style="font-size:13px; color:#38BAFE; font-weight:600; background:rgba(47,134,247,0.1); padding:4px 12px; border-radius:9999px; border:1px solid rgba(47,134,247,0.25);">7 Guides Live</span>
+        <span id="published-guides-count" style="font-size:13px; color:#38BAFE; font-weight:600; background:rgba(47,134,247,0.1); padding:4px 12px; border-radius:9999px; border:1px solid rgba(47,134,247,0.25);"></span>
       </div>
 
-      <!-- Articles Grid with 16:9 Thumbnails -->
-      <div class="articles-grid" id="articles-grid-container">
-        <a href="/blog/2026-thumbnail-psychology-playbook/" class="article-card">
-          <div class="article-card-thumb">
-            <img src="/lp/thumbs/lib-08.jpg" alt="The 2026 Thumbnail Psychology Playbook: Designing for High-Stakes CTR" loading="lazy" />
-            <div class="article-card-thumb-overlay"></div>
-          </div>
-          <div class="article-card-body">
-            <span class="article-category">CTR Optimization</span>
-            <h3 class="article-title">The 2026 Thumbnail Psychology Playbook: Designing for High-Stakes CTR</h3>
-            <p class="article-desc">Master high-CTR thumbnail packaging. Moving beyond exaggerated faces into visual contrast, lighting isolation, cognitive curiosity loops, and title synchronization.</p>
-            <div class="article-meta">
-              <span>Resolvia Studio Team &middot; 7 min read</span>
-              <span class="article-read-link">Read Guide &rarr;</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/b2b-saas-video-production-acquisition-guide/" class="article-card">
-          <div class="article-card-thumb">
-            <img src="/lp/thumbs/lib-02.jpg" alt="B2B SaaS Video Production: How Tech Companies Turn Product Demos into High-ARR Customer Funnels" loading="lazy" />
-            <div class="article-card-thumb-overlay"></div>
-          </div>
-          <div class="article-card-body">
-            <span class="article-category">Product Funnels</span>
-            <h3 class="article-title">B2B SaaS Video Production: How Tech Companies Turn Product Demos into High-ARR Customer Funnels</h3>
-            <p class="article-desc">Stop recording boring software walkthroughs. Learn how B2B tech companies engineer high-retention product demo videos that drive organic pipeline and lower customer acquisition costs.</p>
-            <div class="article-meta">
-              <span>Resolvia Studio Team &middot; 8 min read</span>
-              <span class="article-read-link">Read Guide &rarr;</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/how-to-improve-youtube-retention/" class="article-card">
-          <div class="article-card-thumb">
-            <img src="/lp/thumbs/lib-05.jpg" alt="How to Improve Audience Retention on YouTube: The 4-Beat Blueprint" loading="lazy" />
-            <div class="article-card-thumb-overlay"></div>
-          </div>
-          <div class="article-card-body">
-            <span class="article-category">Algorithm Blueprint</span>
-            <h3 class="article-title">How to Improve Audience Retention on YouTube: The 4-Beat Blueprint</h3>
-            <p class="article-desc">Master YouTube audience retention. How to fix the 30-second cliff, engineer curiosity open loops, and use sonic foley to sustain 50%+ Average View Duration.</p>
-            <div class="article-meta">
-              <span>Resolvia Editorial Team &middot; 9 min read</span>
-              <span class="article-read-link">Read Guide &rarr;</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/video-editing-cost-pricing-guide/" class="article-card">
-          <div class="article-card-thumb">
-            <img src="/lp/promo-format-1.jpg" alt="How Much Does Professional Video Editing Cost in 2026? (Agency vs Freelancer Pricing Breakdown)" loading="lazy" />
-            <div class="article-card-thumb-overlay"></div>
-          </div>
-          <div class="article-card-body">
-            <span class="article-category">2026 Pricing Report</span>
-            <h3 class="article-title">How Much Does Professional Video Editing Cost in 2026? (Agency vs Freelancer Pricing Breakdown)</h3>
-            <p class="article-desc">A transparent breakdown of professional video editing pricing in 2026. Compare hourly rates, per-video pricing, and monthly agency retainers for YouTube and short-form.</p>
-            <div class="article-meta">
-              <span>Resolvia Editorial Team &middot; 8 min read</span>
-              <span class="article-read-link">Read Guide &rarr;</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/what-makes-a-good-short-form-video-editor/" class="article-card">
-          <div class="article-card-thumb">
-            <img src="/lp/card-trend.jpg" alt="What Makes a Good Short-Form Video Editor? 7 Non-Negotiable Skills in 2026" loading="lazy" />
-            <div class="article-card-thumb-overlay"></div>
-          </div>
-          <div class="article-card-body">
-            <span class="article-category">Vertical Video Mastery</span>
-            <h3 class="article-title">What Makes a Good Short-Form Video Editor? 7 Non-Negotiable Skills in 2026</h3>
-            <p class="article-desc">What separates an average vertical video editor from a top-tier post-production specialist? Discover the 7 non-negotiable skills for TikTok, Reels, and Shorts pacing.</p>
-            <div class="article-meta">
-              <span>Resolvia Editorial Team &middot; 6 min read</span>
-              <span class="article-read-link">Read Guide &rarr;</span>
-            </div>
-          </div>
-        </a>
-        <a href="/blog/white-label-video-editing-agency-guide/" class="article-card">
-          <div class="article-card-thumb">
-            <img src="/lp/thumbs/lib-01.jpg" alt="How Agencies Outsource Video Editing: The 2026 White-Label Playbook" loading="lazy" />
-            <div class="article-card-thumb-overlay"></div>
-          </div>
-          <div class="article-card-body">
-            <span class="article-category">Agency Playbook</span>
-            <h3 class="article-title">How Agencies Outsource Video Editing: The 2026 White-Label Playbook</h3>
-            <p class="article-desc">A strategic guide for marketing, creative, and social media agencies wanting to scale video production capacity, preserve 60%+ margins, and protect client relationships.</p>
-            <div class="article-meta">
-              <span>Resolvia Studio Team &middot; 8 min read</span>
-              <span class="article-read-link">Read Guide &rarr;</span>
-            </div>
-          </div>
-        </a>
-      </div>
+      <!-- Articles Grid -->
+      <div class="articles-grid" id="articles-grid-container"></div>
     </div>
 
     <script>
@@ -1261,6 +1147,22 @@
           });
         }
 
+        // Hydrate immediately from sessionStorage cache on repeat refreshes to prevent any flicker
+        var lastSerialized = '';
+        try {
+          var cachedRaw = sessionStorage.getItem('resolvia_blog_posts_cache');
+          if (cachedRaw) {
+            var cachedPosts = JSON.parse(cachedRaw);
+            if (Array.isArray(cachedPosts) && cachedPosts.length > 0) {
+              lastSerialized = cachedRaw;
+              allPosts = cachedPosts;
+              if (articlesSection) articlesSection.classList.remove('hidden');
+              renderFilterPills();
+              renderFilteredPosts();
+            }
+          }
+        } catch(e) {}
+
         try {
           var res = await fetch(SP_URL + '/rest/v1/posts?select=*&status=eq.published&order=created_at.desc', {
             headers: {
@@ -1270,11 +1172,16 @@
           });
           var posts = await res.json();
           if (Array.isArray(posts) && posts.length > 0) {
-            allPosts = posts;
-            if (articlesSection) articlesSection.classList.remove('hidden');
-            renderFilterPills();
-            renderFilteredPosts();
+            var serialized = JSON.stringify(posts);
+            if (serialized !== lastSerialized) {
+              try { sessionStorage.setItem('resolvia_blog_posts_cache', serialized); } catch(e) {}
+              allPosts = posts;
+              if (articlesSection) articlesSection.classList.remove('hidden');
+              renderFilterPills();
+              renderFilteredPosts();
+            }
           } else if (res.ok && Array.isArray(posts) && posts.length === 0) {
+            try { sessionStorage.removeItem('resolvia_blog_posts_cache'); } catch(e) {}
             allPosts = [];
             renderFilterPills();
             if (articlesSection) articlesSection.classList.add('hidden');

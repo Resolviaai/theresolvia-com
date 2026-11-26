@@ -2,7 +2,7 @@ import { KaleTTS } from '/assets/js/kale-tts/js/kale-tts.mjs';
 
 const MODEL_BASE = 'https://huggingface.co/KaleComputer/kale-tts-1-nano/resolve/main/';
 const FRONTEND_BASE = MODEL_BASE + 'frontend/';
-const ORT_CDN = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+const ORT_CDN = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.1/dist/';
 const CACHE_NAME = 'resolvia-kale-tts-v1';
 
 // Wrap fetch to transparently cache Hugging Face weights & data in Cache API and report progress
@@ -153,14 +153,17 @@ self.onmessage = async (event) => {
         backend: tts.backend,
         voices: tts.listVoices()
       });
-      // Silently warm remaining voices in background so switching voices feels instant
-      setTimeout(() => {
-        tts.preload(['f06', 'm3', 'd03', 'd13', 'h013f', 's057b']).catch(() => {});
-      }, 400);
     } else if (msg.type === 'synthesize') {
       const tts = await ensureTTS({ lowEnd: !!msg.lowEnd, voice: msg.voice || 'f06' });
       const { audio, sampleRate } = await tts.speak(msg.text, { voice: msg.voice || 'f06' });
       const bufferCopy = new Float32Array(audio);
+      // Apply smooth 5ms cosine fade-in / fade-out (120 samples at 24kHz) to eliminate clicks
+      const fadeLen = Math.min(120, Math.floor(bufferCopy.length / 4));
+      for (let i = 0; i < fadeLen; i++) {
+        const w = 0.5 * (1 - Math.cos((Math.PI * i) / fadeLen));
+        bufferCopy[i] *= w;
+        bufferCopy[bufferCopy.length - 1 - i] *= w;
+      }
       self.postMessage(
         {
           type: 'audio',

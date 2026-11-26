@@ -144,7 +144,7 @@ function extractArticleChunks() {
     const sents = txt.match(/[^.!?]+[.!?]+/g) || [txt];
     let buf = '';
     for (const s of sents) {
-      if ((buf + ' ' + s).trim().length > 220 && buf) {
+      if ((buf + ' ' + s).trim().length > 155 && buf) {
         out.push(buf.trim());
         buf = s;
       } else {
@@ -321,7 +321,7 @@ function stopAllAudio() {
 
 function scheduleLookahead(sessionToken) {
   if (state.useFallback || !state.worker) return;
-  const LOOKAHEAD = 2;
+  const LOOKAHEAD = 4;
   for (let i = state.currentIndex; i < Math.min(state.chunks.length, state.currentIndex + LOOKAHEAD + 1); i++) {
     if (!state.bufferMap.has(i) && !state.pendingSynth.has(i)) {
       state.pendingSynth.add(i);
@@ -460,7 +460,7 @@ function ensureWorker(audioCtx, onReadyCallback) {
   updateUI();
 
   if (!state.worker) {
-    state.worker = new Worker('/assets/js/blog-tts-worker.js?v=3', { type: 'module' });
+    state.worker = new Worker('/assets/js/blog-tts-worker.js?v=6', { type: 'module' });
     state.worker.onmessage = (e) => {
       const msg = e.data || {};
       if (msg.type === 'progress') {
