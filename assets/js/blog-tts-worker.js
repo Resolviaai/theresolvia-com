@@ -99,15 +99,28 @@ async function ensureTTS({ lowEnd, voice }) {
     const ortMod = await import(ORT_CDN + 'ort.webgpu.min.mjs');
     const ort = ortMod.default || ortMod;
 
-    if (ort && ort.env && ort.env.wasm) {
-      ort.env.wasm.wasmPaths = ORT_CDN;
-      // Avoid SharedArrayBuffer requirement on static hosts without COOP/COEP
-      ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(navigator.hardwareConcurrency || 2, 4) : 1;
+    if (ort && ort.env) {
+      ort.env.logLevel = 'fatal';
+      if (ort.env.wasm) {
+        ort.env.wasm.wasmPaths = ORT_CDN;
+        // Avoid SharedArrayBuffer requirement on static hosts without COOP/COEP
+        ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(navigator.hardwareConcurrency || 2, 4) : 1;
+      }
+    }
+
+    let skipWebGPU = !!lowEnd;
+    if (!skipWebGPU && typeof navigator !== 'undefined' && navigator.gpu) {
+      const adapter = await navigator.gpu.requestAdapter().catch(() => null);
+      if (!adapter || adapter.isFallbackAdapter || (adapter.info && adapter.info.isFallbackAdapter)) {
+        skipWebGPU = true;
+      }
+    } else if (!skipWebGPU) {
+      skipWebGPU = true;
     }
 
     self.postMessage({ type: 'status', phase: 'model', message: 'Loading voice model (cached once on device)...' });
 
-    const loadOpts = lowEnd
+    const loadOpts = skipWebGPU
       ? { ort, frontend: FRONTEND_BASE, graph: 'int8', executionProviders: ['wasm'], threads: 1 }
       : { ort, frontend: FRONTEND_BASE, graph: 'auto' };
 
