@@ -453,7 +453,7 @@ function ensureWorker(audioCtx, onReadyCallback) {
   updateUI();
 
   if (!state.worker) {
-    state.worker = new Worker('/assets/js/blog-tts-worker.js?v=2', { type: 'module' });
+    state.worker = new Worker('/assets/js/blog-tts-worker.js?v=3', { type: 'module' });
     state.worker.onmessage = (e) => {
       const msg = e.data || {};
       if (msg.type === 'progress') {
@@ -778,9 +778,14 @@ export function bindPlayerControls() {
 
       const wasActive = state.mode === 'playing' || state.mode === 'paused';
       stopAllAudio();
+      state.chunkOffsetSec = 0;
       if (wasActive) {
         state.mode = 'playing';
         updateUI();
+        if (els.statusText) {
+          const vShort = (VOICES.find((v) => v.id === state.voice) || VOICES[0]).short;
+          els.statusText.textContent = 'Switching to ' + vShort + '...';
+        }
         playNextNeuralChunk(state.token);
       } else {
         updateUI();

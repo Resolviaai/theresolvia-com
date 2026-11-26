@@ -121,8 +121,8 @@ async function ensureTTS({ lowEnd, voice }) {
     self.postMessage({ type: 'status', phase: 'model', message: 'Loading voice model (cached once on device)...' });
 
     const loadOpts = skipWebGPU
-      ? { ort, frontend: FRONTEND_BASE, graph: 'int8', executionProviders: ['wasm'], threads: 1 }
-      : { ort, frontend: FRONTEND_BASE, graph: 'auto' };
+      ? { ort, frontend: FRONTEND_BASE, graph: 'int8', executionProviders: ['wasm'], threads: 1, sessionOptions: { logSeverityLevel: 4 } }
+      : { ort, frontend: FRONTEND_BASE, graph: 'auto', sessionOptions: { logSeverityLevel: 4 } };
 
     let tts = await KaleTTS.load(MODEL_BASE, loadOpts);
 
@@ -153,6 +153,10 @@ self.onmessage = async (event) => {
         backend: tts.backend,
         voices: tts.listVoices()
       });
+      // Silently warm remaining voices in background so switching voices feels instant
+      setTimeout(() => {
+        tts.preload(['f06', 'm3', 'd03', 'd13', 'h013f', 's057b']).catch(() => {});
+      }, 400);
     } else if (msg.type === 'synthesize') {
       const tts = await ensureTTS({ lowEnd: !!msg.lowEnd, voice: msg.voice || 'f06' });
       const { audio, sampleRate } = await tts.speak(msg.text, { voice: msg.voice || 'f06' });
