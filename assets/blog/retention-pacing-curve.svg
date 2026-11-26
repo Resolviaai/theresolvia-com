@@ -18,24 +18,22 @@
   <rect width="960" height="480" rx="16" fill="url(#chartBg)" stroke="#1e2638" stroke-width="1.5" />
 
   <!-- Header -->
-  <text x="60" y="50" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="-0.02em">AUDIENCE RETENTION CURVE COMPARISON</text>
-  <text x="60" y="74" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">Flat Freelance Cut (28% AVD) vs. Resolvia Retention Architecture (54% AVD)</text>
+  <text x="60" y="48" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="-0.02em">AUDIENCE RETENTION CURVE COMPARISON</text>
+  <text x="60" y="72" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">Flat Freelance Cut (28% AVD) vs. Resolvia Retention Architecture (54% AVD)</text>
 
-  <!-- Legend -->
-  <g transform="translate(620, 42)">
-    <!-- Resolvia -->
-    <line x1="0" y1="12" x2="24" y2="12" stroke="#2F86F7" stroke-width="3" />
-    <circle cx="12" cy="12" r="4" fill="#38bdf8" />
-    <text x="32" y="16" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Resolvia (54% AVD)</text>
+  <!-- Legend (shifted left so nothing clips on the right) -->
+  <g transform="translate(555, 38)">
+    <line x1="0" y1="12" x2="22" y2="12" stroke="#2F86F7" stroke-width="3" />
+    <circle cx="11" cy="12" r="4" fill="#38bdf8" />
+    <text x="30" y="16" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Resolvia (54% AVD)</text>
 
-    <!-- Freelance -->
-    <line x1="175" y1="12" x2="199" y2="12" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />
-    <circle cx="187" cy="12" r="3" fill="#f87171" />
-    <text x="207" y="16" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Solo Freelance (28% AVD)</text>
+    <line x1="175" y1="12" x2="197" y2="12" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />
+    <circle cx="186" cy="12" r="3" fill="#f87171" />
+    <text x="205" y="16" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Solo Freelance (28% AVD)</text>
   </g>
 
   <!-- Chart Area -->
-  <g transform="translate(80, 110)">
+  <g transform="translate(80, 115)">
     <!-- Y-Axis Grid Lines & Labels -->
     <line x1="0" y1="0" x2="820" y2="0" stroke="#1e293b" stroke-width="1" />
     <text x="-15" y="4" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="end">100%</text>
@@ -52,7 +50,7 @@
     <line x1="0" y1="260" x2="820" y2="260" stroke="#334155" stroke-width="1.5" />
     <text x="-15" y="264" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="end">0%</text>
 
-    <!-- X-Axis Labels (Timeline in minutes) -->
+    <!-- X-Axis Labels -->
     <text x="0" y="285" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">0:00 (Hook)</text>
     <text x="120" y="285" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">0:30 (Cliff)</text>
     <text x="270" y="285" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">2:00</text>
@@ -60,36 +58,37 @@
     <text x="630" y="285" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">8:00</text>
     <text x="800" y="285" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="end">10:00 (End)</text>
 
-    <!-- FREELANCE CURVE (Flat Cut / High Drop-off) -->
-    <!-- Path: (0,0) -> (120, 160) -> (270, 190) -> (450, 205) -> (800, 215) -->
+    <!-- FREELANCE CURVE -->
     <path d="M 0 0 C 40 70, 80 150, 120 162 C 200 178, 350 195, 450 205 C 580 215, 700 220, 800 225 L 800 260 L 0 260 Z" fill="url(#freelanceArea)" />
     <path d="M 0 0 C 40 70, 80 150, 120 162 C 200 178, 350 195, 450 205 C 580 215, 700 220, 800 225" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />
 
-    <!-- 30-Second Cliff Annotation -->
+    <!-- 30-Second Cliff Annotation (clear of curve) -->
     <circle cx="120" cy="162" r="5" fill="#ef4444" />
-    <rect x="75" y="185" width="125" height="42" rx="6" fill="#261217" stroke="#ef4444" stroke-width="1" />
-    <text x="137" y="202" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">30s DROP: -62%</text>
-    <text x="137" y="217" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">No pattern interrupt</text>
+    <line x1="120" y1="167" x2="120" y2="188" stroke="#ef4444" stroke-opacity="0.6" stroke-width="1" />
+    <rect x="65" y="188" width="132" height="42" rx="6" fill="#261217" stroke="#ef4444" stroke-width="1" />
+    <text x="131" y="205" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">30s DROP: -62%</text>
+    <text x="131" y="220" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">No pattern interrupt</text>
+
+    <!-- Algorithmic Browse Threshold Line & Label BELOW line -->
+    <line x1="0" y1="130" x2="820" y2="130" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.7" />
+    <text x="815" y="148" fill="#34d399" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" text-anchor="end">YouTube Browse Algorithm Threshold (~50% AVD)</text>
 
     <!-- RESOLVIA RETENTION CURVE -->
-    <!-- Path: (0,0) -> (120, 60) -> (270, 85) -> (450, 110) -> (630, 120) -> (800, 130) with micro-spikes -->
     <path d="M 0 0 C 50 25, 90 55, 120 60 C 180 65, 230 75, 270 78 C 300 70, 310 82, 350 85 C 420 95, 480 105, 520 102 C 550 96, 570 108, 630 115 C 700 120, 750 125, 800 130 L 800 260 L 0 260 Z" fill="url(#resolviaArea)" />
     <path d="M 0 0 C 50 25, 90 55, 120 60 C 180 65, 230 75, 270 78 C 300 70, 310 82, 350 85 C 420 95, 480 105, 520 102 C 550 96, 570 108, 630 115 C 700 120, 750 125, 800 130" fill="none" stroke="#2F86F7" stroke-width="3" />
 
-    <!-- Pattern Interrupt Spikes -->
+    <!-- Hook Retention Annotation (above curve) -->
     <circle cx="120" cy="60" r="5" fill="#38bdf8" />
-    <rect x="75" y="8" width="130" height="42" rx="6" fill="#0d233d" stroke="#2F86F7" stroke-width="1" />
-    <text x="140" y="25" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">HOOK RETENTION: 77%</text>
-    <text x="140" y="40" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">Visual anchor confirmed</text>
+    <line x1="120" y1="55" x2="120" y2="42" stroke="#2F86F7" stroke-opacity="0.7" stroke-width="1" />
+    <rect x="65" y="2" width="142" height="40" rx="6" fill="#0d233d" stroke="#2F86F7" stroke-width="1" />
+    <text x="136" y="19" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">HOOK RETENTION: 77%</text>
+    <text x="136" y="33" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">Visual anchor confirmed</text>
 
-    <!-- Second Spike: Foley Re-engagement -->
-    <circle cx="310" cy="82" r="4" fill="#38bdf8" />
-    <rect x="260" y="115" width="130" height="38" rx="6" fill="#0d233d" stroke="#2F86F7" stroke-opacity="0.8" stroke-width="1" />
-    <text x="325" y="131" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" text-anchor="middle">RE-ENGAGEMENT</text>
-    <text x="325" y="144" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">Fairlight sonic shift</text>
-
-    <!-- Algorithmic Browse Threshold Line -->
-    <line x1="0" y1="130" x2="820" y2="130" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.7" />
-    <text x="815" y="122" fill="#34d399" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" text-anchor="end">YouTube Browse Algorithm Threshold (~50% AVD)</text>
+    <!-- Second Spike: Re-engagement Annotation (placed cleanly ABOVE curve, clear of green 50% line) -->
+    <circle cx="310" cy="82" r="4.5" fill="#38bdf8" />
+    <line x1="310" y1="77" x2="310" y2="54" stroke="#2F86F7" stroke-opacity="0.7" stroke-width="1" />
+    <rect x="245" y="14" width="136" height="40" rx="6" fill="#0d233d" stroke="#2F86F7" stroke-opacity="0.85" stroke-width="1" />
+    <text x="313" y="31" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" text-anchor="middle">RE-ENGAGEMENT</text>
+    <text x="313" y="44" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">Fairlight sonic shift</text>
   </g>
 </svg>
