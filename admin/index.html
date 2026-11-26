@@ -2227,14 +2227,31 @@ ${post.content_markdown}
           <td class="py-3 px-3 text-slate-400 truncate text-[12px]" title="${detailsText}">
             ${detailsText || '<span class="text-slate-600">None provided</span>'}
           </td>
-          <td class="py-3 px-3 whitespace-nowrap">
-            <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-[11.5px] font-medium px-2.5 py-1 rounded-lg bg-[#09090b] text-slate-200 border border-white/[0.08] hover:border-white/20 outline-none cursor-pointer transition-colors max-w-[125px]">
-              <option value="new" class="bg-[#18191c] text-white" ${l.status === 'new' ? 'selected' : ''}>New</option>
-              <option value="contacted" class="bg-[#18191c] text-white" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
-              <option value="proposal_sent" class="bg-[#18191c] text-white" ${l.status === 'proposal_sent' ? 'selected' : ''}>Proposal Sent</option>
-              <option value="won" class="bg-[#18191c] text-white" ${l.status === 'won' ? 'selected' : ''}>Won</option>
-              <option value="archived" class="bg-[#18191c] text-white" ${l.status === 'archived' ? 'selected' : ''}>Archived</option>
-            </select>
+          <td class="py-3 px-3 whitespace-nowrap overflow-visible">
+            <div class="relative inline-block table-status-dropdown" id="table-status-wrap-${l.id}">
+              <button type="button" onclick="toggleTableLeadStatusMenu('${l.id}', event)" class="h-[28px] px-2.5 rounded-lg bg-[#09090b] border border-white/[0.08] hover:border-white/20 text-[11.5px] font-medium text-slate-200 flex items-center gap-2 transition-colors">
+                <span class="size-1.5 rounded-full ${l.status === 'won' ? 'bg-emerald-400' : (l.status === 'proposal_sent' ? 'bg-blue-400' : (l.status === 'contacted' ? 'bg-amber-400' : (l.status === 'archived' ? 'bg-slate-500' : 'bg-white')))}"></span>
+                <span>${LEAD_STATUS_LABELS[l.status] || 'New'}</span>
+                <svg class="size-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="table-status-menu-${l.id}" class="hidden absolute left-0 top-[32px] w-36 rounded-xl border border-white/10 bg-[#18191c] shadow-2xl p-1 z-50">
+                <button type="button" onclick="updateLeadStatus('${l.id}', 'new')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11.5px] ${l.status === 'new' ? 'bg-white/10 text-white font-semibold' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'} flex items-center gap-2 transition-colors">
+                  <span class="size-1.5 rounded-full bg-white"></span><span>New</span>
+                </button>
+                <button type="button" onclick="updateLeadStatus('${l.id}', 'contacted')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11.5px] ${l.status === 'contacted' ? 'bg-white/10 text-white font-semibold' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'} flex items-center gap-2 transition-colors">
+                  <span class="size-1.5 rounded-full bg-amber-400"></span><span>Contacted</span>
+                </button>
+                <button type="button" onclick="updateLeadStatus('${l.id}', 'proposal_sent')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11.5px] ${l.status === 'proposal_sent' ? 'bg-white/10 text-white font-semibold' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'} flex items-center gap-2 transition-colors">
+                  <span class="size-1.5 rounded-full bg-blue-400"></span><span>Proposal Sent</span>
+                </button>
+                <button type="button" onclick="updateLeadStatus('${l.id}', 'won')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11.5px] ${l.status === 'won' ? 'bg-white/10 text-white font-semibold' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'} flex items-center gap-2 transition-colors">
+                  <span class="size-1.5 rounded-full bg-emerald-400"></span><span>Won</span>
+                </button>
+                <button type="button" onclick="updateLeadStatus('${l.id}', 'archived')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11.5px] ${l.status === 'archived' ? 'bg-white/10 text-white font-semibold' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'} flex items-center gap-2 transition-colors">
+                  <span class="size-1.5 rounded-full bg-slate-500"></span><span>Archived</span>
+                </button>
+              </div>
+            </div>
           </td>
           <td class="py-3 px-3 text-right whitespace-nowrap">
             <div class="flex items-center justify-end gap-1.5">
@@ -2250,6 +2267,23 @@ ${post.content_markdown}
         tbody.appendChild(tr);
       });
     }
+
+    function toggleTableLeadStatusMenu(id, e) {
+      if (e) e.stopPropagation();
+      document.querySelectorAll('[id^="table-status-menu-"]').forEach(function(el) {
+        if (el.id !== 'table-status-menu-' + id) el.classList.add('hidden');
+      });
+      var menu = document.getElementById('table-status-menu-' + id);
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.table-status-dropdown')) {
+        document.querySelectorAll('[id^="table-status-menu-"]').forEach(function(el) {
+          el.classList.add('hidden');
+        });
+      }
+    });
 
     function updateLeadStatus(id, newStatus) {
       var lead = leads.find(function(l) { return l.id === id; });
