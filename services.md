@@ -71,7 +71,6 @@ Includes:
 
 ## Related pages
 
-- [Client work & case studies](https://theresolvia.com/work/)
 - [For creators & YouTubers](https://theresolvia.com/for/creators/)
 - [For businesses & B2B SaaS](https://theresolvia.com/for/businesses/)
 - [For marketing agencies](https://theresolvia.com/for/agencies/)

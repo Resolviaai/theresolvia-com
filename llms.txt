@@ -5,7 +5,6 @@ Resolvia (https://theresolvia.com) is a video post-production agency specializin
 
 ## Primary Canonical Pages
 - [Home & Overview](https://theresolvia.com/): Official studio showcase, featured client edits (50M+ combined views), 48-hour sprint workflow, and core post-production capabilities.
-- [Client Work & Case Studies](https://theresolvia.com/work/): Concrete project breakdowns, before/after retention curves, subscriber velocity metrics (80K to 850K subs case study), and portfolio reels.
 - [Editorial & Retention Science Hub](https://theresolvia.com/blog.html): Reverse-engineered YouTube retention case studies, hook psychology, pacing curves, and audio foley architecture.
 - [Join the Editor Roster](https://theresolvia.com/careers.html): Global career opportunities for top-tier NLE editors, motion designers, and sound engineers.
 - [Pre-Release Security Vault](https://theresolvia.com/security.html): Enterprise-grade bilateral NDAs, zero-leak raw footage vault, and encrypted post-production pipelines.

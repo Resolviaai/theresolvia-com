@@ -44,7 +44,6 @@
 ## Key pages
 
 - [Home & Overview](https://theresolvia.com/)
-- [Client Work & Case Studies](https://theresolvia.com/work/)
 - [Editorial & Retention Science Hub](https://theresolvia.com/blog.html)
 - [Pre-Release Security Vault](https://theresolvia.com/security.html)
 - [Join the Editor Roster](https://theresolvia.com/careers.html)

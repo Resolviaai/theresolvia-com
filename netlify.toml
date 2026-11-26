@@ -58,11 +58,6 @@
 
 # Clean URL redirects for Services & Audiences
 [[redirects]]
-  from = "/work"
-  to = "/work/index.html"
-  status = 200
-
-[[redirects]]
   from = "/services/youtube-video-editing"
   to = "/services/youtube-video-editing/index.html"
   status = 200

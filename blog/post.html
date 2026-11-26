@@ -189,13 +189,90 @@
       color: #ffffff;
       margin: 0 0 16px;
     }
+    .article-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
     .article-meta {
       font-size: 13.5px;
       color: rgba(238, 241, 248, 0.5);
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-bottom: 0;
+    }
+    .blog-share-wrap {
+      position: relative;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .blog-share-btn {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(238, 241, 248, 0.88);
+      font-size: 12.5px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.12s;
+    }
+    .blog-share-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.24);
+      color: #ffffff;
+    }
+    .blog-share-btn:active { transform: scale(0.97); }
+    .blog-share-btn.is-copied {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: rgba(16, 185, 129, 0.12);
+      color: #6ee7b7;
+    }
+    .blog-share-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      width: 204px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(14, 16, 22, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.85);
+      padding: 6px;
+      z-index: 65;
+    }
+    .blog-share-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: rgba(238, 241, 248, 0.88);
+      font-size: 13px;
+      font-weight: 500;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .blog-share-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
     }
     .aeo-box {
       background: linear-gradient(135deg, rgba(47, 134, 247, 0.08) 0%, rgba(14, 15, 16, 0.95) 100%);
@@ -415,7 +492,6 @@
       </a>
 
       <div class="resolvia-nav-links">
-        <a href="/work/" class="resolvia-nav-link">Work</a>
         <a href="/services/youtube-video-editing/" class="resolvia-nav-link">Services</a>
         <a href="/#workflow" class="resolvia-nav-link">Process</a>
         <a href="/blog.html" class="resolvia-nav-link active">Blog</a>
@@ -472,12 +548,40 @@
       </div>
 
       <h1 id="dyn-title" class="hero-title"></h1>
-      <div class="article-meta">
-        <span id="dyn-author">By Resolvia Studio Team</span>
-        <span>•</span>
-        <span id="dyn-read-time">7 min read</span>
-        <span>•</span>
-        <span id="dyn-updated"></span>
+      <div class="article-meta-bar">
+        <div class="article-meta">
+          <span id="dyn-author">By Resolvia Studio Team</span>
+          <span>•</span>
+          <span id="dyn-read-time">7 min read</span>
+          <span>•</span>
+          <span id="dyn-updated"></span>
+        </div>
+
+        <div id="article-share-wrap" class="blog-share-wrap">
+          <button type="button" id="article-share-btn" class="blog-share-btn" aria-label="Share this article" aria-haspopup="true" aria-expanded="false">
+            <svg id="article-share-ico" width="13.5" height="13.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            <svg id="article-share-check" width="13.5" height="13.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="article-share-label">Share</span>
+          </button>
+          <div id="article-share-menu" class="blog-share-menu" role="menu" aria-label="Share options">
+            <button type="button" id="share-copy-btn" class="blog-share-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="share-copy-text">Copy link</span>
+            </button>
+            <a id="share-x-link" href="#" target="_blank" rel="noopener noreferrer" class="blog-share-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+              <span>Share on X</span>
+            </a>
+            <a id="share-li-link" href="#" target="_blank" rel="noopener noreferrer" class="blog-share-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <span>Share on LinkedIn</span>
+            </a>
+            <button type="button" id="share-native-btn" class="blog-share-item" role="menuitem" style="display: none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+              <span>Share via device...</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- On-Device AI Audio Player (Resolvia Frosted Glass Card + Animated Playing Shine Border) -->
@@ -734,6 +838,110 @@
         }
 
         shellEl.style.display = 'block';
+
+        // Wire Article Share Popover (Copy Link, X, LinkedIn, Native Web Share)
+        (function initArticleShare() {
+          var shareBtn = document.getElementById('article-share-btn');
+          var shareMenu = document.getElementById('article-share-menu');
+          var shareLabel = document.getElementById('article-share-label');
+          var shareIco = document.getElementById('article-share-ico');
+          var shareCheck = document.getElementById('article-share-check');
+          var copyBtn = document.getElementById('share-copy-btn');
+          var copyText = document.getElementById('share-copy-text');
+          var xLink = document.getElementById('share-x-link');
+          var liLink = document.getElementById('share-li-link');
+          var nativeBtn = document.getElementById('share-native-btn');
+          if (!shareBtn || !shareMenu) return;
+
+          var shareUrl = window.location.href;
+          var shareTitle = post.title || document.title || 'Resolvia Studio';
+
+          if (xLink) {
+            xLink.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareTitle) + '&url=' + encodeURIComponent(shareUrl);
+          }
+          if (liLink) {
+            liLink.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(shareUrl);
+          }
+          if (nativeBtn && typeof navigator.share === 'function') {
+            nativeBtn.style.display = 'flex';
+            nativeBtn.addEventListener('click', function() {
+              shareMenu.style.display = 'none';
+              shareBtn.setAttribute('aria-expanded', 'false');
+              navigator.share({ title: shareTitle, text: post.description || shareTitle, url: shareUrl }).catch(function(){});
+            });
+          }
+
+          function closeShareMenu() {
+            shareMenu.style.display = 'none';
+            shareBtn.setAttribute('aria-expanded', 'false');
+          }
+
+          shareBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var isOpen = shareMenu.style.display === 'block';
+            if (isOpen) {
+              closeShareMenu();
+            } else {
+              var voiceMenu = document.getElementById('tts-voice-menu');
+              if (voiceMenu) voiceMenu.style.display = 'none';
+              shareMenu.style.display = 'block';
+              shareBtn.setAttribute('aria-expanded', 'true');
+            }
+          });
+
+          if (copyBtn) {
+            copyBtn.addEventListener('click', function() {
+              var markCopied = function() {
+                if (copyText) copyText.textContent = 'Copied link';
+                if (shareLabel) shareLabel.textContent = 'Copied';
+                if (shareIco) shareIco.style.display = 'none';
+                if (shareCheck) shareCheck.style.display = 'block';
+                shareBtn.classList.add('is-copied');
+                setTimeout(function() {
+                  closeShareMenu();
+                  if (copyText) copyText.textContent = 'Copy link';
+                  if (shareLabel) shareLabel.textContent = 'Share';
+                  if (shareIco) shareIco.style.display = 'block';
+                  if (shareCheck) shareCheck.style.display = 'none';
+                  shareBtn.classList.remove('is-copied');
+                }, 1400);
+              };
+
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(shareUrl).then(markCopied).catch(function() {
+                  var ta = document.createElement('textarea');
+                  ta.value = shareUrl;
+                  ta.style.position = 'fixed';
+                  ta.style.opacity = '0';
+                  document.body.appendChild(ta);
+                  ta.select();
+                  try { document.execCommand('copy'); } catch (err) {}
+                  document.body.removeChild(ta);
+                  markCopied();
+                });
+              } else {
+                var ta = document.createElement('textarea');
+                ta.value = shareUrl;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (err) {}
+                document.body.removeChild(ta);
+                markCopied();
+              }
+            });
+          }
+
+          document.addEventListener('click', function(e) {
+            if (!e.target.closest || !e.target.closest('#article-share-wrap')) {
+              closeShareMenu();
+            }
+          });
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeShareMenu();
+          });
+        })();
 
         // Build crisp symmetrical studio waveform bars (54 thin vertical bars) + estimate duration (0 KB AI runtime loaded yet)
         (function renderInitialWave() {
@@ -1020,12 +1228,6 @@
 <li class="bwf-fade" style="--bwf-d: 640ms">
 <a class="bwf-link" href="/services/video-ad-editing/">
 <span class="bwf-link-t">Performance Video Ads</span>
-<svg aria-hidden="true" viewbox="0 0 12 12"><path d="M2.5 9.5l7-7M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"></path></svg>
-</a>
-</li>
-<li class="bwf-fade" style="--bwf-d: 700ms">
-<a class="bwf-link" href="/work/">
-<span class="bwf-link-t">Featured Case Studies (50M+)</span>
 <svg aria-hidden="true" viewbox="0 0 12 12"><path d="M2.5 9.5l7-7M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"></path></svg>
 </a>
 </li>
