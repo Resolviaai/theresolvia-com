@@ -714,7 +714,7 @@
         var sharedCtx = null;
         function loadTTSModule() {
           if (!ttsModPromise) {
-            ttsModPromise = import('/assets/js/blog-tts-player.js').then(function(mod) {
+            ttsModPromise = import('/assets/js/blog-tts-player.js?v=2').then(function(mod) {
               mod.bindPlayerControls();
               return mod;
             });

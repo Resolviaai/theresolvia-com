@@ -453,7 +453,7 @@ function ensureWorker(audioCtx, onReadyCallback) {
   updateUI();
 
   if (!state.worker) {
-    state.worker = new Worker('/assets/js/blog-tts-worker.js', { type: 'module' });
+    state.worker = new Worker('/assets/js/blog-tts-worker.js?v=2', { type: 'module' });
     state.worker.onmessage = (e) => {
       const msg = e.data || {};
       if (msg.type === 'progress') {
