@@ -191,42 +191,65 @@
   </style>
   <link rel="canonical" href="https://theresolvia.com/terms.html">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://theresolvia.com/#organization",
-        "name": "Resolvia Creative Studio",
-        "url": "https://theresolvia.com",
-        "email": "studio@theresolvia.com",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "general inquiries",
-          "email": "studio@theresolvia.com"
-        }
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://theresolvia.com/#website",
-        "name": "Resolvia",
-        "url": "https://theresolvia.com",
-        "inLanguage": "en",
-        "publisher": { "@id": "https://theresolvia.com/#organization" }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://theresolvia.com/terms.html#webpage",
-        "url": "https://theresolvia.com/terms.html",
-        "name": "Terms of Production",
-        "description": "Resolvia Creative Studio production terms covering media rights, retainers and delivery windows, with direct studio contact details for contract questions.",
-        "inLanguage": "en",
-        "isPartOf": { "@id": "https://theresolvia.com/#website" },
-        "publisher": { "@id": "https://theresolvia.com/#organization" }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://theresolvia.com/#organization",
+      "name": "Resolvia Creative Studio",
+      "url": "https://theresolvia.com",
+      "email": "studio@theresolvia.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "general inquiries",
+        "email": "studio@theresolvia.com"
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://theresolvia.com/#website",
+      "name": "Resolvia",
+      "url": "https://theresolvia.com",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://theresolvia.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://theresolvia.com/terms.html#webpage",
+      "url": "https://theresolvia.com/terms.html",
+      "name": "Terms of Production",
+      "description": "Resolvia Creative Studio production terms covering media rights, retainers and delivery windows, with direct studio contact details for contract questions.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://theresolvia.com/#website"
+      },
+      "publisher": {
+        "@id": "https://theresolvia.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://theresolvia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Terms of Production",
+          "item": "https://theresolvia.com/terms.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <!-- Resolvia High-DPI 3D Glossy Cursor Preloading & Autoscroll Moon Controller -->
 <link rel="preload" as="image" href="/assets/cursor-default.png">
 <link rel="preload" as="image" href="/assets/cursor-pointer.png">
