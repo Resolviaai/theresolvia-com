@@ -67,7 +67,6 @@ def get_navbar(active_tab='blog'):
 
       <div class="resolvia-nav-links">
         <a href="/services/youtube-video-editing/" class="resolvia-nav-link{services_active}">Services</a>
-        <a href="/#workflow" class="resolvia-nav-link">Process</a>
         <a href="/blog.html" class="resolvia-nav-link{blog_active}">Blog</a>
         <a href="/#faq" class="resolvia-nav-link">FAQ</a>
       </div>

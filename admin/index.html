@@ -429,15 +429,23 @@
 
         <!-- Collapsible Media & SEO Drawer (Progressive Disclosure) -->
         <div id="metadata-drawer" class="hidden px-4 sm:px-6 py-4 border-b border-borderSubtle bg-[#141518] shrink-0 grid grid-cols-1 md:grid-cols-12 gap-3.5 text-[13px] transition-all">
-          <div class="md:col-span-8">
+          <div class="md:col-span-5">
             <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">SEO Excerpt / Social Meta</label>
             <input type="text" id="post-description" placeholder="1-2 punchy sentences summarizing the retention strategy..." class="w-full h-[40px] sm:h-[36px] bg-[#09090b] border border-white/[0.08] rounded-xl px-3 text-white text-[12.5px] outline-none focus:border-accent" />
           </div>
           <div class="md:col-span-4">
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Dedicated Preview Image (Optional)</label>
+            <div class="flex gap-1.5">
+              <input type="text" id="post-cover-image" placeholder="Auto-uses 1st blog image if blank" class="w-full h-[40px] sm:h-[36px] bg-[#09090b] border border-white/[0.08] rounded-xl px-3 text-white font-mono text-[12px] outline-none focus:border-accent" />
+              <input type="file" id="cover-image-input" accept="image/*" onchange="handleCoverImageUpload(event)" class="hidden" />
+              <button type="button" onclick="document.getElementById('cover-image-input').click()" class="px-3 bg-white/10 hover:bg-white/20 text-white rounded-xl text-[11.5px] font-semibold shrink-0 touch-target" title="Upload dedicated preview image">Upload</button>
+            </div>
+          </div>
+          <div class="md:col-span-3">
             <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">YouTube Video ID (Optional)</label>
             <div class="flex gap-1.5">
               <input type="text" id="post-youtube" placeholder="e.g. dQw4w9WgXcQ" class="w-full h-[40px] sm:h-[36px] bg-[#09090b] border border-white/[0.08] rounded-xl px-3 text-white font-mono text-[12px] outline-none focus:border-accent" />
-              <button onclick="insertYouTubeEmbed()" class="px-3 bg-white/10 hover:bg-white/20 text-white rounded-xl text-[11.5px] font-semibold shrink-0 touch-target" title="Insert Lite YouTube Player at Cursor">Insert</button>
+              <button type="button" onclick="insertYouTubeEmbed()" class="px-3 bg-white/10 hover:bg-white/20 text-white rounded-xl text-[11.5px] font-semibold shrink-0 touch-target" title="Insert Lite YouTube Player at Cursor">Insert</button>
             </div>
           </div>
         </div>
@@ -1256,55 +1264,101 @@
       e.target.value = '';
     }
 
-    async function uploadAndInsertImage(file) {
+    async function uploadFileToMediaStore(file) {
       var cName = localStorage.getItem('resolvia_cld_name');
       var cPreset = localStorage.getItem('resolvia_cld_preset');
 
       if (cName && cPreset) {
-        var formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', cPreset);
-
-        var placeholder = '\n\n![Uploading ' + file.name + '...]()\n\n';
-        insertToolbar(placeholder, '');
-
         try {
-          var uploadRes = await fetch('https://api.cloudinary.com/v1_1/' + cName + '/image/upload', {
+          var formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', cPreset);
+          var cldRes = await fetch('https://api.cloudinary.com/v1_1/' + cName + '/image/upload', {
             method: 'POST',
             body: formData
           });
-          var data = await uploadRes.json();
-          if (data.secure_url) {
-            replaceInMarkdown(placeholder, '\n\n![' + file.name + '](' + data.secure_url + ')\n\n');
-            updateLivePreview();
-            return;
-          }
+          var cldData = await cldRes.json();
+          if (cldData.secure_url) return cldData.secure_url;
         } catch(err) {
           console.error("Cloudinary upload error:", err);
         }
       }
 
-      // Local Attachment Token (Zero text lag, emoji-sized preview chip)
-      var reader = new FileReader();
-      reader.onload = function(evt) {
-        var dataUrl = evt.target.result;
-        var alt = prompt("Photo caption / description:", file.name.replace(/\.[^/.]+$/, ""));
-        if (alt === null) return;
-        
+      var dataUrl = await new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function(evt) { resolve(evt.target.result); };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      var post = posts.find(function(p) { return p.id === currentPostId; });
+      try {
+        var fnRes = await fetch('/.netlify/functions/upload-blog-media', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: file.name,
+            contentType: file.type,
+            slug: (post && post.slug) || 'posts',
+            base64Data: dataUrl
+          })
+        });
+        if (fnRes.ok) {
+          var fnJson = await fnRes.json();
+          if (fnJson && fnJson.url) return fnJson.url;
+        }
+      } catch(err) {
+        console.warn("Supabase blog-media upload note:", err);
+      }
+      return dataUrl;
+    }
+
+    async function handleCoverImageUpload(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      e.target.value = '';
+      var coverInput = document.getElementById('post-cover-image');
+      if (coverInput) coverInput.value = 'Uploading preview image...';
+      try {
+        var url = await uploadFileToMediaStore(file);
+        if (coverInput) coverInput.value = url;
+        if (typeof showToast === 'function') showToast('Preview image uploaded!');
+      } catch(err) {
+        if (coverInput) coverInput.value = '';
+        if (typeof showToast === 'function') showToast('Upload failed: ' + err.message, true);
+      }
+    }
+
+    async function uploadAndInsertImage(file) {
+      var alt = prompt("Photo caption / SEO alt description:", file.name.replace(/\.[^/.]+$/, ""));
+      if (alt === null) return;
+      var cleanAlt = alt.trim() || file.name.replace(/\.[^/.]+$/, "");
+      var placeholder = '\n\n![Uploading ' + cleanAlt + '...]()\n\n';
+      insertToolbar(placeholder, '');
+
+      try {
+        var uploadedUrl = await uploadFileToMediaStore(file);
+        if (uploadedUrl && /^https?:\/\//i.test(uploadedUrl)) {
+          replaceInMarkdown(placeholder, '\n\n![' + cleanAlt + '](' + uploadedUrl + ')\n\n');
+          updateLivePreview();
+          return;
+        }
+
+        // Local Attachment Token fallback if offline/local
         var imgId = 'img_' + Math.random().toString(36).substring(2, 8);
         window.imageAttachments[imgId] = {
           id: imgId,
           name: file.name,
-          caption: alt || file.name,
-          dataUrl: dataUrl
+          caption: cleanAlt,
+          dataUrl: uploadedUrl
         };
-
-        var token = '\n\n![' + (alt || file.name) + '](attachment:' + imgId + ')\n\n';
-        insertToolbar(token, '');
+        replaceInMarkdown(placeholder, '\n\n![' + cleanAlt + '](attachment:' + imgId + ')\n\n');
         renderAttachedMediaTray();
         updateLivePreview();
-      };
-      reader.readAsDataURL(file);
+      } catch(err) {
+        replaceInMarkdown(placeholder, '');
+        if (typeof showToast === 'function') showToast('Image insert failed: ' + err.message, true);
+      }
     }
 
     function renderAttachedMediaTray() {
@@ -1626,6 +1680,8 @@
       document.getElementById('post-title').value = post.title || '';
       document.getElementById('post-youtube').value = post.youtube_id || '';
       document.getElementById('post-description').value = post.description || '';
+      var coverInputEl = document.getElementById('post-cover-image');
+      if (coverInputEl) coverInputEl.value = post.cover_image || '';
       
       var cleanContent = sanitizeBase64InMarkdown(post.content_markdown || '');
       document.getElementById('post-markdown').value = cleanContent;
@@ -1815,6 +1871,8 @@ Outline the problem and retention hooks.
       post.badge = post.category;
       post.youtube_id = document.getElementById('post-youtube').value;
       post.description = document.getElementById('post-description').value;
+      var coverEl = document.getElementById('post-cover-image');
+      post.cover_image = coverEl ? coverEl.value.trim() : (post.cover_image || '');
       post.content_markdown = finalMd;
       post.status = publish ? 'published' : 'draft';
       post.updated_at = new Date().toISOString();
@@ -1827,6 +1885,7 @@ Outline the problem and retention hooks.
             description: post.description,
             category: post.category,
             badge: post.category,
+            cover_image: post.cover_image || null,
             youtube_id: post.youtube_id,
             content_markdown: post.content_markdown,
             status: post.status

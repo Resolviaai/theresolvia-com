@@ -1,6 +1,9 @@
 [build]
   publish = "."
 
+[functions]
+  included_files = ["blog/post.html"]
+
 # 301 Permanent Redirect: www.theresolvia.com -> https://theresolvia.com
 [[redirects]]
   from = "https://www.theresolvia.com/*"
@@ -92,10 +95,21 @@
   to = "/for/agencies/index.html"
   status = 200
 
-# Dynamic Database-Driven Blog Post Routing (Supabase)
+# Dynamic Database-Driven Blog Post SSR & Dynamic XML Sitemap (Supabase)
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/.netlify/functions/sitemap"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog/post.html"
+  to = "/blog/post.html"
+  status = 200
+
 [[redirects]]
   from = "/blog/*"
-  to = "/blog/post.html"
+  to = "/.netlify/functions/blog-post"
   status = 200
 
 # Global Security & Performance Headers
