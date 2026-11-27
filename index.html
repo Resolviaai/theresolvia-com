@@ -411,7 +411,7 @@ html {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 18px 40px rgba(0, 0, 0, 0.65) !important;
   }
 
-  /* 4. FAQ Cards (Fixed-Shape In-Place Face Flip, Zero Morph) */
+  /* 4. FAQ Cards (Fixed Shape, Unchanged Question Size, Dynamic Answer Fit) */
   #faq .faq-grid {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
@@ -425,9 +425,13 @@ html {
   }
   #faq .faq-card {
     position: relative !important;
-    height: 236px !important;
-    min-height: 236px !important;
-    max-height: 236px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    padding: 66px 20px 20px !important;
+    height: 296px !important;
+    min-height: 296px !important;
+    max-height: 296px !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
     border-radius: 18px !important;
@@ -437,10 +441,10 @@ html {
     transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
   }
   @media (min-width: 640px) {
-    #faq .faq-card { height: 256px !important; min-height: 256px !important; max-height: 256px !important; }
+    #faq .faq-card { padding: 68px 24px 22px !important; height: 304px !important; min-height: 304px !important; max-height: 304px !important; }
   }
   @media (min-width: 1024px) {
-    #faq .faq-card { height: 268px !important; min-height: 268px !important; max-height: 268px !important; }
+    #faq .faq-card { padding: 70px 24px 24px !important; height: 312px !important; min-height: 312px !important; max-height: 312px !important; }
   }
   #faq .faq-card:hover {
     border-color: rgba(255, 255, 255, 0.18) !important;
@@ -451,14 +455,43 @@ html {
     background: linear-gradient(180deg, #141a24 0%, #1d1f23 100%) !important;
     box-shadow: 0 0 0 1px rgba(47, 134, 247, 0.14), 0 20px 50px -20px rgba(47, 134, 247, 0.45) !important;
   }
-  #faq .faq-front,
-  #faq .faq-back {
-    transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  #faq .faq-content-stack {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    pointer-events: none;
   }
-  #faq .faq-card .faq-front { opacity: 1 !important; transform: translateY(0) !important; pointer-events: none !important; }
-  #faq .faq-card .faq-back { opacity: 0 !important; transform: translateY(8px) !important; pointer-events: none !important; }
-  #faq .faq-card[data-open="true"] .faq-front { opacity: 0 !important; transform: translateY(-6px) !important; pointer-events: none !important; }
-  #faq .faq-card[data-open="true"] .faq-back { opacity: 1 !important; transform: translateY(0) !important; pointer-events: auto !important; }
+  #faq .faq-question {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.02em !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+  }
+  @media (min-width: 1024px) {
+    #faq .faq-question { font-size: 23px !important; }
+  }
+  #faq .faq-answer-grid {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+  }
+  #faq .faq-card[data-open="true"] .faq-answer-grid {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  #faq .faq-answer-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  #faq .faq-answer-text {
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.54;
+    color: rgba(255, 255, 255, 0.78);
+  }
 
   /* 5. Apple Focus Rings for Accessibility */
   a:focus-visible, button:focus-visible, input:focus-visible {
@@ -1327,93 +1360,99 @@ html {
 <p class="mt-[12px] text-center text-[15px] leading-[1.45] text-[#828282] sm:text-[17px]" data-reveal="true">Everything you need to know before partnering with our editing studio.</p>
 <div class="faq-grid mt-[32px] lg:mt-[44px]" data-reveal-children="scale">
 <!-- Card 0 -->
-<div class="faq-card group relative flex scroll-mt-28 flex-col justify-end overflow-hidden" data-open="true">
+<div class="faq-card group" data-open="true">
 <button aria-controls="faq-0" aria-expanded="true" aria-label="What is Resolvia?" class="absolute inset-0 z-10 cursor-pointer rounded-[18px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent-1)]" type="button"></button>
-<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[24px] sm:left-[24px] sm:text-[16px]">01</span>
-<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[24px] sm:right-[24px] border-white/20 bg-white/[0.06]">
+<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[22px] sm:left-[24px] sm:text-[16px]">01</span>
+<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[22px] sm:right-[24px] border-white/20 bg-white/[0.06]">
 <svg aria-hidden="true" class="lucide lucide-minus size-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path></svg>
 </span>
-<div class="faq-front absolute inset-x-0 bottom-0 p-[20px] pt-[74px] sm:p-[24px] sm:pt-[76px] transition-[opacity,transform] duration-250 ease-out opacity-0 -translate-y-1.5 pointer-events-none">
-<p class="font-medium tracking-[-0.02em] text-[22px] leading-[1.22] sm:text-[25px] text-white">What is Resolvia?</p>
+<div class="faq-content-stack">
+<p class="faq-question">What is Resolvia?</p>
+<div class="faq-answer-grid" id="faq-0">
+<div class="faq-answer-inner">
+<p class="faq-answer-text">Resolvia is an elite video editing studio and agency. We partner with leading creators, founders, and personal brands to edit viral, retention-engineered videos that build massive audiences and scale revenue.</p>
 </div>
-<div class="faq-back absolute inset-0 flex flex-col justify-end p-[20px] pt-[70px] sm:p-[24px] sm:pt-[72px] transition-[opacity,transform] duration-250 ease-out opacity-100 translate-y-0 pointer-events-auto overflow-y-auto" id="faq-0">
-<p class="text-[12.5px] font-semibold text-[#60a5fa] mb-[6px] tracking-[-0.01em]">What is Resolvia?</p>
-<p class="text-[14.5px] leading-[1.58] text-white/80">Resolvia is an elite video editing studio and agency. We partner with leading creators, founders, and personal brands to edit viral, retention-engineered videos that build massive audiences and scale revenue.</p>
+</div>
 </div>
 </div>
 <!-- Card 1 -->
-<div class="faq-card group relative flex scroll-mt-28 flex-col justify-end overflow-hidden rounded-[18px] border transition-[border-color,box-shadow,background-color] duration-300 border-white/[0.08] bg-[linear-gradient(180deg,#23262a_0%,#1d1f23_100%)] h-[228px] sm:h-[252px] lg:h-[268px]">
+<div class="faq-card group" data-open="false">
 <button aria-controls="faq-1" aria-expanded="false" aria-label="What tools do you edit with?" class="absolute inset-0 z-10 cursor-pointer rounded-[18px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent-1)]" type="button"></button>
-<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[24px] sm:left-[24px] sm:text-[16px]">02</span>
-<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[24px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
+<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[22px] sm:left-[24px] sm:text-[16px]">02</span>
+<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[22px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
 <svg aria-hidden="true" class="lucide lucide-plus size-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
 </span>
-<div class="faq-front absolute inset-x-0 bottom-0 p-[20px] pt-[74px] sm:p-[24px] sm:pt-[76px] transition-[opacity,transform] duration-250 ease-out opacity-100 translate-y-0">
-<p class="font-medium tracking-[-0.02em] text-[22px] leading-[1.22] sm:text-[25px] text-white">What tools do you edit with?</p>
+<div class="faq-content-stack">
+<p class="faq-question">What tools do you edit with?</p>
+<div class="faq-answer-grid" id="faq-1">
+<div class="faq-answer-inner">
+<p class="faq-answer-text">Our editors work exclusively in Adobe Premiere Pro, After Effects, and DaVinci Resolve Studio. Every video receives custom sound effects, professional typography, calibrated color passes, and 4K masters.</p>
 </div>
-<div class="faq-back absolute inset-0 flex flex-col justify-end p-[20px] pt-[70px] sm:p-[24px] sm:pt-[72px] transition-[opacity,transform] duration-250 ease-out opacity-0 translate-y-2 pointer-events-none overflow-y-auto" id="faq-1">
-<p class="text-[12.5px] font-semibold text-[#60a5fa] mb-[6px] tracking-[-0.01em]">What tools do you edit with?</p>
-<p class="text-[14.5px] leading-[1.58] text-white/80">Our editors work exclusively in Adobe Premiere Pro, After Effects, and DaVinci Resolve Studio. Every video receives custom sound effects, professional typography, calibrated color passes, and 4K masters.</p>
+</div>
 </div>
 </div>
 <!-- Card 2 -->
-<div class="faq-card group relative flex scroll-mt-28 flex-col justify-end overflow-hidden rounded-[18px] border transition-[border-color,box-shadow,background-color] duration-300 border-white/[0.08] bg-[linear-gradient(180deg,#23262a_0%,#1d1f23_100%)] h-[228px] sm:h-[252px] lg:h-[268px]">
+<div class="faq-card group" data-open="false">
 <button aria-controls="faq-2" aria-expanded="false" aria-label="Which platforms do you cover?" class="absolute inset-0 z-10 cursor-pointer rounded-[18px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent-1)]" type="button"></button>
-<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[24px] sm:left-[24px] sm:text-[16px]">03</span>
-<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[24px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
+<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[22px] sm:left-[24px] sm:text-[16px]">03</span>
+<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[22px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
 <svg aria-hidden="true" class="lucide lucide-plus size-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
 </span>
-<div class="faq-front absolute inset-x-0 bottom-0 p-[20px] pt-[74px] sm:p-[24px] sm:pt-[76px] transition-[opacity,transform] duration-250 ease-out opacity-100 translate-y-0">
-<p class="font-medium tracking-[-0.02em] text-[22px] leading-[1.22] sm:text-[25px] text-white">Which platforms do you cover?</p>
+<div class="faq-content-stack">
+<p class="faq-question">Which platforms do you cover?</p>
+<div class="faq-answer-grid" id="faq-2">
+<div class="faq-answer-inner">
+<p class="faq-answer-text">We produce vertical short-form for TikTok, Instagram Reels, and YouTube Shorts, as well as full-length YouTube videos, documentary edits, and high-converting paid ad creatives.</p>
 </div>
-<div class="faq-back absolute inset-0 flex flex-col justify-end p-[20px] pt-[70px] sm:p-[24px] sm:pt-[72px] transition-[opacity,transform] duration-250 ease-out opacity-0 translate-y-2 pointer-events-none overflow-y-auto" id="faq-2">
-<p class="text-[12.5px] font-semibold text-[#60a5fa] mb-[6px] tracking-[-0.01em]">Which platforms do you cover?</p>
-<p class="text-[14.5px] leading-[1.58] text-white/80">We produce vertical short-form for TikTok, Instagram Reels, and YouTube Shorts, as well as full-length YouTube videos, documentary edits, and high-converting paid ad creatives.</p>
+</div>
 </div>
 </div>
 <!-- Card 3 -->
-<div class="faq-card group relative flex scroll-mt-28 flex-col justify-end overflow-hidden rounded-[18px] border transition-[border-color,box-shadow,background-color] duration-300 border-white/[0.08] bg-[linear-gradient(180deg,#23262a_0%,#1d1f23_100%)] h-[228px] sm:h-[252px] lg:h-[268px]">
+<div class="faq-card group" data-open="false">
 <button aria-controls="faq-3" aria-expanded="false" aria-label="What is your turnaround time?" class="absolute inset-0 z-10 cursor-pointer rounded-[18px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent-1)]" type="button"></button>
-<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[24px] sm:left-[24px] sm:text-[16px]">04</span>
-<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[24px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
+<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[22px] sm:left-[24px] sm:text-[16px]">04</span>
+<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[22px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
 <svg aria-hidden="true" class="lucide lucide-plus size-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
 </span>
-<div class="faq-front absolute inset-x-0 bottom-0 p-[20px] pt-[74px] sm:p-[24px] sm:pt-[76px] transition-[opacity,transform] duration-250 ease-out opacity-100 translate-y-0">
-<p class="font-medium tracking-[-0.02em] text-[22px] leading-[1.22] sm:text-[25px] text-white">What is your turnaround time?</p>
+<div class="faq-content-stack">
+<p class="faq-question">What is your turnaround time?</p>
+<div class="faq-answer-grid" id="faq-3">
+<div class="faq-answer-inner">
+<p class="faq-answer-text">Standard delivery is 24 to 48 hours per video cut. We work in dedicated Slack or WhatsApp channels directly with you and your team for instant feedback and iteration.</p>
 </div>
-<div class="faq-back absolute inset-0 flex flex-col justify-end p-[20px] pt-[70px] sm:p-[24px] sm:pt-[72px] transition-[opacity,transform] duration-250 ease-out opacity-0 translate-y-2 pointer-events-none overflow-y-auto" id="faq-3">
-<p class="text-[12.5px] font-semibold text-[#60a5fa] mb-[6px] tracking-[-0.01em]">What is your turnaround time?</p>
-<p class="text-[14.5px] leading-[1.58] text-white/80">Standard delivery is 24 to 48 hours per video cut. We work in dedicated Slack or WhatsApp channels directly with you and your team for instant feedback and iteration.</p>
+</div>
 </div>
 </div>
 <!-- Card 4 -->
-<div class="faq-card group relative flex scroll-mt-28 flex-col justify-end overflow-hidden rounded-[18px] border transition-[border-color,box-shadow,background-color] duration-300 border-white/[0.08] bg-[linear-gradient(180deg,#23262a_0%,#1d1f23_100%)] h-[228px] sm:h-[252px] lg:h-[268px]">
+<div class="faq-card group" data-open="false">
 <button aria-controls="faq-4" aria-expanded="false" aria-label="Do you offer revisions?" class="absolute inset-0 z-10 cursor-pointer rounded-[18px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent-1)]" type="button"></button>
-<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[24px] sm:left-[24px] sm:text-[16px]">05</span>
-<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[24px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
+<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[22px] sm:left-[24px] sm:text-[16px]">05</span>
+<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[22px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
 <svg aria-hidden="true" class="lucide lucide-plus size-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
 </span>
-<div class="faq-front absolute inset-x-0 bottom-0 p-[20px] pt-[74px] sm:p-[24px] sm:pt-[76px] transition-[opacity,transform] duration-250 ease-out opacity-100 translate-y-0">
-<p class="font-medium tracking-[-0.02em] text-[22px] leading-[1.22] sm:text-[25px] text-white">Do you offer revisions?</p>
+<div class="faq-content-stack">
+<p class="faq-question">Do you offer revisions?</p>
+<div class="faq-answer-grid" id="faq-4">
+<div class="faq-answer-inner">
+<p class="faq-answer-text">Yes! We provide unlimited revisions on all edits until you are thrilled with the cut. We lock in your style guide and creator profile so every edit hits the mark immediately.</p>
 </div>
-<div class="faq-back absolute inset-0 flex flex-col justify-end p-[20px] pt-[70px] sm:p-[24px] sm:pt-[72px] transition-[opacity,transform] duration-250 ease-out opacity-0 translate-y-2 pointer-events-none overflow-y-auto" id="faq-4">
-<p class="text-[12.5px] font-semibold text-[#60a5fa] mb-[6px] tracking-[-0.01em]">Do you offer revisions?</p>
-<p class="text-[14.5px] leading-[1.58] text-white/80">Yes! We provide unlimited revisions on all edits until you are thrilled with the cut. We lock in your style guide and creator profile so every edit hits the mark immediately.</p>
+</div>
 </div>
 </div>
 <!-- Card 5 -->
-<div class="faq-card group relative flex scroll-mt-28 flex-col justify-end overflow-hidden rounded-[18px] border transition-[border-color,box-shadow,background-color] duration-300 border-white/[0.08] bg-[linear-gradient(180deg,#23262a_0%,#1d1f23_100%)] h-[228px] sm:h-[252px] lg:h-[268px]">
+<div class="faq-card group" data-open="false">
 <button aria-controls="faq-5" aria-expanded="false" aria-label="How do we get started?" class="absolute inset-0 z-10 cursor-pointer rounded-[18px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--accent-1)]" type="button"></button>
-<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[24px] sm:left-[24px] sm:text-[16px]">06</span>
-<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[24px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
+<span class="absolute top-[20px] left-[20px] z-20 pointer-events-none rounded-[7px] bg-[var(--accent-2)]/[0.18] px-[9px] py-[5px] text-[15px] text-white/90 tabular-nums sm:top-[22px] sm:left-[24px] sm:text-[16px]">06</span>
+<span aria-hidden="true" class="faq-icon-wrap absolute top-[20px] right-[20px] z-20 pointer-events-none flex size-[36px] items-center justify-center rounded-[9px] border transition-colors sm:top-[22px] sm:right-[24px] border-white/15 bg-white/[0.03] group-hover:border-white/30">
 <svg aria-hidden="true" class="lucide lucide-plus size-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
 </span>
-<div class="faq-front absolute inset-x-0 bottom-0 p-[20px] pt-[74px] sm:p-[24px] sm:pt-[76px] transition-[opacity,transform] duration-250 ease-out opacity-100 translate-y-0">
-<p class="font-medium tracking-[-0.02em] text-[22px] leading-[1.22] sm:text-[25px] text-white">How do we get started?</p>
+<div class="faq-content-stack">
+<p class="faq-question">How do we get started?</p>
+<div class="faq-answer-grid" id="faq-5">
+<div class="faq-answer-inner">
+<p class="faq-answer-text">Simply click &ldquo;Book a Call&rdquo;. We review your current content, define your hook and editing style, and edit your first sample video within 48 hours.</p>
 </div>
-<div class="faq-back absolute inset-0 flex flex-col justify-end p-[20px] pt-[70px] sm:p-[24px] sm:pt-[72px] transition-[opacity,transform] duration-250 ease-out opacity-0 translate-y-2 pointer-events-none overflow-y-auto" id="faq-5">
-<p class="text-[12.5px] font-semibold text-[#60a5fa] mb-[6px] tracking-[-0.01em]">How do we get started?</p>
-<p class="text-[14.5px] leading-[1.58] text-white/80">Simply click &ldquo;Book a Call&rdquo;. We review your current content, define your hook and editing style, and edit your first sample video within 48 hours.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1555,7 +1594,7 @@ html {
 .bwf-capacity-text b{color:#10b981;font-weight:600}
 .bwf-sla-box{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .bwf-sla-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(238,241,248,.55)}
-.bwf-sla-item svg{color:rgb(var(--bwf-acc));flex-shrink:0}
+.bwf-sla-item svg{color:rgb(var(--bwf-acc));flex-shrink:0}.bwf-sla-item a{color:rgba(238,241,248,.78);text-decoration:none;transition:color .2s}.bwf-sla-item a:hover{color:#ffffff}
 .bwf-badge-new{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 6px;border-radius:4px;background:rgba(47,134,247,.2);color:#2F86F7;border:1px solid rgba(47,134,247,.35);margin-left:6px;display:inline-block;vertical-align:middle}
 .bwf-fade{transition:opacity .9s ease var(--bwf-d,0ms),translate .9s cubic-bezier(.2,.7,.1,1) var(--bwf-d,0ms)}
 .bwf[data-in='false'] .bwf-fade{opacity:0;translate:0 14px}
@@ -1630,6 +1669,14 @@ html {
 <div class="bwf-sla-item">
 <svg fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="13"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
 <span>New York (EST) · London (GMT) · Tokyo (JST)</span>
+</div>
+<div class="bwf-sla-item">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+<a href="mailto:contact@theresolvia.com">contact@theresolvia.com</a>
+</div>
+<div class="bwf-sla-item">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+<a href="mailto:reachresolve005@gmail.com">reachresolve005@gmail.com</a>
 </div>
 </div>
 <!-- Socials -->
@@ -1904,41 +1951,56 @@ document.addEventListener("DOMContentLoaded", function() {
     el.style.transform = "none";
   });
 
-  // 2. Interactive FAQ Fixed-Shape Cross-Fade Handlers (no card morph or height change)
+  // 2. Interactive FAQ Fixed-Shape + Unchanged Question Size + Dynamic Answer Fitting
+  function fitFaqCardAnswer(card) {
+    if (!card) return;
+    var stack = card.querySelector(".faq-content-stack");
+    var qEl = card.querySelector(".faq-question");
+    var aEl = card.querySelector(".faq-answer-text");
+    if (!stack || !qEl || !aEl) return;
+
+    var styles = window.getComputedStyle(card);
+    var padTop = parseFloat(styles.paddingTop) || 68;
+    var padBot = parseFloat(styles.paddingBottom) || 22;
+    var availableH = card.clientHeight - padTop - padBot;
+    if (availableH <= 0) return;
+
+    // Reset to crisp baseline while keeping .faq-question exact size untouched
+    var size = 15;
+    aEl.style.fontSize = size + "px";
+    aEl.style.lineHeight = "1.54";
+    var qH = qEl.getBoundingClientRect().height;
+    var answerH = aEl.getBoundingClientRect().height + 12;
+
+    while ((qH + answerH) > availableH && size > 11.5) {
+      size -= 0.5;
+      aEl.style.fontSize = size + "px";
+      aEl.style.lineHeight = size <= 13 ? "1.46" : "1.52";
+      answerH = aEl.getBoundingClientRect().height + 12;
+    }
+  }
+
+  function fitAllFaqAnswers() {
+    document.querySelectorAll("#faq .faq-card").forEach(fitFaqCardAnswer);
+  }
+  fitAllFaqAnswers();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitAllFaqAnswers);
+  }
+  window.addEventListener("resize", fitAllFaqAnswers);
+
   var faqButtons = document.querySelectorAll("#faq button[aria-controls]");
   faqButtons.forEach(function(btn) {
     btn.addEventListener("click", function(e) {
       e.preventDefault();
-      var targetId = btn.getAttribute("aria-controls");
-      var backPanel = document.getElementById(targetId);
-      var card = btn.closest(".group");
-      var frontPanel = card ? card.querySelector(".faq-front") : null;
+      var card = btn.closest(".faq-card");
       var isExpanded = btn.getAttribute("aria-expanded") === "true";
       var willExpand = !isExpanded;
 
       btn.setAttribute("aria-expanded", willExpand ? "true" : "false");
 
-      if (frontPanel) {
-        if (willExpand) {
-          frontPanel.classList.remove("opacity-100", "translate-y-0");
-          frontPanel.classList.add("opacity-0", "-translate-y-1.5", "pointer-events-none");
-        } else {
-          frontPanel.classList.remove("opacity-0", "-translate-y-1.5", "pointer-events-none");
-          frontPanel.classList.add("opacity-100", "translate-y-0");
-        }
-      }
-
-      if (backPanel) {
-        if (willExpand) {
-          backPanel.classList.remove("opacity-0", "translate-y-2", "pointer-events-none");
-          backPanel.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");
-        } else {
-          backPanel.classList.remove("opacity-100", "translate-y-0", "pointer-events-auto");
-          backPanel.classList.add("opacity-0", "translate-y-2", "pointer-events-none");
-        }
-      }
-
       if (card) {
+        fitFaqCardAnswer(card);
         card.setAttribute("data-open", willExpand ? "true" : "false");
 
         var iconWrap = card.querySelector(".faq-icon-wrap");
